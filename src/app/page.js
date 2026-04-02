@@ -28,13 +28,15 @@ const slideSection = (bg, extra = {}) => ({
 
 /* ─── Team data ─── */
 const team = [
-  { name: "Muhammad Waleed", role: "Product Owner", num: "01" },
-  { name: "Furqan Basra", role: "Scrum Master", num: "02" },
-  { name: "Muhammad Anas", role: "QA Tester", num: "03" },
-  { name: "Muhammad Faizan Anwar", role: "Developer", num: "04" },
-  { name: "Zarsham Waleed", role: "Developer", num: "05" },
-  { name: "Haleema Imran", role: "Developer", num: "06" },
+  { name: "Muhammad Waleed", role: "Product Owner", num: "01", note: "Initial Sprint" },
+  { name: "Furqan Basra", role: "Scrum Master", num: "02", note: "Initial Sprint" },
+  { name: "Muhammad Anas", role: "QA Tester", num: "03", note: "Initial Sprint" },
+  { name: "Faizan Anwar", role: "Developer", num: "04", note: "Initial Sprint" },
+  { name: "Zarsham Waleed", role: "Developer", num: "05", note: "Initial Sprint" },
+  { name: "Haleema Imran", role: "Developer", num: "06", note: "Initial Sprint" },
 ];
+
+const rotationNote = "Scrum roles will rotate among members across the 3 required sprints.";
 
 const metrics = [
   { role: "Developer", metric: "PRs, Commits, Code Reviews", source: "GitHub / GitLab" },
@@ -101,7 +103,7 @@ function Hero() {
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.0 }}
             style={{ maxWidth: 480, fontSize: "1.15rem", color: "#9CA3AF", lineHeight: 1.7, fontWeight: 400 }}>
-            AI agents that listen, verify, and synchronize your Jira board in real-time so your team can focus on building, not updating tickets.
+            AI agents that listen, verify, and synchronize your Jira board in real-time. Built as a **Web Application** for the **Software Engineering Management** domain.
           </motion.p>
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 1.3 }}>
             <MetalButton enableShader={false} style={{ height: 60, padding: "0 36px", fontSize: "1.05rem" }}>
@@ -220,7 +222,7 @@ function Features() {
   const ref = useRef(null);
   const feats = [
     { col: 2, title: "Intelligent Jira Automation", desc: "Automatic card movement based on verified task completion. Approval-first sync   changes pushed only after PM review.", visual: "bars" },
-    { col: 1, title: "Privacy & Security", desc: "OAuth 2.0 with role-based access control. End-to-end encrypted cloud storage.", visual: "shield" },
+    { col: 1, title: "Database & Security", desc: "Mandatory baseline: Secure OAuth 2.0 Auth and persistent Database integration (PostgreSQL).", visual: "shield" },
     { col: 1, title: "Chat Signal Listening", desc: "Discord, Slack & Telegram bots monitoring standups for 'Done' signals and task mentions.", visual: "dots" },
     { col: 2, title: "Source-of-Truth Verification", desc: "GitHub / GitLab integration checking commits and PRs. Technical audit verifying code meets Jira ticket requirements.", visual: "rings" },
   ];
@@ -301,9 +303,12 @@ function Team() {
         <MetaballBackground backgroundColor="#FFFFFF" color="#f3f4f6" dotCount={8} />
         <div style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-            <h2 style={{ fontFamily: "'Jura', sans-serif", fontSize: "clamp(2rem, 5vw, 4.5rem)", fontWeight: 700, letterSpacing: "-3px", marginBottom: 16, textAlign: "center", color: "#000" }}>
+            <h2 style={{ fontFamily: "'Jura', sans-serif", fontSize: "clamp(2rem, 5vw, 4.5rem)", fontWeight: 700, letterSpacing: "-3px", marginBottom: 12, textAlign: "center", color: "#000" }}>
               The <span style={{ color: "rgb(0, 132, 209)" }}>Orchestrators</span>
             </h2>
+            <p style={{ textAlign: "center", color: "#666", fontSize: "1rem", fontWeight: 500, marginBottom: 32, maxWidth: 600, margin: "0 auto 40px" }}>
+              {rotationNote}
+            </p>
           </motion.div>
           <TeamGallery />
         </div>
@@ -457,6 +462,15 @@ function CTA() {
             {["Group 3", "Section C", "SE Project 2026"].map(tag => (
               <span key={tag} style={{ padding: "10px 24px", borderRadius: 9999, border: "1px solid rgba(255,255,255,0.1)", fontSize: "0.85rem", color: "rgba(255,255,255,0.5)", fontWeight: 500 }}>{tag}</span>
             ))}
+          </div>
+          <div style={{ marginTop: 48, padding: "24px 40px", borderRadius: 24, border: "1px solid rgba(16,185,129,0.1)", background: "rgba(16,185,129,0.03)", maxWidth: 700 }}>
+            <h4 style={{ color: "#10B981", fontSize: "1.1rem", fontWeight: 600, marginBottom: 12 }}>3-Phase Execution Strategy</h4>
+            <div style={{ display: "flex", gap: 32, justifyContent: "center", fontSize: "0.9rem", color: "#9CA3AF" }}>
+              <div>• Phase 1: Foundations</div>
+              <div>• Phase 2: Core Dev</div>
+              <div>• Phase 3: Refinement</div>
+            </div>
+            <p style={{ fontSize: "0.85rem", color: "#6B7280", marginTop: 12 }}>Full traceability for mid-project requirement changes across all phases.</p>
           </div>
         </div>
       </section>
