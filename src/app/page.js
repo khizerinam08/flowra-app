@@ -103,7 +103,7 @@ function Hero() {
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.0 }}
             style={{ maxWidth: 480, fontSize: "1.15rem", color: "#9CA3AF", lineHeight: 1.7, fontWeight: 400 }}>
-            AI agents that listen, verify, and synchronize your Jira board in real-time. Built as a **Web Application** for the **Software Engineering Management** domain.
+            Agentic Software Engineering Infrastructure. Powered by **Subagents of Flowra** that monitor development signals across chat and code to automate your entire SDLC.
           </motion.p>
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 1.3 }}>
             <MetalButton enableShader={false} style={{ height: 60, padding: "0 36px", fontSize: "1.05rem" }}>
@@ -221,10 +221,10 @@ function ScrollStory() {
 function Features() {
   const ref = useRef(null);
   const feats = [
-    { col: 2, title: "Intelligent Jira Automation", desc: "Automatic card movement based on verified task completion. Approval-first sync   changes pushed only after PM review.", visual: "bars" },
-    { col: 1, title: "Database & Security", desc: "Mandatory baseline: Secure OAuth 2.0 Auth and persistent Database integration (PostgreSQL).", visual: "shield" },
-    { col: 1, title: "Chat Signal Listening", desc: "Discord, Slack & Telegram bots monitoring standups for 'Done' signals and task mentions.", visual: "dots" },
-    { col: 2, title: "Source-of-Truth Verification", desc: "GitHub / GitLab integration checking commits and PRs. Technical audit verifying code meets Jira ticket requirements.", visual: "rings" },
+    { col: 2, title: "Agentic Signal Listening", desc: "Discord, Slack & Telegram bots monitoring standups for 'Done' signals and task mentions. Subagents translate chat logs into Jira actions.", visual: "dots" },
+    { col: 1, title: "Manager Approval", desc: "Approval-first sync   changes identified by Flowra are presented on a dashboard for one-click Jira updates.", visual: "bars" },
+    { col: 1, title: "Technical Baseline", desc: "Mandatory baseline: Secure OAuth 2.0 Auth and persistent Database integration (PostgreSQL).", visual: "shield" },
+    { col: 2, title: "Source-of-Truth Verification", desc: "GitHub integration checking PRs, commits, and reviews. Technical audit verifying code meets Jira ticket requirements.", visual: "rings" },
   ];
 
   return (
@@ -393,7 +393,7 @@ function UserRoles() {
             style={{ fontFamily: "'Outfit', sans-serif", fontSize: "clamp(2.5rem,4vw,4rem)", fontWeight: 500, letterSpacing: "-2px", marginBottom: 12 }}>
             3 Distinct User Roles
           </motion.h2>
-          <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.1rem", marginBottom: 56 }}>Each with distinct workflows generating 5+ user stories   15+ total minimum for the product backlog.</p>
+          <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.1rem", marginBottom: 56 }}>Our agentic infrastructure drives the workflow across distinct roles, ensuring 100% Jira-to-Code synchronization.</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}>
             <style>{`
               .glass-prism {
@@ -431,6 +431,74 @@ function UserRoles() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+/* ─── Execution ─── */
+function Execution() {
+  const cards = [
+    {
+      title: "Approval-First Sync",
+      desc: "The Manager Dashboard stages AI-identified task completions. A single-click approval triggers an instant, secure synchronization with Jira, ensuring the board reflects reality.",
+      tag: "Verification Hub",
+      icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>,
+      color: "#10B981"
+    },
+    {
+      title: "3-Phase Strategy",
+      desc: "Foundations → Core Development → Refinement. Full traceability is maintained for every mid-project requirement change across all phases.",
+      tag: "Execution Model",
+      icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="13 17 18 12 13 7" /><polyline points="6 17 11 12 6 7" /></svg>,
+      color: "#60A5FA"
+    },
+    {
+      title: "Technical Baseline",
+      desc: "Persistent PostgreSQL integration for subagent state and secure OAuth 2.0 Identity Management for role-based access control.",
+      tag: "Infrastructure",
+      icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M3 5V19A9 3 0 0 0 21 19V5" /><path d="M3 12A9 3 0 0 0 21 12" /></svg>,
+      color: "#8B5CF6"
+    }
+  ];
+
+  return (
+    <div style={{ height: "100%" }}>
+      <section style={slideSection("#FFFFFF", { color: "#000", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.08)" })}>
+        <MetaballBackground backgroundColor="#FFFFFF" color="#E5E7EB" dotCount={10} />
+        <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 1, width: "100%" }}>
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} style={{ textAlign: "center", marginBottom: 56 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 16px", borderRadius: 9999, border: "1px solid #e5e7eb", background: "#fff", boxShadow: "0 1px 4px rgba(0,0,0,0.04)", marginBottom: 20 }}>
+              <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#10B981" }} />
+              <span style={{ fontSize: 13, color: "#6B7280", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: 700 }}>Project Architecture</span>
+            </div>
+            <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: "clamp(2.5rem,4.5vw,4.8rem)", fontWeight: 500, letterSpacing: "-3px", lineHeight: 0.95, color: "#000" }}>
+              Manager Orchestration<br /><span style={{ color: "#9CA3AF" }}>& Technical Baseline</span>
+            </h2>
+          </motion.div>
+          
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, padding: "0 20px" }}>
+            {cards.map((card, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                style={{ position: "relative", borderRadius: 32, background: "#fff", border: "1px solid #f3f4f6", boxShadow: "0 10px 40px rgba(0,0,0,0.03)", padding: "40px 32px", display: "flex", flexDirection: "column", gap: 24, overflow: "hidden" }}>
+                <div style={{ position: "absolute", top: 0, right: 0, width: 120, height: 120, background: `radial-gradient(circle at top right, ${card.color}15, transparent 70%)` }} />
+                <div style={{ width: 56, height: 56, borderRadius: 16, background: `${card.color}10`, color: card.color, display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid ${card.color}20` }}>
+                  {card.icon}
+                </div>
+                <div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: card.color, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 }}>{card.tag}</div>
+                  <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: "1.6rem", fontWeight: 500, color: "#000", marginBottom: 12, letterSpacing: "-0.5px" }}>{card.title}</h3>
+                  <p style={{ color: "#6B7280", lineHeight: 1.6, fontSize: "0.95rem", margin: 0 }}>{card.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }}
+            style={{ marginTop: 48, textAlign: "center", fontStyle: "italic", color: "#9CA3AF", fontSize: "0.9rem" }}>
+            Ensuring 100% board accuracy through automated agentic verification.
+          </motion.div>
         </div>
       </section>
     </div>
@@ -532,16 +600,14 @@ function ThanksSlide() {
 const presentationSlides = [
   { component: Hero, title1: "FLO", title2: "WRA" },
   { component: Team, title1: "TE", title2: "AM" },
-  { component: ScrollStory, title1: "AGI", title2: "LE" },
-  { component: Features, title1: "FEA", title2: "TURES" },
-  { component: UserRoles, title1: "RO", title2: "LES" },
-  { component: Metrics, title1: "MET", title2: "RICS" },
+  { component: Features, title1: "SUB", title2: "AGENTS" },
+  { component: Execution, title1: "EXE", title2: "CUTION" },
   { component: CTA, title1: "D", title2: "ONE" },
   { component: ThanksSlide, title1: "THA", title2: "NKS" },
 ];
 
 // White card slides (page background should be black for contrast)
-const whiteCardSlides = [1, 3, 5]; // Team, Features, Metrics indices
+const whiteCardSlides = [1, 2, 3]; // Team, Features, Execution indices
 
 /* ─── Page ─── */
 export default function HomePage() {
