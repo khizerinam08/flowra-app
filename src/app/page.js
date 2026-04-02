@@ -180,11 +180,6 @@ function Hero() {
 
 /* ─── ScrollStory ─── */
 function ScrollStory() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
-  const y1 = useTransform(scrollYProgress, [0, 1], [150, -300]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [300, -150]);
-
   const steps = [
     { num: "01", color: "#A78BFA", bg: "rgba(167,139,250,0.1)", border: "rgba(167,139,250,0.2)", title: "Connect & Listen", desc: "Link Jira, GitHub, Slack, Discord and Telegram. Flowra's agents run silently in the background, listening to every commit, PR, and standup message." },
     { num: "02", color: "#34D399", bg: "rgba(52,211,153,0.1)", border: "rgba(52,211,153,0.2)", title: "Verify with Proof", desc: 'When a developer says "Done with the API," Flowra checks GitHub for the actual commits and PRs — not just their word for it. Real proof of work.' },
@@ -193,55 +188,51 @@ function ScrollStory() {
 
   return (
     <div style={{ padding: "0 16px 16px" }}>
-      <section ref={containerRef} style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#000", color: "#fff", padding: "128px 24px", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}>
+      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#000", color: "#fff", padding: "128px 24px", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}>
         <div style={{ position: "absolute", top: 0, right: 0, width: 1000, height: 1000, background: "radial-gradient(circle at center, rgba(139,92,246,0.05) 0%, transparent 60%)", filter: "blur(100px)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", bottom: 0, left: 0, width: 800, height: 800, background: "radial-gradient(circle at center, rgba(52,211,153,0.04) 0%, transparent 60%)", filter: "blur(100px)", pointerEvents: "none" }} />
 
-        <div style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, padding: "0 48px" }}>
-          {/* Sticky left */}
-          <div style={{ position: "sticky", top: 160, height: "fit-content" }}>
-            <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: "clamp(3rem,5vw,5rem)", fontWeight: 700, lineHeight: 0.9, letterSpacing: "-3px", marginBottom: 32 }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", flexDirection: "column", gap: 80, padding: "0 24px" }}>
+          
+          {/* Centered Heading */}
+          <div style={{ textAlign: "center", maxWidth: 800, margin: "0 auto" }}>
+            <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: "clamp(3rem,5vw,5.5rem)", fontWeight: 700, lineHeight: 0.9, letterSpacing: "-3px", marginBottom: 24 }}>
               Agile moves<br />
               <span style={{ background: "linear-gradient(to right, #A78BFA, #60A5FA)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>differently.</span>
             </h2>
-            <p style={{ color: "#6B7280", fontSize: "1.2rem", lineHeight: 1.7, marginBottom: 48, fontWeight: 500 }}>
+            <p style={{ color: "#6B7280", fontSize: "1.2rem", lineHeight: 1.7, fontWeight: 500 }}>
               We&apos;ve re-engineered how Agile state flows. Eliminate the overhead of manual board updates and execute project synchronization in real-time.
             </p>
-            <div style={{ display: "flex", gap: 16 }}>
-              <div style={{ width: 56, height: 56, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.02)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
-                <div style={{ width: "100%", height: "100%", background: "#10B981", borderRadius: "50%", animation: "pulse 2s infinite", boxShadow: "0 0 20px rgba(16,185,129,0.5)" }} />
-              </div>
-              <div style={{ width: 56, height: 56, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.02)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
-                <div style={{ width: "100%", height: "100%", background: "#8B5CF6", borderRadius: "50%", opacity: 0.6 }} />
-              </div>
-            </div>
           </div>
 
-          {/* Scrolling steps */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 128, paddingTop: 40, paddingBottom: 80 }}>
+          {/* Horizontal Grid */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24 }}>
             {steps.map((step, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ margin: "-100px", once: true }} transition={{ duration: 0.8 }}
-                style={{ position: "relative", borderRadius: "2rem", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.01)", padding: "56px", overflow: "hidden" }}>
-                <div style={{ position: "absolute", right: -24, bottom: -40, fontFamily: "'Outfit', sans-serif", fontSize: "min(18rem, 30vw)", fontWeight: 900, color: "rgba(255,255,255,0.015)", lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>{step.num}</div>
-                <div>
-                  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "4px 12px", borderRadius: 9999, background: step.bg, border: `1px solid ${step.border}`, color: step.color, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 24 }}>
+              <motion.div key={i} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: i * 0.15 }}
+                style={{ position: "relative", borderRadius: "2rem", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)", padding: "48px 32px 40px", overflow: "hidden", display: "flex", flexDirection: "column" }}>
+                <div style={{ position: "absolute", right: -16, top: -24, fontFamily: "'Outfit', sans-serif", fontSize: "16rem", fontWeight: 900, color: "rgba(255,255,255,0.015)", lineHeight: 1, pointerEvents: "none", userSelect: "none", zIndex: 0 }}>{step.num}</div>
+                
+                <div style={{ position: "relative", zIndex: 1, flex: 1 }}>
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", borderRadius: 9999, background: step.bg, border: `1px solid ${step.border}`, color: step.color, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 32 }}>
                     Step {["One", "Two", "Three"][i]}
                   </div>
-                  <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: "2.5rem", fontWeight: 500, color: "#fff", marginBottom: 16, lineHeight: 1.1, letterSpacing: "-1px" }}>{step.title}</h3>
-                  <p style={{ color: "#9CA3AF", fontSize: "1.1rem", lineHeight: 1.7, maxWidth: 380 }}>{step.desc}</p>
+                  <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: "2rem", fontWeight: 600, color: "#fff", marginBottom: 16, lineHeight: 1.2, letterSpacing: "-1px" }}>{step.title}</h3>
+                  <p style={{ color: "#9CA3AF", fontSize: "1rem", lineHeight: 1.7 }}>{step.desc}</p>
                 </div>
-                {/* floating decoration */}
-                <motion.div style={{ y: i % 2 === 0 ? y1 : y2, position: "absolute", right: -32, top: -64, width: 192, height: 192, borderRadius: 24, background: "#050505", border: "1px solid rgba(255,255,255,0.08)", padding: 20, display: "flex", flexDirection: "column", justifyContent: "flex-end", zIndex: 20, overflow: "hidden" }}>
-                  <div style={{ position: "absolute", top: 0, right: 0, width: 96, height: 96, background: `${step.color}33`, filter: "blur(30px)" }} />
+
+                {/* Ambient Internal Decoration */}
+                <div style={{ marginTop: 48, height: 80, position: "relative", borderRadius: 16, background: "#050505", border: "1px solid rgba(255,255,255,0.08)", padding: 16, display: "flex", flexDirection: "column", justifyContent: "center", overflow: "hidden", zIndex: 1 }}>
+                  <div style={{ position: "absolute", top: 0, right: 0, width: 120, height: 120, background: `${step.color}22`, filter: "blur(40px)" }} />
                   <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                    {[1, 0.7, 0.5].map((w, j) => (
-                      <div key={j} style={{ height: 6, width: `${w * 100}%`, background: `linear-gradient(to right, ${step.color}, transparent)`, borderRadius: 9999 }} />
+                    {[1, 0.6, 0.4].map((w, j) => (
+                      <div key={j} style={{ height: 4, width: `${w * 100}%`, background: `linear-gradient(to right, ${step.color}, transparent)`, borderRadius: 9999 }} />
                     ))}
                   </div>
-                </motion.div>
+                </div>
               </motion.div>
             ))}
           </div>
+
         </div>
       </section>
     </div>
@@ -335,13 +326,13 @@ function Features() {
 function Team() {
   return (
     <div style={{ padding: "0 16px 16px" }}>
-      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#FFFFFF", color: "#000", padding: "80px 24px", overflow: "hidden", minHeight: "80vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#FFFFFF", color: "#000", padding: "40px 24px", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
         {/* Topographic Background */}
         <MetaballBackground backgroundColor="#FFFFFF" color="#f3f4f6" dotCount={8} />
         
         <div style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-            <h2 style={{ fontFamily: "'Jura', sans-serif", fontSize: "clamp(2rem, 5vw, 4.5rem)", fontWeight: 700, letterSpacing: "-3px", marginBottom: 64, textAlign: "center", color: "#000" }}>
+            <h2 style={{ fontFamily: "'Jura', sans-serif", fontSize: "clamp(2rem, 5vw, 4.5rem)", fontWeight: 700, letterSpacing: "-3px", marginBottom: 16, textAlign: "center", color: "#000" }}>
               The <span style={{ color: "rgb(0, 132, 209)" }}>Orchestrators</span>
             </h2>
           </motion.div>

@@ -55,20 +55,34 @@ const TeamGallery = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.3 }}
+              style={{ textAlign: "center" }}
             >
-              FLOWRA<br /><span style={{ fontSize: "0.5em", opacity: 0.4, letterSpacing: 4, fontWeight: 500 }}>TEAM</span>
+              FLOWRA<br /><span style={{ fontSize: "0.5em", opacity: 0.4, letterSpacing: 4, fontWeight: 500, color: "#000" }}>TEAM</span>
             </motion.h1>
           ) : (
             <motion.div
               key="info"
-              initial={{ opacity: 0, y: 10, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
               className="center-info"
+              style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}
             >
-              <h2 style={{ margin: 0, fontSize: "clamp(1.1rem, 2.5vw, 1.6rem)", fontWeight: 700, color: "#000" }}>{hovered.name}</h2>
-              <p style={{ margin: "4px 0 0", fontSize: "0.9rem", color: "rgb(0, 132, 209)", fontWeight: 600 }}>{hovered.role}</p>
+              <motion.h2
+                initial={{ opacity: 0, scale: 0, x: -50 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                exit={{ opacity: 0, scale: 0, x: -50 }}
+                transition={{ duration: 0.3, ease: "easeInOut", delay: 0.15 }}
+                style={{ margin: 0, fontSize: "clamp(1.1rem, 2.5vw, 1.6rem)", fontWeight: 700, color: "#fff" }}
+              >
+                {hovered.name}
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, scale: 0, x: 50 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                exit={{ opacity: 0, scale: 0, x: 50 }}
+                transition={{ duration: 0.3, ease: "easeInOut", delay: 0.15 }}
+                style={{ margin: "4px 0 0", fontSize: "0.75rem", color: "rgba(255,255,255,0.7)", fontWeight: 600 }}
+              >
+                {hovered.role}
+              </motion.p>
             </motion.div>
           )}
         </AnimatePresence>

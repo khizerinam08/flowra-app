@@ -411,9 +411,9 @@ main:has(.willem-header.is--loading) {
 		grid-template-columns: repeat(15, 1fr);
 		grid-template-rows: repeat(15, 1fr);
 		width: 100%;
-		max-width: 940px;
+		max-width: 650px;
 		aspect-ratio: 1 / 1;
-		margin: 100px auto; 
+		margin: 20px auto; 
 		gap: 0;
 		font-family: "Jura", sans-serif;
 		position: relative;
@@ -432,7 +432,6 @@ main:has(.willem-header.is--loading) {
 	/* Card Geometric Profiles */
 	.label-box, .team-avatar-link {
 		border-radius: 24px;
-    background: #FFFFFF;
 		@supports (corner-shape: notch) {
   			border-radius: 35%;
 				corner-shape: bevel;
@@ -446,30 +445,39 @@ main:has(.willem-header.is--loading) {
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+    background: transparent; /* Transparent by default */
 		border: 1px solid var(--gallery-indicator-color);
 		z-index: 10;
-		box-shadow: 0 25px 60px rgba(0,0,0,0.1);
+		box-shadow: 0 15px 40px rgba(0,0,0,0.15);
 		overflow: hidden;
-    padding: 24px;
+    padding: 16px;
+		transition: background 0.3s ease;
 	}
 
+  /* Dark blue fill only when hovering over team members */
+  .wrapper:has(.team-avatar-link:hover) .label-box {
+    background: #0A192F; /* Deep Dark Blue */
+  }
+
   .label-box h1 {
-    font-size: clamp(1.2rem, 3.5vw, 2.5rem);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
     font-weight: 800;
     margin: 0;
-    color: #000;
+    color: #000; /* Black text on transparent/white background */
     letter-spacing: -3px;
     line-height: 0.85;
     text-align: center;
   }
 
-  /* Spaced Portrait Containment */
+  /* Spaced Portrait Containment with Outline */
 	.team-avatar-link {
 		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		padding: var(--gallery-gap);
+    background: #FFFFFF;
+    border: 1px solid var(--gallery-indicator-color); /* Character container outline */
 		transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
     cursor: pointer;
 	}
