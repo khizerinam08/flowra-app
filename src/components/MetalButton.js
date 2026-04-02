@@ -8,7 +8,8 @@ export default function MetalButton({
   style = {}, 
   onClick,
   variant = "solid", // "solid" or "outline"
-  background = "#ffffff" // for outline variant inner bg
+  background = "#ffffff", // for outline variant inner bg
+  enableShader = true // toggle the liquid metal animation
 }) {
   const containerRef = useRef(null);
   const shaderInstance = useRef(null);
@@ -48,12 +49,14 @@ export default function MetalButton({
       }
     };
 
-    initShader();
+    if (enableShader) {
+      initShader();
+    }
 
     return () => {
       mounted = false;
     };
-  }, [variant]); // Re-init on variant change
+  }, [variant, enableShader]); // Re-init on variant or shader toggle
 
   const isOutline = variant === "outline";
 
@@ -74,16 +77,28 @@ export default function MetalButton({
       }}
     >
       {/* Shader background layer (always is at the very back) */}
-      <div
-        ref={containerRef}
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 0,
-          pointerEvents: "none",
-          borderRadius: "inherit",
-        }}
-      />
+      {enableShader ? (
+        <div
+          ref={containerRef}
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            pointerEvents: "none",
+            borderRadius: "inherit",
+          }}
+        />
+      ) : (
+        <div 
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            background: "#ffffff",
+            borderRadius: "inherit",
+          }}
+        />
+      )}
       
       {/* Inner background (only used for outline variant to hide center shader) */}
       {isOutline && (

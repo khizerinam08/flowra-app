@@ -101,10 +101,10 @@ function Hero() {
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.0 }}
             style={{ maxWidth: 480, fontSize: "1.15rem", color: "#9CA3AF", lineHeight: 1.7, fontWeight: 400 }}>
-            AI agents that listen, verify, and synchronize your Jira board in real-time—so your team can focus on building, not updating tickets.
+            AI agents that listen, verify, and synchronize your Jira board in real-time so your team can focus on building, not updating tickets.
           </motion.p>
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 1.3 }}>
-            <MetalButton style={{ height: 60, padding: "0 36px", fontSize: "1.05rem" }}>
+            <MetalButton enableShader={false} style={{ height: 60, padding: "0 36px", fontSize: "1.05rem" }}>
               Let&apos;s Start
             </MetalButton>
           </motion.div>
@@ -167,8 +167,8 @@ function Hero() {
 function ScrollStory() {
   const steps = [
     { num: "01", color: "#A78BFA", bg: "rgba(167,139,250,0.1)", border: "rgba(167,139,250,0.2)", title: "Connect & Listen", desc: "Link Jira, GitHub, Slack, Discord and Telegram. Flowra's agents run silently in the background, listening to every commit, PR, and standup message." },
-    { num: "02", color: "#34D399", bg: "rgba(52,211,153,0.1)", border: "rgba(52,211,153,0.2)", title: "Verify with Proof", desc: 'When a developer says "Done with the API," Flowra checks GitHub for the actual commits and PRs — not just their word for it. Real proof of work.' },
-    { num: "03", color: "#60A5FA", bg: "rgba(96,165,250,0.1)", border: "rgba(96,165,250,0.2)", title: "Approve & Sync", desc: "Flowra suggests a card move on the dashboard. The PM approves it with one click. Jira updates instantly, staying 100% accurate — automatically." },
+    { num: "02", color: "#34D399", bg: "rgba(52,211,153,0.1)", border: "rgba(52,211,153,0.2)", title: "Verify with Proof", desc: 'When a developer says "Done with the API," Flowra checks GitHub for the actual commits and PRs   not just their word for it. Real proof of work.' },
+    { num: "03", color: "#60A5FA", bg: "rgba(96,165,250,0.1)", border: "rgba(96,165,250,0.2)", title: "Approve & Sync", desc: "Flowra suggests a card move on the dashboard. The PM approves it with one click. Jira updates instantly, staying 100% accurate   automatically." },
   ];
 
   return (
@@ -219,7 +219,7 @@ function ScrollStory() {
 function Features() {
   const ref = useRef(null);
   const feats = [
-    { col: 2, title: "Intelligent Jira Automation", desc: "Automatic card movement based on verified task completion. Approval-first sync — changes pushed only after PM review.", visual: "bars" },
+    { col: 2, title: "Intelligent Jira Automation", desc: "Automatic card movement based on verified task completion. Approval-first sync   changes pushed only after PM review.", visual: "bars" },
     { col: 1, title: "Privacy & Security", desc: "OAuth 2.0 with role-based access control. End-to-end encrypted cloud storage.", visual: "shield" },
     { col: 1, title: "Chat Signal Listening", desc: "Discord, Slack & Telegram bots monitoring standups for 'Done' signals and task mentions.", visual: "dots" },
     { col: 2, title: "Source-of-Truth Verification", desc: "GitHub / GitLab integration checking commits and PRs. Technical audit verifying code meets Jira ticket requirements.", visual: "rings" },
@@ -228,7 +228,7 @@ function Features() {
   return (
     <div style={{ height: "100%" }}>
       <section style={slideSection("#FFFFFF", { color: "#000", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.08)" })}>
-        <MetaballBackground backgroundColor="#FFFFFF" color="#1A1A1A" dotCount={15} />
+        <MetaballBackground backgroundColor="#FFFFFF" color="#E5E7EB" dotCount={15} />
         <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 1, width: "100%" }}>
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} style={{ textAlign: "center", marginBottom: 56 }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 16px", borderRadius: 9999, border: "1px solid #e5e7eb", background: "#fff", boxShadow: "0 1px 4px rgba(0,0,0,0.04)", marginBottom: 20 }}>
@@ -317,7 +317,7 @@ function Metrics() {
   return (
     <div style={{ height: "100%" }}>
       <section style={slideSection("#FFFFFF", { color: "#000" })}>
-        <MetaballBackground backgroundColor="#FFFFFF" color="#1A1A1A" dotCount={10} />
+        <MetaballBackground backgroundColor="#FFFFFF" color="#E5E7EB" dotCount={10} />
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1, width: "100%" }}>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: 40 }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 16px", borderRadius: 9999, border: "1px solid #e5e7eb", background: "#fff", marginBottom: 20 }}>
@@ -388,7 +388,7 @@ function UserRoles() {
             style={{ fontFamily: "'Outfit', sans-serif", fontSize: "clamp(2.5rem,4vw,4rem)", fontWeight: 500, letterSpacing: "-2px", marginBottom: 12 }}>
             3 Distinct User Roles
           </motion.h2>
-          <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.1rem", marginBottom: 56 }}>Each with distinct workflows generating 5+ user stories — 15+ total minimum for the product backlog.</p>
+          <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.1rem", marginBottom: 56 }}>Each with distinct workflows generating 5+ user stories   15+ total minimum for the product backlog.</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}>
             <style>{`
               .glass-prism {
@@ -437,7 +437,8 @@ function CTA() {
   return (
     <div style={{ height: "100%" }}>
       <section style={slideSection("#030405", { color: "#fff", alignItems: "center", textAlign: "center", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" })}>
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "100%", height: "100%", background: "radial-gradient(circle at center, rgba(16,185,129,0.15) 0%, transparent 50%)", pointerEvents: "none" }} />
+        <MetaballBackground backgroundColor="#030405" color="#333333" dotCount={12} />
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "100%", height: "100%", background: "radial-gradient(circle at center, rgba(16,185,129,0.05) 0%, transparent 50%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 1000, margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", position: "relative", zIndex: 10 }}>
           <motion.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
             style={{ fontFamily: "'Outfit', sans-serif", fontSize: "clamp(3rem,7vw,6.5rem)", fontWeight: 500, letterSpacing: "-4px", lineHeight: 0.9, marginBottom: 40 }}>
@@ -448,8 +449,8 @@ function CTA() {
             Flowra turns the tedious &quot;Work about Work&quot; into an automated background process. Your team focuses on building. AI handles Agile synchronization.
           </motion.p>
           <motion.div initial={{ scale: 0.95, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
-            <MetalButton style={{ height: 72, padding: "0 48px", fontSize: "1.2rem" }}>
-              Thank You — Q&amp;A ↗
+            <MetalButton enableShader={false} style={{ height: 72, padding: "0 48px", fontSize: "1.2rem" }}>
+              Thank You   Q&amp;A ↗
             </MetalButton>
           </motion.div>
           <div style={{ marginTop: 40, display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
@@ -463,15 +464,66 @@ function CTA() {
   );
 }
 
+/* ─── Thanks ─── */
+function ThanksSlide() {
+  return (
+    <div style={{ height: "100%" }}>
+      <section style={slideSection("#FFFFFF", { color: "#000", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.08)" })}>
+        <div style={{ width: "100%", maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ borderTop: "1.5px solid #b7b7bc", width: "100%" }}>
+            <div style={{ width: "100%", paddingTop: "clamp(48px, 8vh, 120px)", paddingBottom: "clamp(24px, 5vh, 56px)", paddingLeft: "clamp(8px, 2vw, 24px)", paddingRight: "clamp(8px, 2vw, 24px)" }}>
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}
+              >
+                <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: "clamp(1.15rem, 2vw, 1.8rem)", fontWeight: 500, color: "#1f1f1f", lineHeight: 1.35, letterSpacing: "-0.02em" }}>
+                  Thank you for your time and attention.
+                </p>
+                <p style={{ marginTop: 10, fontSize: "clamp(0.95rem, 1.3vw, 1.1rem)", color: "#5f6368", fontWeight: 500 }}>
+                  We appreciate your support and feedback.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                style={{ position: "relative", marginTop: "clamp(32px, 6vh, 64px)", height: "clamp(300px, 45vh, 520px)", width: "100%", maxWidth: 1200, marginLeft: "auto", marginRight: "auto", borderRadius: 32, overflow: "hidden", border: "1px solid rgba(17,17,17,0.08)", boxShadow: "0 12px 40px rgba(0,0,0,0.06)" }}
+              >
+                <MetaballBackground
+                  color="#E5E7EB"
+                  backgroundColor="#FFFFFF"
+                  dotCount={14}
+                />
+
+                <div style={{ pointerEvents: "none", position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 16px" }}>
+                  <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: "clamp(2.2rem, 7vw, 4.6rem)", fontWeight: 600, color: "#000000", letterSpacing: "-0.03em", textAlign: "center" }}>
+                    Thank You
+                  </h2>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 /* ─── Slides config ─── */
 const presentationSlides = [
-  { component: Hero,        title1: "FLO",  title2: "WRA"   },
-  { component: Team,        title1: "TE",   title2: "AM"    },
-  { component: ScrollStory, title1: "AGI",  title2: "LE"    },
-  { component: Features,    title1: "FEA",  title2: "TURES" },
-  { component: UserRoles,   title1: "RO",   title2: "LES"   },
-  { component: Metrics,     title1: "MET",  title2: "RICS"  },
-  { component: CTA,         title1: "D",    title2: "ONE"   },
+  { component: Hero, title1: "FLO", title2: "WRA" },
+  { component: Team, title1: "TE", title2: "AM" },
+  { component: ScrollStory, title1: "AGI", title2: "LE" },
+  { component: Features, title1: "FEA", title2: "TURES" },
+  { component: UserRoles, title1: "RO", title2: "LES" },
+  { component: Metrics, title1: "MET", title2: "RICS" },
+  { component: CTA, title1: "D", title2: "ONE" },
+  { component: ThanksSlide, title1: "THA", title2: "NKS" },
 ];
 
 // White card slides (page background should be black for contrast)
@@ -534,7 +586,7 @@ export default function HomePage() {
       {/* Fixed navbar floats above everything */}
       <Navbar />
 
-      {/* Card container — absolute inset with 16px page padding */}
+      {/* Card container   absolute inset with 16px page padding */}
       <div style={{ position: "absolute", inset: "16px", zIndex: 1, borderRadius: "3.5rem", overflow: "hidden" }}>
         <div style={{ width: "100%", height: "100%", overflowY: "auto", overflowX: "hidden" }}>
           <CurrentComponent />
