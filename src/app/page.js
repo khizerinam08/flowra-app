@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import MetalButton from "@/components/MetalButton";
+import MetaballBackground from "@/components/MetaballBackground";
 
 /* ─── Team data ─── */
 const team = [
@@ -259,10 +260,11 @@ function Features() {
 
   return (
     <div style={{ padding: "0 16px 16px" }}>
-      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#FAFAFA", color: "#0A0B0D", padding: "80px 24px 128px", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.08)" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(0,0,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.03) 1px,transparent 1px)", backgroundSize: "100px 100px", maskImage: "radial-gradient(ellipse at center, black 50%, transparent 90%)", pointerEvents: "none" }} />
+      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#FFFFFF", color: "#000", padding: "80px 24px 128px", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.08)" }}>
+        {/* Topographic Background */}
+        <MetaballBackground backgroundColor="#FFFFFF" color="#1A1A1A" dotCount={15} />
 
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} style={{ textAlign: "center", marginBottom: 80 }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 16px", borderRadius: 9999, border: "1px solid #e5e7eb", background: "#fff", boxShadow: "0 1px 4px rgba(0,0,0,0.04)", marginBottom: 24 }}>
               <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#10B981", animation: "pulse 2s infinite" }} />
@@ -365,8 +367,10 @@ function Team() {
 function Metrics() {
   return (
     <div style={{ padding: "0 16px 16px" }}>
-      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#FAFAFA", color: "#000", padding: "80px 48px 80px", overflow: "hidden" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#FFFFFF", color: "#000", padding: "80px 48px 80px", overflow: "hidden" }}>
+        {/* Topographic Background */}
+        <MetaballBackground backgroundColor="#FFFFFF" color="#1A1A1A" dotCount={10} />
+        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: 48 }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 16px", borderRadius: 9999, border: "1px solid #e5e7eb", background: "#fff", marginBottom: 24 }}>
               <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#8B5CF6" }} />
@@ -376,7 +380,8 @@ function Metrics() {
               Performance<br /><span style={{ color: "#9CA3AF" }}>Metrics Matrix</span>
             </h2>
           </motion.div>
-          <motion.div initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+          <motion.div initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
+            style={{ background: "#FFFFFF", borderRadius: 32, border: "1px solid #f3f4f6", boxShadow: "0 4px 30px rgba(0,0,0,0.03)", padding: "48px", overflow: "hidden" }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
                 <tr style={{ borderBottom: "2px solid #e5e7eb" }}>
