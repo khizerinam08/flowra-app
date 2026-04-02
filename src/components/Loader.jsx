@@ -6,21 +6,19 @@ import gsap from "gsap";
 const FlowLoader = ({ onComplete }) => {
   const containerRef = useRef(null);
   const loaderRef = useRef(null);
+  const rimRef = useRef(null);
   const timelineRef = useRef(null);
 
   useEffect(() => {
     const container = containerRef.current;
     const loader = loaderRef.current;
+    const rim = rimRef.current;
     if (!container || !loader) return;
 
     const loadingLetters = container.querySelectorAll(".willem__letter");
     const headingStart = container.querySelector(".willem__h1-start");
     const headingEnd = container.querySelector(".willem__h1-end");
     const mainContent = document.querySelector("#main-content");
-
-    // Force start at the absolute top of the website
-    window.scrollTo(0, 0);
-    document.body.style.overflow = "hidden";
 
     /* GSAP Timeline */
     const tl = gsap.timeline({
@@ -29,61 +27,82 @@ const FlowLoader = ({ onComplete }) => {
       },
       onStart: () => {
         container.classList.remove('is--hidden');
+        // Force the page TO THE TOP
+        window.scrollTo(0,0);
+        document.body.style.overflow = "hidden";
       },
       onComplete: () => {
-        document.body.style.overflow = "auto";
+        document.body.style.overflow = "";
         if (onComplete) onComplete();
       }
     });
 
     timelineRef.current = tl;
 
-    /* 1. Initial Styles (Ensure website content is ready to zoom) */
+    /* 1. Initial Styles (Scale from TOP to reveal Hero) */
     if (mainContent) {
-      gsap.set(mainContent, { scale: 0.7, opacity: 0, transformOrigin: "center center" });
+      gsap.set(mainContent, { 
+        scale: 0.8, // Slightly tighter zoom for speed
+        opacity: 0, 
+        transformOrigin: "center top" 
+      });
     }
     gsap.set(loader, { "--portal-radius": "0%" });
+    if (rim) gsap.set(rim, { opacity: 0 });
 
-    /* 2. Brand Reveal (Letters slide up) */
+    /* 2. Brand Reveal (Snappier Letters Reveal) */
     tl.from(loadingLetters, {
       yPercent: 100,
-      stagger: 0.08,
-      duration: 1,
+      stagger: 0.05,
+      duration: 0.8,
     });
 
-    /* 3. The CIRCULAR MASK HOLE Reveal + WEBSITE SCALE-UP (Dynamic 'from scratch' effect) */
-    // Synchronize mask expansion with content zoom-in
+    /* 3. HIGH-SPEED DARK GREEN PORTAL Reveal */
+    // Duration reduced from 2.5s to 1.2s for snappier feel
     tl.to(loader, {
       "--portal-radius": "150%",
-      duration: 2.2,
-      ease: "power3.inOut"
-    }, "+=0.3"); // Brand pause
+      duration: 1.2,
+      ease: "power4.in" // Use 'in' ease for initial velocity
+    }, "+=0.1"); // Shorter pause
+
+    if (rim) {
+      tl.to(rim, {
+        opacity: 1,
+        duration: 0.3,
+      }, "<");
+      
+      tl.to(rim, {
+        opacity: 0,
+        duration: 0.3,
+      }, ">-0.4");
+    }
 
     if (mainContent) {
       tl.to(mainContent, {
         scale: 1,
         opacity: 1,
-        duration: 2.2,
-        ease: "power3.inOut"
-      }, "<"); // Perfect sync with mask growth
+        duration: 1.2,
+        ease: "power4.inOut"
+      }, "<"); // Perfect sync with portal growth
     }
 
-    /* 4. Branding Disperse (Sync with expansion) */
+    /* 4. Branding Disperse (Sync with High-Speed expansion) */
     tl.to(headingStart, {
-      xPercent: -150,
+      xPercent: -200,
       opacity: 0,
-      duration: 1.8,
-      ease: "power2.inOut"
-    }, "<0.1");
+       duration: 1,
+      ease: "power3.inOut"
+    }, "<0.05");
 
     tl.to(headingEnd, {
-      xPercent: 150,
+      xPercent: 200,
       opacity: 0,
-      duration: 1.8,
-      ease: "power2.inOut"
+      duration: 1,
+      ease: "power3.inOut"
     }, "<");
 
     return () => {
+      document.body.style.overflow = "";
       if (timelineRef.current) timelineRef.current.kill();
     };
   }, [onComplete]);
@@ -97,7 +116,6 @@ const FlowLoader = ({ onComplete }) => {
             <span className="willem__letter">L</span>
             <span className="willem__letter">O</span>
           </div>
-          <div style={{ width: "0.1em" }} />
           <div className="willem__h1-end">
             <span className="willem__letter">W</span>
             <span className="willem__letter">R</span>
@@ -105,6 +123,9 @@ const FlowLoader = ({ onComplete }) => {
           </div>
         </div>
       </div>
+      
+      {/* Dark Green Portal Rim */}
+      <div ref={rimRef} className="portal-rim" />
     </section>
   );
 };
