@@ -1,5 +1,4 @@
 import "./globals.css";
-import LoaderWrapper from "../components/LoaderWrapper";
 
 export const metadata = {
   title: "Flowra — Agentic Agile Orchestration & Performance Verification",
@@ -10,9 +9,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body suppressHydrationWarning>
-        <LoaderWrapper>
-          {children}
-        </LoaderWrapper>
+        {children}
       </body>
     </html>
   );

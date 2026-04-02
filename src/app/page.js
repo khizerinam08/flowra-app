@@ -71,8 +71,8 @@ function Navbar() {
 /* ─── Hero ─── */
 function Hero() {
   return (
-    <div style={{ padding: "0 16px 16px" }}>
-      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#000", color: "#fff", padding: "144px 24px 80px", overflow: "hidden", minHeight: "95vh", display: "flex", flexDirection: "column", alignItems: "center", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}>
+    <div style={{ padding: "0", height: "100%" }}>
+      <section style={{ position: "relative", width: "100%", height: "100%", borderRadius: "3.5rem", background: "#000", color: "#fff", padding: "14vh 16px 16px", overflow: "hidden", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}>
 
         {/* Green atmosphere */}
         <div style={{ position: "absolute", top: "-20%", left: "-10%", width: 1200, height: 1200, borderRadius: "50%", background: "radial-gradient(circle at center, #1a3b32 0%, transparent 60%)", filter: "blur(100px)", opacity: 0.6, pointerEvents: "none" }} />
@@ -99,7 +99,7 @@ function Hero() {
             </motion.p>
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 1.3 }}>
               <MetalButton style={{ height: 60, padding: "0 36px", fontSize: "1.05rem" }}>
-                SE Project Proposal ↗
+                Lets Start
               </MetalButton>
             </motion.div>
           </div>
@@ -187,13 +187,13 @@ function ScrollStory() {
   ];
 
   return (
-    <div style={{ padding: "0 16px 16px" }}>
-      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#000", color: "#fff", padding: "128px 24px", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}>
+    <div style={{ padding: "0" }}>
+      <section style={{ position: "relative", width: "100%", height: "100%", borderRadius: "3.5rem", background: "#000", color: "#fff", padding: "14vh 16px 16px", display: "flex", flexDirection: "column", justifyContent: "center", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}>
         <div style={{ position: "absolute", top: 0, right: 0, width: 1000, height: 1000, background: "radial-gradient(circle at center, rgba(139,92,246,0.05) 0%, transparent 60%)", filter: "blur(100px)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", bottom: 0, left: 0, width: 800, height: 800, background: "radial-gradient(circle at center, rgba(52,211,153,0.04) 0%, transparent 60%)", filter: "blur(100px)", pointerEvents: "none" }} />
 
         <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", flexDirection: "column", gap: 80, padding: "0 24px" }}>
-          
+
           {/* Centered Heading */}
           <div style={{ textAlign: "center", maxWidth: 800, margin: "0 auto" }}>
             <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: "clamp(3rem,5vw,5.5rem)", fontWeight: 700, lineHeight: 0.9, letterSpacing: "-3px", marginBottom: 24 }}>
@@ -211,7 +211,7 @@ function ScrollStory() {
               <motion.div key={i} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: i * 0.15 }}
                 style={{ position: "relative", borderRadius: "2rem", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)", padding: "48px 32px 40px", overflow: "hidden", display: "flex", flexDirection: "column" }}>
                 <div style={{ position: "absolute", right: -16, top: -24, fontFamily: "'Outfit', sans-serif", fontSize: "16rem", fontWeight: 900, color: "rgba(255,255,255,0.015)", lineHeight: 1, pointerEvents: "none", userSelect: "none", zIndex: 0 }}>{step.num}</div>
-                
+
                 <div style={{ position: "relative", zIndex: 1, flex: 1 }}>
                   <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", borderRadius: 9999, background: step.bg, border: `1px solid ${step.border}`, color: step.color, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 32 }}>
                     Step {["One", "Two", "Three"][i]}
@@ -251,8 +251,8 @@ function Features() {
   ];
 
   return (
-    <div style={{ padding: "0 16px 16px" }}>
-      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#FFFFFF", color: "#000", padding: "80px 24px 128px", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.08)" }}>
+    <div style={{ padding: "0", height: "100%" }}>
+      <section style={{ position: "relative", width: "100%", height: "100%", borderRadius: "3.5rem", background: "#FFFFFF", color: "#000", padding: "14vh 16px 16px", display: "flex", flexDirection: "column", justifyContent: "center", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.08)" }}>
         {/* Topographic Background */}
         <MetaballBackground backgroundColor="#FFFFFF" color="#1A1A1A" dotCount={15} />
 
@@ -325,11 +325,11 @@ function Features() {
 /* ─── Team (Gallery Widget) ─── */
 function Team() {
   return (
-    <div style={{ padding: "0 16px 16px" }}>
-      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#FFFFFF", color: "#000", padding: "40px 24px", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div style={{ padding: "0", height: "100%" }}>
+      <section style={{ position: "relative", width: "100%", height: "100%", borderRadius: "3.5rem", background: "#FFFFFF", color: "#000", padding: "14vh 16px 16px", overflow: "hidden", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
         {/* Topographic Background */}
         <MetaballBackground backgroundColor="#FFFFFF" color="#f3f4f6" dotCount={8} />
-        
+
         <div style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
             <h2 style={{ fontFamily: "'Jura', sans-serif", fontSize: "clamp(2rem, 5vw, 4.5rem)", fontWeight: 700, letterSpacing: "-3px", marginBottom: 16, textAlign: "center", color: "#000" }}>
@@ -346,8 +346,8 @@ function Team() {
 /* ─── Metrics (light) ─── */
 function Metrics() {
   return (
-    <div style={{ padding: "0 16px 16px" }}>
-      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#FFFFFF", color: "#000", padding: "80px 48px 80px", overflow: "hidden" }}>
+    <div style={{ padding: "0", height: "100%" }}>
+      <section style={{ position: "relative", width: "100%", height: "100%", borderRadius: "3.5rem", background: "#FFFFFF", color: "#000", padding: "14vh 16px 16px", display: "flex", flexDirection: "column", justifyContent: "center", overflow: "hidden" }}>
         {/* Topographic Background */}
         <MetaballBackground backgroundColor="#FFFFFF" color="#1A1A1A" dotCount={10} />
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1 }}>
@@ -392,38 +392,38 @@ function Metrics() {
 /* ─── User Roles ─── */
 function UserRoles() {
   const roles = [
-    { 
+    {
       color: "oklch(0.7 0.15 160)", // Cyber Green
-      title: "Developers", 
+      title: "Developers",
       desc: "Track GitHub PRs, commits, and Slack activity without manual overhead. AI verification of 'Done' claims against real codebase changes.",
-      icon: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg> 
+      icon: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
     },
-    { 
+    {
       color: "oklch(0.65 0.25 280)", // Ethereal Purple
-      title: "Project Managers", 
-      desc: "Dashboard-driven approvals of AI-suggested Jira card movements. Sprint velocity analytics and team performance evaluation.", 
+      title: "Project Managers",
+      desc: "Dashboard-driven approvals of AI-suggested Jira card movements. Sprint velocity analytics and team performance evaluation.",
       icon: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><path d="M9 3v18" /><path d="M15 3v18" /></svg>
     },
-    { 
+    {
       color: "oklch(0.65 0.15 240)", // Inferno Blue
-      title: "QA Testers", 
-      desc: "End-to-end traceability connecting codebase updates with bug reports. Regression test tracking via Jira and codebase analysis.", 
-      icon: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 2v4.5A2.5 2.5 0 0 0 9.8 8L3.2 18.5A2 2 0 0 0 5 22h14a2 2 0 0 0 1.8-3.5L14.2 8A2.5 2.5 0 0 0 15 6.5V2" /><path d="M8.5 2h7" /><path d="M3.2 16h17.6" /></svg> 
+      title: "QA Testers",
+      desc: "End-to-end traceability connecting codebase updates with bug reports. Regression test tracking via Jira and codebase analysis.",
+      icon: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 2v4.5A2.5 2.5 0 0 0 9.8 8L3.2 18.5A2 2 0 0 0 5 22h14a2 2 0 0 0 1.8-3.5L14.2 8A2.5 2.5 0 0 0 15 6.5V2" /><path d="M8.5 2h7" /><path d="M3.2 16h17.6" /></svg>
     },
   ];
   return (
-    <div style={{ padding: "0 16px 16px" }}>
-      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#050505", color: "#fff", padding: "100px 48px", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}>
+    <div style={{ padding: "0", height: "100%" }}>
+      <section style={{ position: "relative", width: "100%", height: "100%", borderRadius: "3.5rem", background: "#050505", color: "#fff", padding: "14vh 16px 16px", display: "flex", flexDirection: "column", justifyContent: "center", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}>
         {/* Ambient background glow */}
         <div style={{ position: "absolute", width: "80vw", height: "80vw", borderRadius: "50%", background: "radial-gradient(circle at center, oklch(0.3 0.1 240) 0%, transparent 60%)", filter: "blur(100px)", top: "10%", left: "50%", transform: "translateX(-50%)", zIndex: 0, opacity: 0.5, pointerEvents: "none" }} />
-        
+
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 10 }}>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             style={{ fontFamily: "'Outfit', sans-serif", fontSize: "clamp(2.5rem,4vw,4rem)", fontWeight: 500, letterSpacing: "-2px", marginBottom: 16 }}>
             3 Distinct User Roles
           </motion.h2>
           <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.1rem", marginBottom: 64 }}>Each with distinct workflows generating 5+ user stories — 15+ total minimum for the product backlog.</p>
-          
+
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
             <style>{`
               .glass-prism {
@@ -470,7 +470,7 @@ function UserRoles() {
                 letter-spacing: -1px;
               }
             `}</style>
-            
+
             {roles.map((r, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.15 }}
                 className="glass-prism"
@@ -493,8 +493,8 @@ function UserRoles() {
 /* ─── CTA ─── */
 function CTA() {
   return (
-    <div style={{ padding: "0 16px 16px" }}>
-      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#030405", color: "#fff", padding: "160px 24px", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}>
+    <div style={{ padding: "0", height: "100%" }}>
+      <section style={{ position: "relative", width: "100%", height: "100%", borderRadius: "3.5rem", background: "#030405", color: "#fff", padding: "14vh 16px 16px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}>
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "100%", height: "100%", background: "radial-gradient(circle at center, rgba(16,185,129,0.15) 0%, transparent 50%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 1000, margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", position: "relative", zIndex: 10 }}>
           <motion.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
@@ -505,7 +505,7 @@ function CTA() {
             style={{ fontSize: "1.2rem", color: "#9CA3AF", maxWidth: 560, marginBottom: 64, lineHeight: 1.7 }}>
             Flowra turns the tedious &quot;Work about Work&quot; into an automated background process. Your team focuses on building. AI handles Agile synchronization.
           </motion.p>
-          
+
           <motion.div initial={{ scale: 0.95, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
             <MetalButton style={{ height: 72, padding: "0 48px", fontSize: "1.2rem" }}>
               Thank You — Q&amp;A ↗
@@ -525,7 +525,7 @@ function CTA() {
 /* ─── Footer ─── */
 function Footer() {
   return (
-    <div style={{ padding: "0 16px 16px" }}>
+    <div style={{ padding: "0" }}>
       <footer style={{ width: "100%", borderRadius: "0 0 2rem 2rem", background: "#fff", color: "#111", padding: "64px 48px", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid #f3f4f6" }}>
         <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: "2rem", fontWeight: 900, letterSpacing: "-2px" }}>Flowra</div>
         <div style={{ display: "flex", gap: 32, fontSize: 14, fontWeight: 500, color: "rgba(0,0,0,0.5)" }}>
@@ -539,20 +539,105 @@ function Footer() {
 }
 
 /* ─── Page ─── */
+import FlowLoader from "@/components/Loader";
+
+const presentationSlides = [
+  { component: Hero, title1: "FLO", title2: "WRA" },
+  { component: Team, title1: "TE", title2: "AM" },
+  { component: ScrollStory, title1: "AGI", title2: "LE" },
+  { component: Features, title1: "FEA", title2: "TURES" },
+  { component: UserRoles, title1: "RO", title2: "LES" },
+  { component: Metrics, title1: "MET", title2: "RICS" },
+  { component: CTA, title1: "D", title2: "ONE" }
+];
+
 export default function HomePage() {
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const CurrentComponent = presentationSlides[currentSlideIndex].component;
+  const slideTitle1 = presentationSlides[currentSlideIndex].title1;
+  const slideTitle2 = presentationSlides[currentSlideIndex].title2;
+
+  const handleNext = () => {
+    if (currentSlideIndex < presentationSlides.length - 1) {
+      setIsLoading(true);
+      setCurrentSlideIndex(prev => prev + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentSlideIndex > 0) {
+      setIsLoading(true);
+      setCurrentSlideIndex(prev => prev - 1);
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        setCurrentSlideIndex(prev => {
+          if (prev < presentationSlides.length - 1) {
+            setIsLoading(true);
+            return prev + 1;
+          }
+          return prev;
+        });
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        setCurrentSlideIndex(prev => {
+          if (prev > 0) {
+            setIsLoading(true);
+            return prev - 1;
+          }
+          return prev;
+        });
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
-    <main style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
-      <Navbar />
-      <motion.div initial={{ y: "100vh" }} animate={{ y: 0 }} transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}>
-        <Hero />
-        <Team />
-        <ScrollStory />
-        <Features />
-        <UserRoles />
-        <Metrics />
-        <CTA />
-        <Footer />
-      </motion.div>
+    <main style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden", position: "relative" }}>
+      {isLoading && (
+        <FlowLoader
+          key={`loader-${currentSlideIndex}`}
+          word1={slideTitle1}
+          word2={slideTitle2}
+          onComplete={() => setIsLoading(false)}
+        />
+      )}
+
+      <div id="main-content" style={{ position: "relative", zIndex: 1, height: "100vh", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+        <Navbar />
+
+        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", width: "100vw", height: "100vh", padding: "16px", boxSizing: "border-box" }}>
+          <div style={{ width: "100%", height: "100%", overflowY: "auto", overflowX: "hidden", borderRadius: "3.5rem", position: "relative" }}>
+            <CurrentComponent />
+          </div>
+        </div>
+
+        {currentSlideIndex === presentationSlides.length - 1 && <Footer />}
+
+        {/* Floating Navigation Arrows */}
+        <div style={{ position: "fixed", bottom: "40px", right: "40px", zIndex: 100, display: "flex", gap: "16px" }}>
+          <button
+            onClick={handlePrev}
+            disabled={currentSlideIndex === 0}
+            style={{ width: "50px", height: "50px", borderRadius: "50%", background: "rgba(9,10,13,0.8)", backdropFilter: "blur(12px)", color: "#fff", border: "1px solid rgba(255,255,255,0.2)", cursor: currentSlideIndex === 0 ? "not-allowed" : "pointer", opacity: currentSlideIndex === 0 ? 0.3 : 1, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", transition: "all 0.2s" }}
+          >
+            ←
+          </button>
+          <button
+            onClick={handleNext}
+            disabled={currentSlideIndex === presentationSlides.length - 1}
+            style={{ width: "50px", height: "50px", borderRadius: "50%", background: "rgba(9,10,13,0.8)", backdropFilter: "blur(12px)", color: "#fff", border: "1px solid rgba(255,255,255,0.2)", cursor: currentSlideIndex === presentationSlides.length - 1 ? "not-allowed" : "pointer", opacity: currentSlideIndex === presentationSlides.length - 1 ? 0.3 : 1, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", transition: "all 0.2s" }}
+          >
+            →
+          </button>
+        </div>
+      </div>
     </main>
   );
 }

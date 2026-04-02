@@ -69,7 +69,7 @@ const TeamGallery = () => {
                 initial={{ opacity: 0, scale: 0, x: -50 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0, x: -50 }}
-                transition={{ duration: 0.3, ease: "easeInOut", delay: 0.15 }}
+                transition={{ duration: 0.2, ease: "easeInOut", delay: 0.05 }}
                 style={{ margin: 0, fontSize: "clamp(1.1rem, 2.5vw, 1.6rem)", fontWeight: 700, color: "#fff" }}
               >
                 {hovered.name}
@@ -78,7 +78,7 @@ const TeamGallery = () => {
                 initial={{ opacity: 0, scale: 0, x: 50 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0, x: 50 }}
-                transition={{ duration: 0.3, ease: "easeInOut", delay: 0.15 }}
+                transition={{ duration: 0.2, ease: "easeInOut", delay: 0.05 }}
                 style={{ margin: "4px 0 0", fontSize: "0.75rem", color: "rgba(255,255,255,0.7)", fontWeight: 600 }}
               >
                 {hovered.role}
