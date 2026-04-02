@@ -389,30 +389,98 @@ function Metrics() {
 }
 
 /* ─── User Roles ─── */
+/* ─── User Roles ─── */
 function UserRoles() {
   const roles = [
-    { icon: "👨‍💻", title: "Developers", desc: "Track GitHub PRs, commits, and Slack activity without manual overhead. AI verification of 'Done' claims against real codebase changes.", color: "#10B981" },
-    { icon: "📊", title: "Project Managers", desc: "Dashboard-driven approvals of AI-suggested Jira card movements. Sprint velocity analytics and team performance evaluation.", color: "#8B5CF6" },
-    { icon: "🧪", title: "QA Testers", desc: "End-to-end traceability connecting codebase updates with bug reports. Regression test tracking via Jira and codebase analysis.", color: "#60A5FA" },
+    { 
+      color: "oklch(0.7 0.15 160)", // Cyber Green
+      title: "Developers", 
+      desc: "Track GitHub PRs, commits, and Slack activity without manual overhead. AI verification of 'Done' claims against real codebase changes.",
+      icon: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg> 
+    },
+    { 
+      color: "oklch(0.65 0.25 280)", // Ethereal Purple
+      title: "Project Managers", 
+      desc: "Dashboard-driven approvals of AI-suggested Jira card movements. Sprint velocity analytics and team performance evaluation.", 
+      icon: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><path d="M9 3v18" /><path d="M15 3v18" /></svg>
+    },
+    { 
+      color: "oklch(0.65 0.15 240)", // Inferno Blue
+      title: "QA Testers", 
+      desc: "End-to-end traceability connecting codebase updates with bug reports. Regression test tracking via Jira and codebase analysis.", 
+      icon: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 2v4.5A2.5 2.5 0 0 0 9.8 8L3.2 18.5A2 2 0 0 0 5 22h14a2 2 0 0 0 1.8-3.5L14.2 8A2.5 2.5 0 0 0 15 6.5V2" /><path d="M8.5 2h7" /><path d="M3.2 16h17.6" /></svg> 
+    },
   ];
   return (
     <div style={{ padding: "0 16px 16px" }}>
-      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#000", color: "#fff", padding: "80px 48px", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#050505", color: "#fff", padding: "100px 48px", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}>
+        {/* Ambient background glow */}
+        <div style={{ position: "absolute", width: "80vw", height: "80vw", borderRadius: "50%", background: "radial-gradient(circle at center, oklch(0.3 0.1 240) 0%, transparent 60%)", filter: "blur(100px)", top: "10%", left: "50%", transform: "translateX(-50%)", zIndex: 0, opacity: 0.5, pointerEvents: "none" }} />
+        
+        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 10 }}>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             style={{ fontFamily: "'Outfit', sans-serif", fontSize: "clamp(2.5rem,4vw,4rem)", fontWeight: 500, letterSpacing: "-2px", marginBottom: 16 }}>
             3 Distinct User Roles
           </motion.h2>
-          <p style={{ color: "#9CA3AF", fontSize: "1.1rem", marginBottom: 48 }}>Each with distinct workflows generating 5+ user stories — 15+ total minimum for the product backlog.</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+          <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.1rem", marginBottom: 64 }}>Each with distinct workflows generating 5+ user stories — 15+ total minimum for the product backlog.</p>
+          
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
+            <style>{`
+              .glass-prism {
+                position: relative;
+                padding: 3rem;
+                border-radius: 24px;
+                background: oklch(from var(--color-1) 0.1 0.02 h / 0.3);
+                backdrop-filter: blur(20px);
+                border: 1px solid oklch(from var(--color-1) 0.9 0.05 h / 0.3);
+                border-bottom-color: rgba(255, 255, 255, 0.05);
+                box-shadow: 0 30px 60px color-mix(in oklab, var(--color-1) 10%, black);
+                transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+              }
+              .glass-prism:hover {
+                transform: translateY(-10px) scale(1.02);
+                border-color: oklch(from var(--color-1) 0.95 0.1 h / 0.6);
+                background: oklch(from var(--color-1) 0.15 0.03 h / 0.4);
+              }
+              .glass-prism-icon {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 64px;
+                height: 64px;
+                border-radius: 16px;
+                margin-bottom: 32px;
+                background: oklch(from var(--color-1) 0.3 0.1 h / 0.3);
+                color: oklch(from var(--color-1) 0.95 0.05 h);
+                border: 1px solid oklch(from var(--color-1) 0.8 0.1 h / 0.5);
+                box-shadow: 0 0 20px oklch(from var(--color-1) 0.5 0.1 h / 0.2);
+              }
+              .glass-prism h3 {
+                font-family: 'Outfit', sans-serif;
+                font-size: 1.8rem;
+                font-weight: 500;
+                margin-bottom: 16px;
+                background: linear-gradient(135deg, oklch(from var(--color-1) 0.95 0.05 h), oklch(from var(--color-1) 0.7 0.1 h));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                line-height: 1.1;
+                letter-spacing: -1px;
+              }
+            `}</style>
+            
             {roles.map((r, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.1 }}
-                whileHover={{ scale: 0.98 }}
-                style={{ borderRadius: 32, border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.01)", padding: 40, position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: `linear-gradient(to right, ${r.color}, transparent)` }} />
-                <div style={{ fontSize: "2.5rem", marginBottom: 20 }}>{r.icon}</div>
-                <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: "1.4rem", fontWeight: 500, marginBottom: 12, color: "#fff" }}>{r.title}</h3>
-                <p style={{ color: "#9CA3AF", lineHeight: 1.7, fontSize: "0.95rem" }}>{r.desc}</p>
+              <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.15 }}
+                className="glass-prism"
+                style={{ "--color-1": r.color }}
+              >
+                <div className="glass-prism-icon">
+                  {r.icon}
+                </div>
+                <h3>{r.title}</h3>
+                <p style={{ color: "rgba(255,255,255,0.6)", lineHeight: 1.7, fontSize: "1.05rem", margin: 0 }}>{r.desc}</p>
               </motion.div>
             ))}
           </div>
