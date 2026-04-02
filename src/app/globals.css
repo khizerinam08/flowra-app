@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.bunny.net/css?family=jura:300,500,700");
 
 *, *::before, *::after {
   margin: 0;
@@ -394,4 +395,122 @@ main:has(.willem-header.is--loading) {
   font-weight: 500;
   font-style: normal;
   font-display: swap;
+}
+
+/* ─── Team Gallery (Premium Spaced Diamond) ─── */
+@layer team-gallery {
+	:root {
+		--gallery-gap: 24px;
+		--gallery-indicator-color: rgb(0, 132, 209);
+		--gallery-indicator-hover-bg: rgba(0, 132, 209, 0.05);
+		--gallery-img-border: 1px solid rgba(0, 0, 0, 0.04);
+	}
+
+	.wrapper {
+		display: grid;
+		grid-template-columns: repeat(15, 1fr);
+		grid-template-rows: repeat(15, 1fr);
+		width: 100%;
+		max-width: 940px;
+		aspect-ratio: 1 / 1;
+		margin: 100px auto; 
+		gap: 0;
+		font-family: "Jura", sans-serif;
+		position: relative;
+    z-index: 20;
+	}
+
+  /* Spacious 6-Member Pattern (Perfect 1-unit gaps - NO OVERLAPS) */
+	.wrapper > :nth-child(1) { grid-row: 6 / span 5; grid-column: 6 / span 5; } /* Center (6-11) */
+	.wrapper > :nth-child(2) { grid-row: 1 / span 5; grid-column: 6 / span 5; } /* Top (1-6) - Distance=1 */
+	.wrapper > :nth-child(3) { grid-row: 3 / span 5; grid-column: 1 / span 5; } /* Top Left (3-8, 1-6) */
+	.wrapper > :nth-child(4) { grid-row: 3 / span 5; grid-column: 11 / span 5; } /* Top Right (3-8, 11-16) */
+	.wrapper > :nth-child(5) { grid-row: 9 / span 5; grid-column: 1 / span 5; } /* Bottom Left (9-14, 1-6) */
+	.wrapper > :nth-child(6) { grid-row: 9 / span 5; grid-column: 11 / span 5; } /* Bottom Right (9-14, 11-16) */
+	.wrapper > :nth-child(7) { grid-row: 11 / span 5; grid-column: 6 / span 5; } /* Bottom (11-16) - Distance=1 */
+
+	/* Card Geometric Profiles */
+	.label-box, .team-avatar-link {
+		border-radius: 24px;
+    background: #FFFFFF;
+		@supports (corner-shape: notch) {
+  			border-radius: 35%;
+				corner-shape: bevel;
+		}
+	}
+
+	/* Center Label Polish */
+	.label-box {
+		position: relative;
+		display: flex !important;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid var(--gallery-indicator-color);
+		z-index: 10;
+		box-shadow: 0 25px 60px rgba(0,0,0,0.1);
+		overflow: hidden;
+    padding: 24px;
+	}
+
+  .label-box h1 {
+    font-size: clamp(1.2rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    margin: 0;
+    color: #000;
+    letter-spacing: -3px;
+    line-height: 0.85;
+    text-align: center;
+  }
+
+  /* Spaced Portrait Containment */
+	.team-avatar-link {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: var(--gallery-gap);
+		transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+    cursor: pointer;
+	}
+
+	.team-avatar-link img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		border: var(--gallery-img-border);
+		border-radius: inherit;
+    corner-shape: inherit;
+		transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+		filter: grayscale(1) opacity(0.85);
+    background: #fafafa;
+	}
+
+	.team-avatar-link:hover img {
+		transform: scale(1.15) translateY(-10px);
+		filter: grayscale(0) opacity(1);
+		box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+    z-index: 50;
+	}
+
+	/* Inactive member fade down */
+	.wrapper:has(.team-avatar-link:hover) .team-avatar-link:not(:hover) img {
+		opacity: 0.2;
+		transform: scale(0.9);
+    filter: grayscale(1) blur(1px);
+	}
+
+	@media (max-width: 900px) {
+		.wrapper {
+			grid-template-columns: repeat(2, 1fr);
+			grid-template-rows: auto;
+			gap: 40px;
+			aspect-ratio: auto;
+			padding: 40px 24px;
+      margin: 40px auto;
+		}
+		.label-box { order: -1; grid-column: span 2; grid-row: auto; min-height: 180px; margin-bottom: 40px; }
+		.team-avatar-link { grid-column: span 1 !important; grid-row: auto !important; height: auto; aspect-ratio: 1/1; }
+    .team-avatar-link img { filter: grayscale(0); opacity: 1; transform: none !important; }
+	}
 }

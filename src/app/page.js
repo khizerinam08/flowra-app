@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import MetalButton from "@/components/MetalButton";
 import MetaballBackground from "@/components/MetaballBackground";
+import TeamGallery from "@/components/TeamGallery";
 
 /* ─── Team data ─── */
 const team = [
@@ -330,33 +331,21 @@ function Features() {
   );
 }
 
-/* ─── Team (dark rounded card) ─── */
+/* ─── Team (Gallery Widget) ─── */
 function Team() {
   return (
     <div style={{ padding: "0 16px 16px" }}>
-      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#000", color: "#fff", padding: "80px 48px 48px", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, background: "radial-gradient(ellipse at top, rgba(16,185,129,0.05) 0%, transparent 60%)", pointerEvents: "none" }} />
-        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
-            style={{ fontFamily: "'Outfit', sans-serif", fontSize: "clamp(3rem,5vw,4.5rem)", fontWeight: 700, letterSpacing: "-3px", marginBottom: 48 }}>
-            Our Team
-          </motion.h2>
-          {team.map((m, i) => (
-            <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.08 }}
-              style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "24px 32px", position: "relative", overflow: "hidden", borderBottom: "1px solid rgba(255,255,255,0.07)", cursor: "default" }}
-              className="team-row">
-              <style>{`.team-row:hover .team-overlay { height: 100% !important; }`}</style>
-              <div className="team-overlay" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "100%", height: "0%", background: "#0077ff", transition: "height 0.5s cubic-bezier(0.4,0,0.2,1)", zIndex: 0 }} />
-              <div style={{ display: "flex", gap: "3vw", alignItems: "baseline", position: "relative", zIndex: 2 }}>
-                <span style={{ fontWeight: 700, fontSize: "1.2rem", opacity: 0.3 }}>{m.num}</span>
-                <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: "1.5rem" }}>{m.name}</span>
-              </div>
-              <span style={{ fontSize: "1rem", opacity: 0.6, position: "relative", zIndex: 2 }}>{m.role}</span>
-            </motion.div>
-          ))}
-          <p style={{ textAlign: "center", padding: "32px", opacity: 0.4, fontStyle: "italic", fontSize: "0.9rem" }}>
-            Scrum roles rotate across all 3 sprints — ensuring every team member gains comprehensive agile experience.
-          </p>
+      <section style={{ position: "relative", width: "100%", borderRadius: "3.5rem", background: "#FFFFFF", color: "#000", padding: "80px 24px", overflow: "hidden", minHeight: "80vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        {/* Topographic Background */}
+        <MetaballBackground backgroundColor="#FFFFFF" color="#f3f4f6" dotCount={8} />
+        
+        <div style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+            <h2 style={{ fontFamily: "'Jura', sans-serif", fontSize: "clamp(2rem, 5vw, 4.5rem)", fontWeight: 700, letterSpacing: "-3px", marginBottom: 64, textAlign: "center", color: "#000" }}>
+              The <span style={{ color: "rgb(0, 132, 209)" }}>Orchestrators</span>
+            </h2>
+          </motion.div>
+          <TeamGallery />
         </div>
       </section>
     </div>
@@ -497,9 +486,9 @@ export default function HomePage() {
       <Navbar />
       <motion.div initial={{ y: "100vh" }} animate={{ y: 0 }} transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}>
         <Hero />
+        <Team />
         <ScrollStory />
         <Features />
-        <Team />
         <UserRoles />
         <Metrics />
         <CTA />
