@@ -474,10 +474,14 @@ const presentationSlides = [
   { component: CTA,         title1: "D",    title2: "ONE"   },
 ];
 
+// White card slides (page background should be black for contrast)
+const whiteCardSlides = [1, 3, 5]; // Team, Features, Metrics indices
+
 /* ─── Page ─── */
 export default function HomePage() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const isWhiteCardSlide = whiteCardSlides.includes(currentSlideIndex);
 
   const CurrentComponent = presentationSlides[currentSlideIndex].component;
   const slideTitle1 = presentationSlides[currentSlideIndex].title1;
@@ -517,7 +521,7 @@ export default function HomePage() {
   }, [presentationSlides.length]);
 
   return (
-    <main style={{ width: "100vw", height: "100vh", background: "#111", overflow: "hidden", position: "relative" }}>
+    <main style={{ width: "100vw", height: "100vh", background: isWhiteCardSlide ? "#000" : "#FFFFFF", overflow: "hidden", position: "relative" }}>
       {isLoading && (
         <FlowLoader
           key={`loader-${currentSlideIndex}`}
