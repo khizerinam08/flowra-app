@@ -19,7 +19,7 @@ const LoaderWrapper = ({ children }) => {
   return (
     <>
       {loading && <FlowLoader onComplete={handleComplete} />}
-      <main style={{ visibility: loading ? "hidden" : "visible", height: loading ? "100vh" : "auto", overflow: loading ? "hidden" : "auto" }}>
+      <main id="main-content" style={{ position: "relative", zIndex: 1 }}>
         {children}
       </main>
     </>
