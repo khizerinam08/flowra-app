@@ -1,49 +1,372 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap");
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --font-outfit: "Outfit", sans-serif;
+  --font-inter: "Inter", sans-serif;
 }
 
 html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
+body {
+  background-color: #f4f4f4;
+  font-family: PP Neue Montreal, Arial, sans-serif;
+  color: #201d1d;
+  font-weight: 400;
   margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
+  min-height: 100%;
+  cursor: url("https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/671251b239d7aeb290a31ac5_cursor-default%402x.svg")
+      2 0,
+    auto;
 }
 
-a {
+a,
+button {
+  cursor: url("https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/671251b212e6b71494aa67ff_cursor-pointer%402x.svg")
+      12 0,
+    pointer;
+}
+
+/* Breathe animation */
+@keyframes letter-breathe {
+  from, to { font-weight: 100; }
+  50% { font-weight: 900; }
+}
+
+/* Aurora gradient text */
+.text-aurora {
+  background: linear-gradient(to right, #00c2ff, #33ff8c, #ffc640, #e54cff, #00c2ff);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: aurora-flow 6s linear infinite;
+}
+
+@keyframes aurora-flow {
+  to { background-position: 200% center; }
+}
+
+/* Glass styles (from ZuneFlow globals.css) */
+.glass-card {
+  position: relative;
+  background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.03) 100%);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.glass-card:hover {
+  background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  border-color: rgba(255,255,255,0.2);
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.1);
+  transform: translateY(-4px) scale(1.01);
+}
+
+/* Scrollbar hide */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ─── Metal Button Styles ─── */
+.metal-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff; /* Fallback */
+  color: #000000;
+  border-radius: 9999px;
+  font-weight: 700;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.metal-button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.metal-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ------- Osmo [https://osmo.supply/] ------- */
+
+/* Disable Scroll on Loading */
+main:has(.willem-header.is--loading) {
+  height: 100dvh;
+}
+
+.willem-header {
+  color: #f4f4f4;
+  position: fixed; /* Fixed for React layout coverage */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Loading: Hidden */
+.willem-header.is--loading.is--hidden {
+  display: none;
+}
+
+.willem-loader {
+  color: #201d1d;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: #f4f4f4;
+}
+
+.willem__h1 {
+  white-space: nowrap;
+  justify-content: center;
+  font-size: 12.5em;
+  font-weight: 500;
+  line-height: .75;
+  display: flex;
+  position: relative;
+}
+
+.willem__h1-start {
+  justify-content: flex-end;
+  width: 1.5256em;
+  display: flex;
+  overflow: hidden;
+}
+
+.willem__h1-end {
+  justify-content: flex-start;
+  width: 1.525em;
+  display: flex;
+  overflow: hidden;
+}
+
+.willem__letter {
+  display: block;
+  position: relative;
+}
+
+.willem__letter-white.is--space {
+  margin-left: .25em;
+}
+
+.willem-loader__box {
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 0;
+  display: flex;
+  position: relative;
+}
+
+.willem-loader__box-inner {
+  justify-content: center;
+  align-items: center;
+  min-width: 1em;
+  height: 95%;
+  display: flex;
+  position: relative;
+}
+
+.willem__growing-image {
+  justify-content: center;
+  align-items: center;
+  width: 0%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  overflow: hidden;
+}
+
+.willem__growing-image-wrap {
+  width: 100%;
+  min-width: 1em;
+  height: 100%;
+  position: absolute;
+}
+
+.willem__cover-image {
+  pointer-events: none;
+  object-fit: cover;
+  -webkit-user-select: none;
+  user-select: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.willem__cover-image-extra {
+  pointer-events: none;
+  object-fit: cover;
+  -webkit-user-select: none;
+  user-select: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.willem__cover-image-extra.is--1 {
+  z-index: 3;
+}
+
+.willem__cover-image-extra.is--2 {
+  z-index: 2;
+}
+
+.willem__cover-image-extra.is--3 {
+  z-index: 1;
+}
+
+.willem-header__content {
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 100dvh;
+  padding: 3em;
+  display: flex;
+  position: relative;
+  z-index: 5;
+}
+
+.willem-header__top {
+  width: 100%;
+  position: relative;
+}
+
+.willem-header__bottom {
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.willen-nav {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.willem-nav__start {
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 50%;
+  display: flex;
+}
+
+.willem-nav__end {
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 50%;
+  display: flex;
+}
+
+.willem-nav__cta {
+  display: flex;
+}
+
+.willem-nav__links {
+  grid-column-gap: .5em;
+  grid-row-gap: .5em;
+  display: flex;
+}
+
+.willem-nav__link {
   color: inherit;
+  font-size: 1.3125em;
+  line-height: 1.3;
   text-decoration: none;
+  position: relative;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.willem__letter-white {
+  display: block;
+  position: relative;
+}
+
+@media screen and (max-width: 991px) {
+  .willem__h1 {
+    font-size: 9em;
   }
+
+  .willem-nav__links {
+    grid-column-gap: 0em;
+    grid-row-gap: 0em;
+    flex-flow: column;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .willem__h1 {
+    font-size: 5.5em;
+  }
+
+  .willem-nav__start {
+    width: 65%;
+  }
+
+  .willem-nav__end {
+    grid-column-gap: 1.5em;
+    grid-row-gap: 1.5em;
+    flex-flow: column;
+    width: 45%;
+  }
+}
+
+.osmo-credits__p {
+  pointer-events: auto;
+  text-align: center;
+  margin: 0;
+  font-family: PP Neue Montreal, Arial, sans-serif;
+  font-size: 1.125em;
+  font-weight: 500;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.osmo-credits__p-a {
+  color: #f4f4f4;
+}
+
+@media screen and (max-width: 991px) {
+  .osmo-credits__p {
+    display: none;
+  }
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('https://cdn.prod.website-files.com/6819ed8312518f61b84824df/6819ed8312518f61b84825ba_PPNeueMontreal-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
