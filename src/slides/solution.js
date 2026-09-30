@@ -14,19 +14,19 @@ const OBJECTIVES = [
     n: "O1",
     color: "#10B981",
     head: "Deploy any supported repository",
-    body: "Point Depot at GitHub, GitLab or an archive. It reads the application, decides the target and pattern, prices it, then provisions it to AWS, GCP, Azure, Vercel or Railway inside the user's own account — every change validated, costed and signed before it runs.",
+    body: "Point Depot at a repo. It reads the app, picks the target, prices it, provisions it.",
   },
   {
     n: "O2",
     color: "#60A5FA",
     head: "Check health, metrics and cost",
-    body: "Deployment history, health checks, logs, metrics, environment-variable metadata and running spend in one place, with rollback and the savings found. The agent investigates an incident and proposes a fix; a person approves.",
+    body: "History, health, logs, spend and rollback in one place.",
   },
   {
     n: "O3",
     color: "#8B5CF6",
-    head: "Review every change, and trace it after",
-    body: "Nothing reaches the cloud without a saved plan you can read and an explicit approval. Every release then links back through the commit, the model, the specification, the plan, the workflow run and the health outcome — a reviewer follows the whole chain, not just a diff.",
+    head: "Move a live service, not just its code",
+    body: "Cutover planned, priced and rehearsed before the switch.",
   },
 ];
 

@@ -1,6 +1,6 @@
 import { TitleSlide, ChallengeSlide, ProblemSlide, LandscapeSlide } from "./opening";
 import { ObjectivesSlide, UsersSlide, FeaturesSlide, InActionSlide } from "./solution";
-import { ScopeSlide, TimelineSlide, WorkSlide, RisksSlide } from "./plan";
+import { ScopeSlide, TimelineSlide, WorkSlide } from "./plan";
 import { SdgSlide, ReferencesSlide, ThanksSlide } from "./closing";
 
 /* Order follows the advisor's FYDP-I outline. word1 + word2 is the split title the
@@ -17,7 +17,6 @@ export const slides = [
   { component: ScopeSlide, title: "Scope", word1: "SC", word2: "OPE", theme: "light" },
   { component: TimelineSlide, title: "Timeline", word1: "TIME", word2: "LINE", theme: "light" },
   { component: WorkSlide, title: "Work division", word1: "TE", word2: "AM", theme: "light" },
-  { component: RisksSlide, title: "Risks and safety", word1: "RI", word2: "SKS", theme: "dark" },
   { component: SdgSlide, title: "UN Sustainable Development Goals", word1: "S", word2: "DGS", theme: "light" },
   { component: ReferencesSlide, title: "References", word1: "SOUR", word2: "CES", theme: "light" },
   { component: ThanksSlide, title: "Thank you", word1: "THA", word2: "NKS", theme: "dark" },
@@ -31,6 +30,6 @@ export const sections = {
     { label: "Scope", from: 8, to: 8 },
   ],
   right: [
-    { label: "Plan", from: 9, to: 13 },
+    { label: "Plan", from: 9, to: 12 },
   ],
 };

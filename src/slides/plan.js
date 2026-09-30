@@ -1,19 +1,19 @@
 "use client";
 
-import { Check, X } from "lucide-react";
+import { Check } from "lucide-react";
 import { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Ref } from "@/components/deck/ui";
+import { SlideFrame, Layout } from "@/components/deck/ui";
 
 const label = { fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" };
 
 /* ─── 09 · Scope ─── */
-function ScopeList({ items, ok }) {
+function ScopeList({ items }) {
   return (
     <div>
       {items.map((t) => (
-        <div key={t} style={{ display: "flex", gap: 16, alignItems: "baseline", padding: "15px 0", borderTop: "1px solid #eceef1", fontSize: 23, color: ok ? "#111" : "#6B7280" }}>
-          <span style={{ color: ok ? "#10B981" : "#EF4444", flex: "none", position: "relative", top: 3 }}>{ok ? <Check size={22} strokeWidth={3} /> : <X size={22} strokeWidth={3} />}</span>
+        <div key={t} style={{ display: "flex", gap: 16, alignItems: "baseline", padding: "15px 0", borderTop: "1px solid #eceef1", fontSize: 23, color: "#111" }}>
+          <span style={{ color: "#10B981", flex: "none", position: "relative", top: 3 }}><Check size={22} strokeWidth={3} /></span>
           {t}
         </div>
       ))}
@@ -24,33 +24,19 @@ function ScopeList({ items, ok }) {
 export function ScopeSlide() {
   const inScope = [
     "GitHub, GitLab or an archive",
-    "Web apps, APIs, static sites and workers (JS/TS, Python, Go)",
-    "AWS, GCP, Azure, Vercel, Railway",
-    "Scoped, short-lived credentials",
-    "Approval before every infrastructure change",
-    "Delivery, rollback, monitoring, cost, savings, agent",
-  ];
-  const outScope = [
-    "GPU, mobile and desktop software",
-    "Clouds without a reviewed pattern library",
-    "Pasted long-lived keys",
-    "Any unapproved change",
-    "Compliance certification",
+    "Apps, APIs, static sites, workers",
+    "AWS, GCP, Azure",
+    "Short-lived credentials",
+    "Approval before every change",
   ];
   return (
     <SlideFrame theme="light">
-      <Layout title="In scope," sub="and deliberately out." gap={48}
+      <Layout title="What Depot" sub="covers." gap={48}
         cite="Extended scope only if M8 is met early: guided mode, Oracle and Yandex Cloud, voice, preview environments.">
-        <div style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr", gap: 80 }}>
-          <Reveal delay={0.1}>
-            <div style={{ ...label, color: "#10B981", marginBottom: 12 }}>In scope</div>
-            <ScopeList items={inScope} ok />
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div style={{ ...label, color: "#EF4444", marginBottom: 12 }}>Out of scope</div>
-            <ScopeList items={outScope} />
-          </Reveal>
-        </div>
+        <Reveal delay={0.1}>
+          <div style={{ ...label, color: "#10B981", marginBottom: 12 }}>In scope</div>
+          <ScopeList items={inScope} />
+        </Reveal>
       </Layout>
     </SlideFrame>
   );
@@ -70,7 +56,7 @@ export function TimelineSlide() {
     ["M3", "AWS, gate and CI proven", "Faizan", "2026-10-05", "2026-11-27"],
     ["M4", "GCP, GitLab and archive", "Waleed", "2026-11-16", "2027-01-09"],
     ["M5", "Azure, target selection", "Faizan", "2026-12-14", "2027-01-23"],
-    ["M6", "Vercel, Railway, workspaces", "Waleed", "2027-02-02", "2027-03-13"],
+    ["M6", "Workspaces, live migration", "Waleed", "2027-02-02", "2027-03-13"],
     ["M7", "Agent, savings, model comparison", "Ahsan", "2027-02-02", "2027-04-03"],
     ["M8", "Evaluation", "Ahsan", "2027-03-09", "2027-04-25"],
     ["M9", "Final report and defence", "All", "2027-04-21", "2027-05-30"],
@@ -146,38 +132,9 @@ export function WorkSlide() {
           ))}
         </div>
         <Reveal delay={0.5} style={{ marginTop: 72, fontSize: 19, color: "#6B7280" }}>
-          Advisor <b style={{ color: "#111" }}>Hira Anwar</b> · Co-advisor <b style={{ color: "#111" }}>Ayesha Hakim</b> · Scrum, two-week sprints
+          Advisor <b style={{ color: "#111" }}>Hira Anwar</b> · Co-advisor <b style={{ color: "#111" }}>Ayesha Hakim</b>
         </Reveal>
       </div>
-    </SlideFrame>
-  );
-}
-
-/* ─── 12 · Risks and safety ─── */
-export function RisksSlide() {
-  const rows = [
-    ["Cloud accounts or credits not ready", "First-sprint task with an owner; no features until fixed"],
-    ["Scope outgrows three people", "Extended scope only if M8 is met early; Railway can move out"],
-    ["AI proposes unsafe infrastructure", "The model only selects; reviewed templates execute"],
-    ["An agent is tricked into acting", <>Fixed actions, fixed permissions, approval by risk<Ref n={5} dark /></>],
-    ["Credentials reach too far", "Bounded, short-lived roles from M3; no stored user keys"],
-    ["A member acts without the role", "Server-side role check on every route"],
-  ];
-  return (
-    <SlideFrame theme="dark">
-      <Layout dark title="What could go wrong," sub="and how we handle it." gap={44}>
-        <div>
-          {rows.map(([risk, fix], k) => (
-            <Reveal key={k} delay={0.08 + k * 0.05} style={{ display: "grid", gridTemplateColumns: "1fr 1.15fr", gap: 40, padding: "28px 20px", borderTop: "1px solid rgba(255,255,255,0.12)", fontSize: 24, background: k === 0 ? "rgba(16,185,129,0.12)" : "transparent", borderRadius: k === 0 ? 12 : 0 }}>
-              <div style={{ fontWeight: 600 }}>{risk}</div>
-              <div style={{ color: "rgba(255,255,255,0.62)" }}>{fix}</div>
-            </Reveal>
-          ))}
-        </div>
-        <Reveal delay={0.5} style={{ marginTop: "auto", fontFamily: "var(--font-display)", fontSize: 30, fontWeight: 500, letterSpacing: "-0.5px" }}>
-          Every change is traceable to its model, plan and approval.
-        </Reveal>
-      </Layout>
     </SlideFrame>
   );
 }

@@ -52,7 +52,7 @@ export function ChallengeSlide() {
         <Reveal>
           <h2 style={{ fontFamily: "var(--font-display)", fontSize: 118, fontWeight: 600, lineHeight: 0.98, letterSpacing: "-4.5px" }}>
             Building is fast now.<br />
-            The <Grad>infrastructure</Grad><br />
+            The <Grad>shipping</Grad><br />
             is still expert work.
           </h2>
         </Reveal>
