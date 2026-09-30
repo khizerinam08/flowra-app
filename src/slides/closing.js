@@ -2,7 +2,7 @@
 
 import { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Ref, BLUE } from "@/components/deck/ui";
+import { SlideFrame, Layout, Ref, BLUE, SourceLink } from "@/components/deck/ui";
 import { Words } from "@/components/fx";
 
 /* ─── 13 · UN Sustainable Development Goals ─── */
@@ -35,13 +35,13 @@ export function SdgSlide() {
 
 /* ─── 14 · References (numbers match the [n] markers on the slides) ─── */
 export const REFERENCES = [
-  `I. Mehta, "A quarter of startups in YC's current cohort have codebases that are almost entirely AI-generated," TechCrunch, Mar. 2025.`,
-  `T. Zhang, S. Pan, Z. Zhang, Z. Xing and X. Sun, "Deployability-centric infrastructure-as-code generation: Fail, learn, refine, and succeed through LLM-empowered DevOps simulation," ACM FSE, 2026 (arXiv:2506.05623).`,
-  `Flexera, 2026 State of the Cloud Report, 2026.`,
-  `Stack Overflow, "Technology," 2025 Stack Overflow Developer Survey, 2025.`,
-  `Vendor documentation of the nine products compared, accessed Sep. 30, 2026.`,
-  `OWASP Gen AI Security Project, "LLM06:2025 Excessive agency," 2025.`,
-  `United Nations, "Goal 8" and "Goal 9," Sustainable Development Goals, accessed Sep. 30, 2026.`,
+  { text: `I. Mehta, "A quarter of startups in YC's current cohort have codebases that are almost entirely AI-generated," TechCrunch, Mar. 2025.`, url: "https://techcrunch.com/2025/03/06/a-quarter-of-startups-in-ycs-current-cohort-have-codebases-that-are-almost-entirely-ai-generated/" },
+  { text: `T. Zhang, S. Pan, Z. Zhang, Z. Xing and X. Sun, "Deployability-centric infrastructure-as-code generation: Fail, learn, refine, and succeed through LLM-empowered DevOps simulation," ACM FSE, 2026 (arXiv:2506.05623).`, url: "https://arxiv.org/abs/2506.05623" },
+  { text: `Flexera, 2026 State of the Cloud Report, 2026.`, url: "https://info.flexera.com/cm-report-state-of-the-cloud" },
+  { text: `Stack Overflow, "Technology," 2025 Stack Overflow Developer Survey, 2025.`, url: "https://survey.stackoverflow.co/2025/technology" },
+  { text: `Vendor documentation of the nine products compared, accessed Sep. 30, 2026.`, url: null },
+  { text: `OWASP Gen AI Security Project, "LLM06:2025 Excessive agency," 2025.`, url: "https://genai.owasp.org/llmrisk/llm062025-excessive-agency/" },
+  { text: `United Nations, "Goal 8" and "Goal 9," Sustainable Development Goals, accessed Sep. 30, 2026.`, url: "https://sdgs.un.org/goals" },
 ];
 
 export function ReferencesSlide() {
@@ -50,14 +50,14 @@ export function ReferencesSlide() {
   return (
     <SlideFrame theme="light">
       <Layout title="Sources." gap={48}
-        cite="Full IEEE entries, with links and access dates, are in the proposal.">
+        cite="Click a source to open it. Full IEEE entries, with access dates, are in the proposal.">
         <Reveal delay={0.1} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64 }}>
           {cols.map((col, c) => (
             <ol key={c} start={c * half + 1} style={{ listStyle: "none" }}>
               {col.map((r, i) => (
                 <li key={i} style={{ display: "grid", gridTemplateColumns: "44px 1fr", padding: "12px 0", borderTop: "1px solid #f0f1f3", fontSize: 17, lineHeight: 1.45, color: "#374151" }}>
                   <span style={{ fontWeight: 800, color: "#10B981" }}>{c * half + i + 1}</span>
-                  <span>{r}</span>
+                  <span><SourceLink href={r.url}>{r.text}</SourceLink></span>
                 </li>
               ))}
             </ol>

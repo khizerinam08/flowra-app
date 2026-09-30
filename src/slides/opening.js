@@ -2,7 +2,8 @@
 
 import TeamGallery, { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Ref, BLUE } from "@/components/deck/ui";
+import { Boxes, Cloud, Wallet, ShieldCheck } from "lucide-react";
+import { SlideFrame, Layout, Ref, BLUE, SourceLink } from "@/components/deck/ui";
 import { Words, Roll } from "@/components/fx";
 
 const label = { fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" };
@@ -72,10 +73,10 @@ const blueGlass = {
 
 export function ChallengeSlide() {
   const stats = [
-    { light: true, tag: "Building is fast", n: "~95%", what: "of the code written by AI, at a quarter of YC's Winter 2025 start-ups", source: "TechCrunch, 2025", r: 1 },
-    { tag: "Deploys break", n: "~70%", what: "of AI-written infrastructure failed to deploy on the first try, even from the best of six AI models", source: "Zhang et al., FSE 2026", r: 2 },
-    { light: true, tag: "Costs run away", n: "29%", what: "of cloud spend is wasted, by the estimate of 753 cloud decision-makers", source: "Flexera State of the Cloud, 2026", r: 3 },
-    { tag: "Few can ship it", n: "17.8%", what: "of developers work extensively with Terraform, against 43.3% on AWS", source: "Stack Overflow Developer Survey, 2025", r: 4 },
+    { light: true, tag: "Building is fast", n: "~95%", what: "of the code written by AI, at a quarter of YC's Winter 2025 start-ups", source: "TechCrunch, 2025", url: "https://techcrunch.com/2025/03/06/a-quarter-of-startups-in-ycs-current-cohort-have-codebases-that-are-almost-entirely-ai-generated/", r: 1 },
+    { tag: "Deploys break", n: "~70%", what: "of AI-written infrastructure failed to deploy on the first try, even from the best of six AI models", source: "Zhang et al., FSE 2026", url: "https://arxiv.org/abs/2506.05623", r: 2 },
+    { light: true, tag: "Costs run away", n: "29%", what: "of their cloud spend is wasted, say 753 cloud decision-makers", source: "Flexera State of the Cloud, 2026", url: "https://info.flexera.com/cm-report-state-of-the-cloud", r: 3 },
+    { tag: "Few can ship it", n: "17.8%", what: "of developers work extensively with Terraform, against 43.3% on AWS", source: "Stack Overflow Developer Survey, 2025", url: "https://survey.stackoverflow.co/2025/technology", r: 4 },
   ];
   return (
     <SlideFrame theme="dark" band>
@@ -95,7 +96,7 @@ export function ChallengeSlide() {
                 </div>
                 <p style={{ marginTop: 16, fontSize: 19, lineHeight: 1.45, color: s.light ? "#334155" : "rgba(255,255,255,0.82)" }}>{s.what}</p>
                 <p style={{ marginTop: "auto", paddingTop: 18, fontSize: 15, color: s.light ? "#64748b" : "rgba(255,255,255,0.6)" }}>
-                  {s.source}<Ref n={s.r} dark={!s.light} />
+                  <SourceLink href={s.url}>{s.source}</SourceLink><Ref n={s.r} dark={!s.light} />
                 </p>
               </div>
             </Reveal>
@@ -108,15 +109,25 @@ export function ChallengeSlide() {
 
 /* ─── 03 · Problem statement ─── */
 export function ProblemSlide() {
-  const decisions = ["What it needs", "Where it runs", "What it costs", "How to change it safely"];
+  const decisions = [
+    [Boxes, "What it needs"],
+    [Cloud, "Where it runs"],
+    [Wallet, "What it costs"],
+    [ShieldCheck, "How to change it safely"],
+  ];
   return (
     <SlideFrame theme="light">
       <Layout title="Working code still leaves" sub="four decisions." gap={48} middle>
         <Reveal delay={0.1} style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20 }}>
-          {decisions.map((d, i) => (
-            <div key={d} style={{ display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 296, padding: "48px 36px", borderRadius: 26, border: "1px solid #eceef1", background: "#fafafa" }}>
-              <div style={{ fontSize: 17, fontWeight: 800, color: "#10B981" }}>0{i + 1}</div>
-              <div style={{ marginTop: 18, minHeight: 87, fontFamily: "var(--font-display)", fontSize: 38, fontWeight: 500, letterSpacing: "-0.9px", lineHeight: 1.14 }}>{d}</div>
+          {decisions.map(([Icon, d], i) => (
+            <div key={d} style={{ display: "flex", flexDirection: "column", minHeight: 296, padding: "36px 34px", borderRadius: 26, background: "#050505", color: "#fff", border: "1px solid #050505", boxShadow: "0 24px 50px rgba(0,0,0,0.18)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ width: 52, height: 52, borderRadius: 15, display: "inline-flex", alignItems: "center", justifyContent: "center", background: "rgba(16,185,129,0.14)", color: "#34D399", border: "1px solid rgba(52,211,153,0.3)" }}>
+                  <Icon size={24} />
+                </span>
+                <span style={{ fontSize: 17, fontWeight: 800, color: "rgba(255,255,255,0.35)" }}>0{i + 1}</span>
+              </div>
+              <div style={{ marginTop: "auto", fontFamily: "var(--font-display)", fontSize: 38, fontWeight: 500, letterSpacing: "-0.9px", lineHeight: 1.14 }}>{d}</div>
             </div>
           ))}
         </Reveal>

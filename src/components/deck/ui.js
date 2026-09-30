@@ -68,6 +68,17 @@ export function Cite({ children, dark, style }) {
   );
 }
 
+/* A source that opens the original page in a new tab, so the deck stays where it is.
+   Links are not requests: nothing loads until clicked, so the deck still runs offline. */
+export function SourceLink({ href, children }) {
+  if (!href) return children;
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline", textDecorationThickness: 1, textUnderlineOffset: 3, textDecorationColor: "currentColor" }}>
+      {children}
+    </a>
+  );
+}
+
 /* Small inline reference marker, e.g. <Ref n={4} /> → [4] */
 export function Ref({ n, dark }) {
   return <span style={{ fontSize: "0.72em", fontWeight: 600, color: dark ? "rgba(255,255,255,0.45)" : "#9CA3AF", marginLeft: 3 }}>[{n}]</span>;
