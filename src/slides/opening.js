@@ -73,8 +73,8 @@ const blueGlass = {
 export function ChallengeSlide() {
   const stats = [
     { light: true, tag: "Building is fast", n: "~95%", what: "of the code written by AI, at a quarter of YC's Winter 2025 start-ups", source: "TechCrunch, 2025", r: 1 },
-    { tag: "Shipping is the blocker", n: "19.36%", what: "GPT-4's pass rate on infrastructure code, against 86.6% on general code", source: "IaC-Eval, NeurIPS 2024", r: 2 },
-    { light: true, tag: "Shipping is the blocker", n: "150%", what: "average yearly growth in infrastructure-as-code questions on Stack Overflow, 2011–2022", source: "Begoug et al., ESEM 2023", r: 3 },
+    { tag: "Shipping is the blocker", n: "30.2%", what: "at best, of AI-written infrastructure deployed on the first try (six LLMs, 153 real-world scenarios)", source: "Zhang et al., FSE 2026", r: 2 },
+    { light: true, tag: "Shipping is the blocker", n: "17.8%", what: "of developers worked extensively with Terraform, against 43.3% with AWS (24,473 developers)", source: "Stack Overflow Developer Survey, 2025", r: 3 },
   ];
   return (
     <SlideFrame theme="dark" band>
