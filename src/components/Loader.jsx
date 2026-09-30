@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-const FlowLoader = ({ onComplete, word1 = "FLO", word2 = "WRA" }) => {
+const FlowLoader = ({ onComplete, onReveal, word1 = "DE", word2 = "POT" }) => {
   const containerRef = useRef(null);
   const loaderRef = useRef(null);
   const rimRef = useRef(null);
@@ -60,11 +60,12 @@ const FlowLoader = ({ onComplete, word1 = "FLO", word2 = "WRA" }) => {
 
       /* 3. HIGH-SPEED DARK GREEN PORTAL Reveal */
       // Duration reduced from 2.5s to 1.2s for snappier feel
+      tl.addLabel("portal", "+=0.1");
       tl.to(loader, {
         "--portal-radius": "150%",
         duration: 1.2,
         ease: "power4.in" // Use 'in' ease for initial velocity
-      }, "+=0.1"); // Shorter pause
+      }, "portal");
 
       if (rim) {
         tl.to(rim, {
@@ -101,13 +102,16 @@ const FlowLoader = ({ onComplete, word1 = "FLO", word2 = "WRA" }) => {
         duration: 1,
         ease: "power3.inOut"
       }, "<");
+
+      // Slide content starts its entrance as the portal opens, not after it closes.
+      tl.call(() => onReveal && onReveal(), null, "portal+=0.45");
     }, container);
 
     return () => {
       document.body.style.overflow = "";
       ctx.revert(); // Automatically kills the timeline and reverts `.from()` styles
     };
-  }, [onComplete]);
+  }, [onComplete, onReveal]);
 
   return (
     <section ref={containerRef} className="willem-header is--loading is--hidden">
@@ -115,12 +119,12 @@ const FlowLoader = ({ onComplete, word1 = "FLO", word2 = "WRA" }) => {
         <div className="willem__h1">
           <div className="willem__h1-start">
             {word1.split('').map((char, i) => (
-              <span key={`w1-${i}`} className="willem__letter">{char === " " ? "\\u00A0" : char}</span>
+              <span key={`w1-${i}`} className="willem__letter">{char === " " ? "\u00A0" : char}</span>
             ))}
           </div>
           <div className="willem__h1-end">
             {word2.split('').map((char, i) => (
-              <span key={`w2-${i}`} className="willem__letter">{char === " " ? "\\u00A0" : char}</span>
+              <span key={`w2-${i}`} className="willem__letter">{char === " " ? "\u00A0" : char}</span>
             ))}
           </div>
         </div>

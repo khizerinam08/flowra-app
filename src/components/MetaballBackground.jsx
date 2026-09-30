@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useId, useRef } from "react";
 
 const MetaballBackground = ({ color = "#1A1A1A", backgroundColor = "#E8E4D9", dotCount = 12 }) => {
   const canvasRef = useRef(null);
   const stageRef = useRef(null);
+  // Unique per instance: the PDF export renders every slide at once, each with its own colour.
+  const filterId = `topo-hollow-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -91,7 +93,7 @@ const MetaballBackground = ({ color = "#1A1A1A", backgroundColor = "#E8E4D9", do
         style={{
           width: "100%",
           height: "100%",
-          filter: "url(#topo-hollow)",
+          filter: `url(#${filterId})`,
           opacity: 0.8, // Subtle
         }}
       >
@@ -107,7 +109,7 @@ const MetaballBackground = ({ color = "#1A1A1A", backgroundColor = "#E8E4D9", do
 
       <svg style={{ position: "absolute", width: 0, height: 0 }} aria-hidden="true">
         <defs>
-          <filter id="topo-hollow" x="-50%" y="-50%" width="200%" height="200%">
+          <filter id={filterId} x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur in="SourceGraphic" stdDeviation="35" result="blur" />
             <feComponentTransfer in="blur" result="rings">
               {/* This creates the hollow ring look by quantizing the alpha */}

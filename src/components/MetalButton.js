@@ -45,7 +45,7 @@ export default function MetalButton({
           );
         }
       } catch (error) {
-        console.error("Failed to load metal shader:", error);
+        console.warn("Metal shader unavailable (no WebGL); using the plain button:", error);
       }
     };
 

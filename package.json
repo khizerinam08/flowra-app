@@ -1,12 +1,13 @@
 {
-  "name": "flowra-app",
+  "name": "depot-deck",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "export:pdf": "node scripts/export-pdf.mjs"
   },
   "dependencies": {
     "@paper-design/shaders": "^0.0.72",
@@ -18,6 +19,8 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@dicebear/collection": "^9.4.2",
+    "@dicebear/core": "^9.4.3",
     "eslint": "^9",
     "eslint-config-next": "16.2.2"
   }
