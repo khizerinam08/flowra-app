@@ -107,7 +107,9 @@ export function ChallengeSlide() {
   );
 }
 
-/* ─── 03 · Problem statement ─── */
+/* ─── 03 · Problem statement ───
+   Amplio's glass "Live" panel as a card: a pill tag with a live dot, a solid
+   round badge for the mark, the line at the foot. Cards alternate ink and white glass. */
 export function ProblemSlide() {
   const decisions = [
     [Boxes, "What it needs"],
@@ -115,21 +117,41 @@ export function ProblemSlide() {
     [Wallet, "What it costs"],
     [ShieldCheck, "How to change it safely"],
   ];
+  const ink = {
+    background: "linear-gradient(160deg, #111318, #050505 60%)",
+    color: "#fff",
+    border: "1px solid rgba(255,255,255,0.08)",
+    boxShadow: "inset 1px 1px 0 rgba(255,255,255,0.08), 0 24px 50px rgba(0,0,0,0.22)",
+  };
+  const glass = {
+    background: "linear-gradient(135deg, rgba(255,255,255,0.97), rgba(255,255,255,0.86))",
+    color: "#0b1020",
+    border: "1px solid #e6e9ef",
+    boxShadow: "inset 1px 1px 0 rgba(255,255,255,0.9), 0 18px 40px rgba(28,52,92,0.1)",
+    backdropFilter: "blur(24px) saturate(112%)",
+    WebkitBackdropFilter: "blur(24px) saturate(112%)",
+  };
   return (
     <SlideFrame theme="light">
       <Layout title="Working code still leaves" sub="four decisions." gap={48} middle>
         <Reveal delay={0.1} style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20 }}>
-          {decisions.map(([Icon, d], i) => (
-            <div key={d} style={{ display: "flex", flexDirection: "column", minHeight: 296, padding: "36px 34px", borderRadius: 26, background: "#050505", color: "#fff", border: "1px solid #050505", boxShadow: "0 24px 50px rgba(0,0,0,0.18)" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span style={{ width: 52, height: 52, borderRadius: 15, display: "inline-flex", alignItems: "center", justifyContent: "center", background: "rgba(16,185,129,0.14)", color: "#34D399", border: "1px solid rgba(52,211,153,0.3)" }}>
-                  <Icon size={24} />
-                </span>
-                <span style={{ fontSize: 17, fontWeight: 800, color: "rgba(255,255,255,0.35)" }}>0{i + 1}</span>
+          {decisions.map(([Icon, d], i) => {
+            const dark = i % 2 === 0;
+            return (
+              <div key={d} style={{ display: "flex", flexDirection: "column", minHeight: 300, padding: "26px 26px 32px", borderRadius: 28, ...(dark ? ink : glass) }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "7px 14px 7px 12px", borderRadius: 9999, fontSize: 15, fontWeight: 600, background: dark ? "#fff" : "#050505", color: dark ? "#050505" : "#fff" }}>
+                    <span className="fx-ping" style={{ width: 8, height: 8, borderRadius: "50%", background: "#10B981" }} />
+                    Decision 0{i + 1}
+                  </span>
+                  <span style={{ width: 68, height: 68, borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", background: dark ? "#fff" : "#050505", color: dark ? "#050505" : "#fff", boxShadow: dark ? "0 0 24px rgba(255,255,255,0.18)" : "0 8px 20px rgba(0,0,0,0.18)" }}>
+                    <Icon size={28} strokeWidth={2.2} />
+                  </span>
+                </div>
+                <div style={{ marginTop: "auto", fontFamily: "var(--font-display)", fontSize: 38, fontWeight: 500, letterSpacing: "-0.9px", lineHeight: 1.14 }}>{d}</div>
               </div>
-              <div style={{ marginTop: "auto", fontFamily: "var(--font-display)", fontSize: 38, fontWeight: 500, letterSpacing: "-0.9px", lineHeight: 1.14 }}>{d}</div>
-            </div>
-          ))}
+            );
+          })}
         </Reveal>
         <Reveal delay={0.22} style={{ marginTop: 88 }}>
           <p style={{ fontFamily: "var(--font-display)", fontSize: 44, lineHeight: 1.25, color: "#000", fontWeight: 500, letterSpacing: "-0.9px" }}>
