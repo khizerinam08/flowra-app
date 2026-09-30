@@ -44,11 +44,10 @@ export function ChallengeSlide() {
   const stats = [
     { n: "~95%", t: "of the code was AI-generated in a quarter of YC's Winter 2025 start-ups", r: 1 },
     { n: "150%", t: "average yearly growth in infrastructure-as-code questions on Stack Overflow, 2011–2022", r: 2 },
-    { n: "0%", t: "of one model's Terraform passed a security scan, though 77.8% passed validation", r: 3 },
   ];
   return (
     <SlideFrame theme="dark">
-      <div style={{ position: "absolute", inset: 0, padding: "64px 104px 56px", display: "flex", flexDirection: "column" }}>
+      <div style={{ position: "absolute", inset: 0, padding: "64px 104px 56px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
         <Reveal>
           <h2 style={{ fontFamily: "var(--font-display)", fontSize: 118, fontWeight: 600, lineHeight: 0.98, letterSpacing: "-4.5px" }}>
             Building is fast now.<br />
@@ -56,7 +55,7 @@ export function ChallengeSlide() {
             is still expert work.
           </h2>
         </Reveal>
-        <div style={{ marginTop: "auto", paddingTop: 88, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 64 }}>
+        <div style={{ marginTop: 96, display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 96 }}>
           {stats.map((s, i) => (
             <Reveal key={s.n} delay={0.2 + i * 0.1} style={{ borderTop: "1px solid rgba(255,255,255,0.18)", paddingTop: 34 }}>
               <div style={{ fontFamily: "var(--font-display)", fontSize: 116, fontWeight: 500, letterSpacing: "-4px", lineHeight: 1 }}>{s.n}</div>
@@ -116,15 +115,13 @@ function Cell({ level, depot, children }) {
 }
 
 export function LandscapeSlide() {
-  const criteria = ["Starts from code as it is", "Runs in the user's account", "Chooses cloud or platform", "Approval before change"];
+  const criteria = ["Starts from the code", "Picks where it runs", "Asks before it acts"];
   const tools = [
-    { name: "Vercel", cat: "managed platform", c: [[PARTIAL, "Plus platform config"], [WEAK, "No — their platform"], [WEAK, "The platform only"], [PARTIAL, "No approval gate"]] },
-    { name: "Flightcontrol", cat: "bring-your-own-cloud", c: [[PARTIAL, "Repo plus config file"], [STRONG, "Yes"], [PARTIAL, "AWS only"], [PARTIAL, "Deploy only"]] },
-    { name: "Encore", cat: "framework-driven", c: [[WEAK, "Encore primitives"], [STRONG, "Yes"], [PARTIAL, "AWS and GCP"], [WEAK, "Not stated"]] },
-    { name: "Pulumi Neo", cat: "AI and enterprise IaC", c: [[PARTIAL, "Pulumi estate"], [STRONG, "Yes"], [PARTIAL, "Fixed set, org-led"], [PARTIAL, "Platform team's call"]] },
-    { name: "Depot", cat: "proposed", depot: true, c: [[STRONG, "Ordinary repository"], [STRONG, "Yes"], [STRONG, "Compares all five"], [STRONG, "Signed, risk-tiered"]] },
+    { name: "Vercel", cat: "managed platform", c: [[PARTIAL, "Plus platform config"], [WEAK, "The platform only"], [PARTIAL, "No approval gate"]] },
+    { name: "Flightcontrol", cat: "bring-your-own-cloud", c: [[PARTIAL, "Repo plus config file"], [PARTIAL, "AWS only"], [PARTIAL, "Deploy only"]] },
+    { name: "Depot", cat: "proposed", depot: true, c: [[STRONG, "Ordinary repository"], [STRONG, "Compares every option"], [STRONG, "Signed, risk-tiered"]] },
   ];
-  const grid = "1.25fr repeat(5, 1fr)";
+  const grid = "1.1fr repeat(3, 1fr)";
   return (
     <SlideFrame theme="dark">
       <Layout dark title="Each tool solves part of it." sub="Someone still decides where it runs." gap={40}
