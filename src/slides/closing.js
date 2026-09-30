@@ -14,7 +14,7 @@ export function SdgSlide() {
   return (
     <SlideFrame theme="light">
       <Layout title="Two goals" sub="we contribute to." gap={40} middle
-        cite={<>Icons are the official UN SDG icons, used under the UN SDG guidelines<Ref n={6} />. The content of this publication has not been approved by the United Nations and does not reflect the views of the United Nations or its officials or Member States.</>}>
+        cite={<>Icons are the official UN SDG icons, used under the UN SDG guidelines<Ref n={7} />. The content of this publication has not been approved by the United Nations and does not reflect the views of the United Nations or its officials or Member States.</>}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72 }}>
           {goals.map((g, i) => (
             <Reveal key={g.goal} delay={0.12 + i * 0.12} style={{ display: "flex", gap: 36, alignItems: "flex-start" }}>
@@ -37,6 +37,7 @@ export function SdgSlide() {
 export const REFERENCES = [
   `I. Mehta, "A quarter of startups in YC's current cohort have codebases that are almost entirely AI-generated," TechCrunch, Mar. 2025.`,
   `T. Zhang, S. Pan, Z. Zhang, Z. Xing and X. Sun, "Deployability-centric infrastructure-as-code generation: Fail, learn, refine, and succeed through LLM-empowered DevOps simulation," ACM FSE, 2026 (arXiv:2506.05623).`,
+  `Flexera, 2026 State of the Cloud Report, 2026.`,
   `Stack Overflow, "Technology," 2025 Stack Overflow Developer Survey, 2025.`,
   `Vendor documentation of the nine products compared, accessed Sep. 30, 2026.`,
   `OWASP Gen AI Security Project, "LLM06:2025 Excessive agency," 2025.`,

@@ -9,7 +9,7 @@ const jura = Jura({ subsets: ["latin"], variable: "--font-jura", display: "swap"
 
 export const metadata = {
   title: "Depot — FYDP-I Proposal Defence",
-  description: "Depot: an AI-powered infrastructure architect, from code to cloud. FYDP-I proposal defence, NUST SEECS, BS Computer Science.",
+  description: "Depot: an infrastructure architect powered by AI, from code to cloud. FYDP-I proposal defence, NUST SEECS, BS Computer Science.",
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     shortcut: "/icon.svg",

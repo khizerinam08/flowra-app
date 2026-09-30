@@ -22,7 +22,7 @@ export function TitleSlide() {
           </Reveal>
           <Reveal delay={0.16}>
             <p style={{ marginTop: 26, fontFamily: "var(--font-display)", fontSize: 36, fontWeight: 400, letterSpacing: "-0.8px", lineHeight: 1.2, color: "#6B7280", maxWidth: 640 }}>
-              An AI-powered infrastructure architect, <span style={{ color: "#000" }}>from code to cloud.</span>
+              An infrastructure architect powered by AI, <span style={{ color: "#000" }}>from code to cloud.</span>
             </p>
           </Reveal>
           <Reveal delay={0.26} style={{ marginTop: 64, display: "grid", gridTemplateColumns: "auto auto", columnGap: 56, rowGap: 10, justifyContent: "start" }}>
@@ -41,8 +41,8 @@ export function TitleSlide() {
 }
 
 /* ─── 02 · The challenge ───
-   One claim, three numbers, as little text as each needs. The outer cards are
-   white glass, the middle one blue glass; tags are solid Amplio live-dot pills. */
+   One claim, four numbers: building is fast; deploys break, costs run away and
+   few can ship it. Cards alternate white and blue glass; tags are solid Amplio live-dot pills. */
 function Tag({ light, children }) {
   return (
     <span style={{
@@ -73,8 +73,9 @@ const blueGlass = {
 export function ChallengeSlide() {
   const stats = [
     { light: true, tag: "Building is fast", n: "~95%", what: "of the code written by AI, at a quarter of YC's Winter 2025 start-ups", source: "TechCrunch, 2025", r: 1 },
-    { tag: "Shipping is the blocker", n: "30.2%", what: "at best, of AI-written infrastructure deployed on the first try (six LLMs, 153 real-world scenarios)", source: "Zhang et al., FSE 2026", r: 2 },
-    { light: true, tag: "Shipping is the blocker", n: "17.8%", what: "of developers worked extensively with Terraform, against 43.3% with AWS (24,473 developers)", source: "Stack Overflow Developer Survey, 2025", r: 3 },
+    { tag: "Deploys break", n: "~70%", what: "of AI-written infrastructure failed to deploy on the first try, even from the best of six AI models", source: "Zhang et al., FSE 2026", r: 2 },
+    { light: true, tag: "Costs run away", n: "29%", what: "of cloud spend is wasted, by the estimate of 753 cloud decision-makers", source: "Flexera State of the Cloud, 2026", r: 3 },
+    { tag: "Few can ship it", n: "17.8%", what: "of developers work extensively with Terraform, against 43.3% on AWS", source: "Stack Overflow Developer Survey, 2025", r: 4 },
   ];
   return (
     <SlideFrame theme="dark" band>
@@ -84,15 +85,15 @@ export function ChallengeSlide() {
           <br />
           <span style={{ color: "#a7e3c4" }}><Words text="Shipping them is the bottleneck." delay={320} /></span>
         </h2>
-        <div style={{ marginTop: "auto", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+        <div style={{ marginTop: "auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20 }}>
           {stats.map((s, i) => (
             <Reveal key={s.n} delay={0.25 + i * 0.12} y={30}>
-              <div style={{ height: "100%", display: "flex", flexDirection: "column", alignItems: "flex-start", borderRadius: 28, padding: "28px 30px 26px", backdropFilter: "blur(24px) saturate(112%)", WebkitBackdropFilter: "blur(24px) saturate(112%)", ...(s.light ? whiteGlass : blueGlass) }}>
+              <div style={{ height: "100%", display: "flex", flexDirection: "column", alignItems: "flex-start", borderRadius: 28, padding: "26px 26px 24px", backdropFilter: "blur(24px) saturate(112%)", WebkitBackdropFilter: "blur(24px) saturate(112%)", ...(s.light ? whiteGlass : blueGlass) }}>
                 <Tag light={s.light}>{s.tag}</Tag>
-                <div style={{ marginTop: 22, fontFamily: "var(--font-display)", fontSize: 92, fontWeight: 500, letterSpacing: "-3.5px", lineHeight: 1 }}>
+                <div style={{ marginTop: 22, fontFamily: "var(--font-display)", fontSize: 80, fontWeight: 500, letterSpacing: "-3px", lineHeight: 1 }}>
                   <Roll value={s.n} delay={700 + i * 150} />
                 </div>
-                <p style={{ marginTop: 16, fontSize: 21, lineHeight: 1.45, color: s.light ? "#334155" : "rgba(255,255,255,0.82)" }}>{s.what}</p>
+                <p style={{ marginTop: 16, fontSize: 19, lineHeight: 1.45, color: s.light ? "#334155" : "rgba(255,255,255,0.82)" }}>{s.what}</p>
                 <p style={{ marginTop: "auto", paddingTop: 18, fontSize: 15, color: s.light ? "#64748b" : "rgba(255,255,255,0.6)" }}>
                   {s.source}<Ref n={s.r} dark={!s.light} />
                 </p>
@@ -162,7 +163,7 @@ export function LandscapeSlide() {
   return (
     <SlideFrame theme="dark">
       <Layout dark title="Each tool solves part of it." sub="Someone still decides where it runs." gap={40}
-        cite={<>One representative product per category, from vendor documentation, 30 Sep 2026<Ref n={4} dark />. Depot is proposed.</>}>
+        cite={<>One representative product per category, from vendor documentation, 30 Sep 2026<Ref n={5} dark />. Depot is proposed.</>}>
         <Reveal delay={0.1}>
           <div style={{ display: "grid", gridTemplateColumns: grid, alignItems: "stretch", paddingBottom: 14, borderBottom: "1px solid rgba(255,255,255,0.14)" }}>
             <div />
