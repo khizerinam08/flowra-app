@@ -40,27 +40,50 @@ export function TitleSlide() {
   );
 }
 
-/* ─── 02 · The challenge ─── */
+/* ─── 02 · The challenge ───
+   One claim, three numbers. Each card says what the number measures, what it
+   means, and who measured it, so it reads without the speaker. */
 export function ChallengeSlide() {
   const stats = [
-    { n: "~95%", t: "of the code was AI-generated in a quarter of YC's Winter 2025 start-ups", r: 1 },
-    { n: "150%", t: "average yearly growth in infrastructure-as-code questions on Stack Overflow, 2011–2022", r: 2 },
+    {
+      side: "Building is fast", tone: "#a7e3c4", n: "~95%",
+      what: "of the code was written by AI in a quarter of Y Combinator's Winter 2025 start-ups.",
+      means: "Writing the product is no longer the hard part.",
+      source: "TechCrunch, March 2025", r: 1,
+    },
+    {
+      side: "Shipping is the blocker", tone: "#FCD34D", n: "19.36%",
+      what: "of infrastructure-code tasks were passed by GPT-4, against 86.6% of general coding tasks.",
+      means: "AI writes the app, but not the infrastructure that runs it.",
+      source: "IaC-Eval benchmark, NeurIPS 2024", r: 2,
+    },
+    {
+      side: "Shipping is the blocker", tone: "#FCD34D", n: "150%",
+      what: "average yearly growth in infrastructure-as-code questions on Stack Overflow, 2011–2022.",
+      means: "Setting up infrastructure is a growing source of difficulty.",
+      source: "Study of Stack Overflow questions, ESEM 2023", r: 3,
+    },
   ];
   return (
     <SlideFrame theme="dark" band>
-      <div style={{ position: "absolute", inset: 0, padding: "64px 104px 56px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-        <h2 style={{ fontFamily: "var(--font-display)", fontSize: 118, fontWeight: 600, lineHeight: 0.98, letterSpacing: "-4.5px" }}>
-          <Words text="Building is fast now." />
+      <div style={{ position: "absolute", inset: 0, padding: "60px 104px 52px", display: "flex", flexDirection: "column" }}>
+        <h2 style={{ fontFamily: "var(--font-display)", fontSize: 88, fontWeight: 600, lineHeight: 1, letterSpacing: "-3px" }}>
+          <Words text="Building apps is fast now." />
           <br />
-          <Words text="The" delay={280} /> <span style={{ color: "#a7e3c4" }}><Words text="shipping" delay={350} /></span>
-          <br />
-          <Words text="is still expert work." delay={420} />
+          <span style={{ color: "#a7e3c4" }}><Words text="Shipping them is the bottleneck." delay={320} /></span>
         </h2>
-        <div style={{ marginTop: 96, display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 96 }}>
+        <div style={{ marginTop: "auto", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
           {stats.map((s, i) => (
-            <Reveal key={s.n} delay={0.2 + i * 0.1} style={{ borderTop: "1px solid rgba(255,255,255,0.28)", paddingTop: 34 }}>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: 116, fontWeight: 500, letterSpacing: "-4px", lineHeight: 1 }}><Roll value={s.n} delay={600 + i * 150} /></div>
-              <p style={{ marginTop: 20, fontSize: 25, lineHeight: 1.5, color: "rgba(255,255,255,0.72)" }}>{s.t}<Ref n={s.r} dark /></p>
+            <Reveal key={s.n} delay={0.25 + i * 0.12} y={30}>
+              <div style={{ height: "100%", display: "flex", flexDirection: "column", borderRadius: 28, padding: "28px 30px 26px", border: "1px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.08)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
+                <div style={{ fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: s.tone }}>{s.side}</div>
+                <div style={{ marginTop: 16, fontFamily: "var(--font-display)", fontSize: 84, fontWeight: 500, letterSpacing: "-3px", lineHeight: 1 }}>
+                  <Roll value={s.n} delay={700 + i * 150} />
+                </div>
+                <p style={{ marginTop: 14, fontSize: 21, lineHeight: 1.45, color: "#fff" }}>{s.what}</p>
+                <p style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid rgba(255,255,255,0.16)", fontSize: 21, lineHeight: 1.4, fontWeight: 600, color: s.tone }}>{s.means}</p>
+                <p style={{ marginTop: "auto", paddingTop: 16, fontSize: 15, color: "rgba(255,255,255,0.6)" }}>{s.source}<Ref n={s.r} dark /></p>
+              </div>
             </Reveal>
           ))}
         </div>

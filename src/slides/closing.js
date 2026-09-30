@@ -36,8 +36,8 @@ export function SdgSlide() {
 /* ─── 14 · References (numbers match the [n] markers on the slides) ─── */
 export const REFERENCES = [
   `I. Mehta, "A quarter of startups in YC's current cohort have codebases that are almost entirely AI-generated," TechCrunch, Mar. 2025.`,
+  `P. T. J. Kon et al., "IaC-Eval: A code generation benchmark for cloud infrastructure-as-code programs," NeurIPS Datasets and Benchmarks Track, 2024.`,
   `M. Begoug et al., "What do infrastructure-as-code practitioners discuss: An empirical study on Stack Overflow," ESEM, 2023.`,
-  `F. L. S. Vargas, R. B. Mansilha and D. Kreutz, "Security-first evaluation of text-to-Terraform," arXiv:2608.02672, 2026.`,
   `Vendor documentation of the nine products compared, accessed Sep. 30, 2026.`,
   `OWASP Gen AI Security Project, "LLM06:2025 Excessive agency," 2025.`,
   `United Nations, "Goal 8" and "Goal 9," Sustainable Development Goals, accessed Sep. 30, 2026.`,
