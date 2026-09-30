@@ -2,7 +2,7 @@
 
 import TeamGallery, { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Ref } from "@/components/deck/ui";
+import { SlideFrame, Layout, Ref, BLUE } from "@/components/deck/ui";
 import { Words, Roll } from "@/components/fx";
 
 const label = { fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" };
@@ -41,28 +41,40 @@ export function TitleSlide() {
 }
 
 /* ─── 02 · The challenge ───
-   One claim, three numbers. Each card says what the number measures, what it
-   means, and who measured it, so it reads without the speaker. */
+   One claim, three numbers, as little text as each needs. The outer cards are
+   white glass, the middle one blue glass; tags are Amplio's live-dot pills. */
+function Tag({ light, children }) {
+  return (
+    <span style={{
+      display: "inline-flex", alignItems: "center", gap: 9, padding: "7px 14px 7px 12px", borderRadius: 9999,
+      fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em",
+      background: light ? "rgba(30,64,175,0.08)" : "rgba(255,255,255,0.16)",
+      border: light ? "1px solid rgba(30,64,175,0.14)" : "1px solid rgba(255,255,255,0.28)",
+      color: light ? BLUE : "#fff",
+    }}>
+      <span className="fx-ping" style={{ width: 8, height: 8, borderRadius: "50%", background: light ? BLUE : "#fff" }} />
+      {children}
+    </span>
+  );
+}
+
+const whiteGlass = {
+  background: "linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.91))",
+  border: "1px solid rgba(255,255,255,0.9)",
+  boxShadow: "inset 1px 1px 0 rgba(255,255,255,0.9), 0 24px 50px rgba(8,20,64,0.28)",
+  color: "#0b1020",
+};
+const blueGlass = {
+  background: "rgba(255,255,255,0.08)",
+  border: "1px solid rgba(255,255,255,0.22)",
+  color: "#fff",
+};
+
 export function ChallengeSlide() {
   const stats = [
-    {
-      side: "Building is fast", tone: "#a7e3c4", n: "~95%",
-      what: "of the code was written by AI in a quarter of Y Combinator's Winter 2025 start-ups.",
-      means: "Writing the product is no longer the hard part.",
-      source: "TechCrunch, March 2025", r: 1,
-    },
-    {
-      side: "Shipping is the blocker", tone: "#FCD34D", n: "19.36%",
-      what: "of infrastructure-code tasks were passed by GPT-4, against 86.6% of general coding tasks.",
-      means: "AI writes the app, but not the infrastructure that runs it.",
-      source: "IaC-Eval benchmark, NeurIPS 2024", r: 2,
-    },
-    {
-      side: "Shipping is the blocker", tone: "#FCD34D", n: "150%",
-      what: "average yearly growth in infrastructure-as-code questions on Stack Overflow, 2011–2022.",
-      means: "Setting up infrastructure is a growing source of difficulty.",
-      source: "Study of Stack Overflow questions, ESEM 2023", r: 3,
-    },
+    { light: true, tag: "Building is fast", n: "~95%", what: "of the code written by AI, at a quarter of YC's Winter 2025 start-ups", source: "TechCrunch, 2025", r: 1 },
+    { tag: "Shipping is the blocker", n: "19.36%", what: "GPT-4's pass rate on infrastructure code, against 86.6% on general code", source: "IaC-Eval, NeurIPS 2024", r: 2 },
+    { light: true, tag: "Shipping is the blocker", n: "150%", what: "average yearly growth in infrastructure-as-code questions on Stack Overflow, 2011–2022", source: "Begoug et al., ESEM 2023", r: 3 },
   ];
   return (
     <SlideFrame theme="dark" band>
@@ -75,14 +87,15 @@ export function ChallengeSlide() {
         <div style={{ marginTop: "auto", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
           {stats.map((s, i) => (
             <Reveal key={s.n} delay={0.25 + i * 0.12} y={30}>
-              <div style={{ height: "100%", display: "flex", flexDirection: "column", borderRadius: 28, padding: "28px 30px 26px", border: "1px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.08)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
-                <div style={{ fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: s.tone }}>{s.side}</div>
-                <div style={{ marginTop: 16, fontFamily: "var(--font-display)", fontSize: 84, fontWeight: 500, letterSpacing: "-3px", lineHeight: 1 }}>
+              <div style={{ height: "100%", display: "flex", flexDirection: "column", alignItems: "flex-start", borderRadius: 28, padding: "28px 30px 26px", backdropFilter: "blur(24px) saturate(112%)", WebkitBackdropFilter: "blur(24px) saturate(112%)", ...(s.light ? whiteGlass : blueGlass) }}>
+                <Tag light={s.light}>{s.tag}</Tag>
+                <div style={{ marginTop: 22, fontFamily: "var(--font-display)", fontSize: 92, fontWeight: 500, letterSpacing: "-3.5px", lineHeight: 1 }}>
                   <Roll value={s.n} delay={700 + i * 150} />
                 </div>
-                <p style={{ marginTop: 14, fontSize: 21, lineHeight: 1.45, color: "#fff" }}>{s.what}</p>
-                <p style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid rgba(255,255,255,0.16)", fontSize: 21, lineHeight: 1.4, fontWeight: 600, color: s.tone }}>{s.means}</p>
-                <p style={{ marginTop: "auto", paddingTop: 16, fontSize: 15, color: "rgba(255,255,255,0.6)" }}>{s.source}<Ref n={s.r} dark /></p>
+                <p style={{ marginTop: 16, fontSize: 21, lineHeight: 1.45, color: s.light ? "#334155" : "rgba(255,255,255,0.82)" }}>{s.what}</p>
+                <p style={{ marginTop: "auto", paddingTop: 18, fontSize: 15, color: s.light ? "#64748b" : "rgba(255,255,255,0.6)" }}>
+                  {s.source}<Ref n={s.r} dark={!s.light} />
+                </p>
               </div>
             </Reveal>
           ))}
