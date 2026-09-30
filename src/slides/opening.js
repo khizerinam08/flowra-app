@@ -42,17 +42,17 @@ export function TitleSlide() {
 
 /* ─── 02 · The challenge ───
    One claim, three numbers, as little text as each needs. The outer cards are
-   white glass, the middle one blue glass; tags are Amplio's live-dot pills. */
+   white glass, the middle one blue glass; tags are solid Amplio live-dot pills. */
 function Tag({ light, children }) {
   return (
     <span style={{
       display: "inline-flex", alignItems: "center", gap: 9, padding: "7px 14px 7px 12px", borderRadius: 9999,
       fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em",
-      background: light ? "rgba(30,64,175,0.08)" : "rgba(255,255,255,0.16)",
-      border: light ? "1px solid rgba(30,64,175,0.14)" : "1px solid rgba(255,255,255,0.28)",
-      color: light ? BLUE : "#fff",
+      background: light ? BLUE : "#fff",
+      color: light ? "#fff" : BLUE,
+      boxShadow: light ? "0 6px 16px rgba(30,64,175,0.28)" : "0 6px 16px rgba(8,20,64,0.25)",
     }}>
-      <span className="fx-ping" style={{ width: 8, height: 8, borderRadius: "50%", background: light ? BLUE : "#fff" }} />
+      <span className="fx-ping" style={{ width: 8, height: 8, borderRadius: "50%", background: light ? "#fff" : BLUE }} />
       {children}
     </span>
   );
