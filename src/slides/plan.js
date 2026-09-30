@@ -3,11 +3,11 @@
 import { Check, X } from "lucide-react";
 import { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Ref, Pill, Sym } from "@/components/deck/ui";
+import { SlideFrame, Layout, Ref } from "@/components/deck/ui";
 
 const label = { fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" };
 
-/* ─── 12 · Scope ─── */
+/* ─── 09 · Scope ─── */
 function ScopeList({ items, ok }) {
   return (
     <div>
@@ -39,7 +39,7 @@ export function ScopeSlide() {
   ];
   return (
     <SlideFrame theme="light">
-      <Layout eyebrow="Scope" title="In scope," sub="and deliberately out." gap={48}
+      <Layout title="In scope," sub="and deliberately out." gap={48}
         cite="Extended scope only if M8 is met early: guided mode, Oracle and Yandex Cloud, voice, preview environments.">
         <div style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr", gap: 80 }}>
           <Reveal delay={0.1}>
@@ -56,39 +56,7 @@ export function ScopeSlide() {
   );
 }
 
-/* ─── 13 · How we'll prove it works ─── */
-export function EvaluationSlide() {
-  const rows = [
-    ["O1", "Model fields match the reference", "≥ 85%"],
-    ["O2", "Right target and pattern on real apps", "≥ 80%"],
-    ["O3", "Apps healthy after one approved apply", "≥ 7 of 8"],
-    ["O4", "Changes run without a valid approval", "0", true],
-    ["O5", "Push-to-live and rollback", "median ≤ 10 min"],
-    ["O6", "Adversarial cases that get through (n ≥ 100)", "0", true],
-    ["O8", <>Usability, System Usability Scale<Ref n={10} dark /></>, <><Sym>≥ 68</Sym><Ref n={11} dark /></>],
-  ];
-  return (
-    <SlideFrame theme="dark">
-      <Layout dark eyebrow="Evaluation" title="How we'll prove" sub="it works." gap={40} middle
-        cite={<>Tested on <Sym>≥ 30</Sym> independently labelled public apps, 8 deployments with injected faults, 5 baselines and <Sym>≥ 8</Sym> target users. Missing a hard threshold fails the objective.</>}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", columnGap: 72 }}>
-          {rows.map(([o, what, pass, hard], i) => (
-            <Reveal key={o} delay={0.08 + i * 0.05} style={{ display: "grid", gridTemplateColumns: "54px 1fr auto", alignItems: "center", gap: 14, padding: "28px 0", borderTop: "1px solid rgba(255,255,255,0.12)" }}>
-              <span style={{ fontSize: 15, fontWeight: 800, color: "rgba(255,255,255,0.4)" }}>{o}</span>
-              <span style={{ fontSize: 21, color: "rgba(255,255,255,0.75)", lineHeight: 1.35 }}><Sym>{what}</Sym></span>
-              <span style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "var(--font-display)", fontSize: 30, fontWeight: 500, color: hard ? "#F87171" : "#34D399", whiteSpace: "nowrap" }}>
-                <Sym>{pass}</Sym>
-                {hard && <Pill color="#F87171" style={{ fontSize: 11, padding: "3px 9px" }}>Hard</Pill>}
-              </span>
-            </Reveal>
-          ))}
-        </div>
-      </Layout>
-    </SlideFrame>
-  );
-}
-
-/* ─── 14 · Timeline ─── */
+/* ─── 10 · Timeline ─── */
 const START = new Date("2026-09-01").getTime();
 const END = new Date("2027-06-01").getTime();
 const pos = (d) => ((new Date(d).getTime() - START) / (END - START)) * 100;
@@ -111,7 +79,7 @@ export function TimelineSlide() {
   const demo = pos("2027-01-30");
   return (
     <SlideFrame theme="light">
-      <Layout eyebrow="Timeline" title="Three clouds first," sub="then everything else." gap={40}
+      <Layout title="Three clouds first," sub="then everything else." gap={40}
         cite="Team planning targets; dates will follow the official defence schedule.">
         <Reveal delay={0.1} style={{ position: "relative" }}>
           <div style={{ display: "flex", marginLeft: labelW, position: "relative", height: 30, fontSize: 15, fontWeight: 700, color: "#9CA3AF" }}>
@@ -146,12 +114,12 @@ export function TimelineSlide() {
   );
 }
 
-/* ─── 15 · Work division ─── */
+/* ─── 11 · Work division ─── */
 export function WorkSlide() {
   const leads = [
-    { color: "#8B5CF6", leads: "Application Model, agent mode, incident loop, research", tags: ["O1", "O6", "O7"] },
-    { color: "#60A5FA", leads: "User-facing work, team workspaces, managed platforms", tags: ["O5", "O8"] },
-    { color: "#10B981", leads: "Architect, cloud adapters, safety gate, savings", tags: ["O2", "O3", "O4"] },
+    { color: "#8B5CF6", leads: "Application Model, agent mode, incident loop, research", tags: ["O1", "O2", "O3"] },
+    { color: "#60A5FA", leads: "User-facing work, team workspaces, managed platforms", tags: ["O1", "O2"] },
+    { color: "#10B981", leads: "Architect, cloud adapters, safety gate, savings", tags: ["O1", "O3"] },
   ];
   return (
     <SlideFrame theme="light">
@@ -185,22 +153,22 @@ export function WorkSlide() {
   );
 }
 
-/* ─── 16 · Risks and safety ─── */
+/* ─── 12 · Risks and safety ─── */
 export function RisksSlide() {
   const rows = [
     ["Cloud accounts or credits not ready", "First-sprint task with an owner; no features until fixed"],
     ["Scope outgrows three people", "Extended scope only if M8 is met early; Railway can move out"],
     ["AI proposes unsafe infrastructure", "The model only selects; reviewed templates execute"],
-    ["An agent is tricked into acting", <>Fixed actions, fixed permissions, approval by risk<Ref n={12} dark /></>],
+    ["An agent is tricked into acting", <>Fixed actions, fixed permissions, approval by risk<Ref n={5} dark /></>],
     ["Credentials reach too far", "Bounded, short-lived roles from M3; no stored user keys"],
     ["A member acts without the role", "Server-side role check on every route"],
   ];
   return (
     <SlideFrame theme="dark">
-      <Layout dark eyebrow="Risks and safety" eyebrowColor="#F87171" title="What could go wrong," sub="and how we handle it." gap={44}>
+      <Layout dark title="What could go wrong," sub="and how we handle it." gap={44}>
         <div>
           {rows.map(([risk, fix], k) => (
-            <Reveal key={k} delay={0.08 + k * 0.05} style={{ display: "grid", gridTemplateColumns: "1fr 1.15fr", gap: 40, padding: "17px 20px", borderTop: "1px solid rgba(255,255,255,0.12)", fontSize: 22, background: k === 0 ? "rgba(16,185,129,0.12)" : "transparent", borderRadius: k === 0 ? 12 : 0 }}>
+            <Reveal key={k} delay={0.08 + k * 0.05} style={{ display: "grid", gridTemplateColumns: "1fr 1.15fr", gap: 40, padding: "28px 20px", borderTop: "1px solid rgba(255,255,255,0.12)", fontSize: 24, background: k === 0 ? "rgba(16,185,129,0.12)" : "transparent", borderRadius: k === 0 ? 12 : 0 }}>
               <div style={{ fontWeight: 600 }}>{risk}</div>
               <div style={{ color: "rgba(255,255,255,0.62)" }}>{fix}</div>
             </Reveal>

@@ -19,35 +19,15 @@ export function SlideFrame({ theme = "light", metaball, decor, children }) {
 }
 
 /* ─── Slide layout on the 1600×900 canvas ─── */
-export function Layout({ dark, eyebrow, eyebrowColor, title, sub, titleSize = 76, align = "left", cite, children, gap = 56, middle }) {
+export function Layout({ dark, title, sub, titleSize = 76, align = "left", cite, children, gap = 56, middle }) {
   const center = align === "center";
   return (
     <div style={{ position: "absolute", inset: 0, padding: "56px 104px 44px", display: "flex", flexDirection: "column" }}>
       <Reveal style={{ textAlign: center ? "center" : "left", marginBottom: gap }}>
-        {eyebrow && <Eyebrow dark={dark} color={eyebrowColor}>{eyebrow}</Eyebrow>}
         <Heading dark={dark} size={titleSize} sub={sub}>{title}</Heading>
       </Reveal>
       <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column", justifyContent: middle ? "center" : "flex-start", paddingBottom: middle ? 40 : 0 }}>{children}</div>
       {cite && <Cite dark={dark} style={{ marginTop: 20 }}>{cite}</Cite>}
-    </div>
-  );
-}
-
-export function Eyebrow({ children, color = "var(--emerald)", dark, style }) {
-  return (
-    <div
-      style={{
-        display: "inline-flex", alignItems: "center", gap: 10, padding: "9px 18px", borderRadius: 9999,
-        border: dark ? "1px solid rgba(255,255,255,0.12)" : "1px solid #e5e7eb",
-        background: dark ? "rgba(255,255,255,0.04)" : "#fff",
-        boxShadow: dark ? "none" : "0 1px 4px rgba(0,0,0,0.04)",
-        marginBottom: 22, ...style,
-      }}
-    >
-      <span style={{ width: 9, height: 9, borderRadius: "50%", background: color, animation: "pulse 2s infinite" }} />
-      <span style={{ fontSize: 15, color: dark ? "rgba(255,255,255,0.65)" : "#6B7280", textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 700 }}>
-        {children}
-      </span>
     </div>
   );
 }

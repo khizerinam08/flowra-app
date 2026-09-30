@@ -2,9 +2,9 @@
 
 import { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Eyebrow, Ref } from "@/components/deck/ui";
+import { SlideFrame, Layout, Ref } from "@/components/deck/ui";
 
-/* ─── 17 · UN Sustainable Development Goals ─── */
+/* ─── 13 · UN Sustainable Development Goals ─── */
 export function SdgSlide() {
   const goals = [
     { img: "/images/sdg/sdg-08.png", goal: "SDG 8.3", name: "Small-enterprise growth", line: "Small teams run products on cloud accounts they own, at a known monthly cost, without hiring." },
@@ -12,8 +12,8 @@ export function SdgSlide() {
   ];
   return (
     <SlideFrame theme="light">
-      <Layout eyebrow="UN Sustainable Development Goals" eyebrowColor="#FD6925" title="Two goals" sub="we contribute to." gap={40} middle
-        cite={<>Icons are the official UN SDG icons, used under the UN SDG guidelines<Ref n={13} />. The content of this publication has not been approved by the United Nations and does not reflect the views of the United Nations or its officials or Member States.</>}>
+      <Layout title="Two goals" sub="we contribute to." gap={40} middle
+        cite={<>Icons are the official UN SDG icons, used under the UN SDG guidelines<Ref n={6} />. The content of this publication has not been approved by the United Nations and does not reflect the views of the United Nations or its officials or Member States.</>}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72 }}>
           {goals.map((g, i) => (
             <Reveal key={g.goal} delay={0.12 + i * 0.12} style={{ display: "flex", gap: 36, alignItems: "flex-start" }}>
@@ -32,19 +32,12 @@ export function SdgSlide() {
   );
 }
 
-/* ─── 18 · References (numbers match the [n] markers on the slides) ─── */
+/* ─── 14 · References (numbers match the [n] markers on the slides) ─── */
 export const REFERENCES = [
   `I. Mehta, "A quarter of startups in YC's current cohort have codebases that are almost entirely AI-generated," TechCrunch, Mar. 2025.`,
   `M. Begoug et al., "What do infrastructure-as-code practitioners discuss: An empirical study on Stack Overflow," ESEM, 2023.`,
   `F. L. S. Vargas, R. B. Mansilha and D. Kreutz, "Security-first evaluation of text-to-Terraform," arXiv:2608.02672, 2026.`,
-  `Stack Overflow, "Technology," 2025 Stack Overflow Developer Survey, 2025.`,
-  `P. T. J. Kon et al., "IaC-Eval: A code generation benchmark for cloud infrastructure-as-code programs," NeurIPS, 2024.`,
-  `Flexera, "New Flexera report finds that 84% of organizations struggle to manage cloud spend," Mar. 2025.`,
-  `Flexera, 2026 State of the Cloud Report, 2026.`,
-  `Vendor documentation of the fifteen products compared, accessed Sep. 30, 2026.`,
-  `M. Jouini, "Verifier-first evaluation of agentic LLMs for infrastructure-as-code generation," arXiv:2607.20478, 2026.`,
-  `J. Brooke, "SUS: A 'quick and dirty' usability scale," in Usability Evaluation in Industry, 1996.`,
-  `J. Sauro, "Measuring usability with the System Usability Scale (SUS)," MeasuringU, 2011.`,
+  `Vendor documentation of the nine products compared, accessed Sep. 30, 2026.`,
   `OWASP Gen AI Security Project, "LLM06:2025 Excessive agency," 2025.`,
   `United Nations, "Goal 8" and "Goal 9," Sustainable Development Goals, accessed Sep. 30, 2026.`,
 ];
@@ -54,7 +47,7 @@ export function ReferencesSlide() {
   const cols = [REFERENCES.slice(0, half), REFERENCES.slice(half)];
   return (
     <SlideFrame theme="light">
-      <Layout eyebrow="References" eyebrowColor="#9CA3AF" title="Sources." gap={48}
+      <Layout title="Sources." gap={48}
         cite="Full IEEE entries, with links and access dates, are in the proposal.">
         <Reveal delay={0.1} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64 }}>
           {cols.map((col, c) => (
@@ -73,13 +66,12 @@ export function ReferencesSlide() {
   );
 }
 
-/* ─── 19 · Thank you ─── */
+/* ─── 15 · Thank you ─── */
 export function ThanksSlide() {
   return (
     <SlideFrame theme="dark" metaball="#1f1f1f">
       <div style={{ position: "absolute", inset: 0, padding: "56px 104px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
         <Reveal>
-          <Eyebrow dark>Depot · FYDP-I</Eyebrow>
         </Reveal>
         <Reveal delay={0.08}>
           <h2 style={{ fontFamily: "var(--font-display)", fontSize: 140, fontWeight: 500, letterSpacing: "-6px", lineHeight: 0.92, marginTop: 8 }}>

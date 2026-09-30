@@ -1,35 +1,46 @@
 "use client";
 
-import { ArrowRight, CornerDownLeft, Sparkles, CodeXml, Users, ShieldCheck, Layers, Route, KeyRound, Activity, Bot } from "lucide-react";
+import { Sparkles, CodeXml, Users, ShieldCheck, Layers, Route, KeyRound, Activity, Bot } from "lucide-react";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Ref, Pill, Glyph } from "@/components/deck/ui";
+import { SlideFrame, Layout, Ref, Pill } from "@/components/deck/ui";
 
 const label = { fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" };
 
-/* ─── 06 · Objectives ─── */
+/* ─── 05 · Objectives ─── */
+/* Stated as what a user can do once Depot exists. The O-numbers are referenced by the
+   evaluation and work-division slides, so they stay stable. */
+const OBJECTIVES = [
+  {
+    n: "O1",
+    color: "#10B981",
+    head: "Deploy any supported repository",
+    body: "Point Depot at GitHub, GitLab or an archive. It reads the application, decides the target and pattern, prices it, then provisions it to AWS, GCP, Azure, Vercel or Railway inside the user's own account — every change validated, costed and signed before it runs.",
+  },
+  {
+    n: "O2",
+    color: "#60A5FA",
+    head: "Check health, metrics and cost",
+    body: "Deployment history, health checks, logs, metrics, environment-variable metadata and running spend in one place, with rollback and the savings found. The agent investigates an incident and proposes a fix; a person approves.",
+  },
+  {
+    n: "O3",
+    color: "#8B5CF6",
+    head: "Review every change, and trace it after",
+    body: "Nothing reaches the cloud without a saved plan you can read and an explicit approval. Every release then links back through the commit, the model, the specification, the plan, the workflow run and the health outcome — a reviewer follows the whole chain, not just a diff.",
+  },
+];
+
 export function ObjectivesSlide() {
-  const objs = [
-    ["O1", "Model", "the application from its code and a short intake"],
-    ["O2", "Select", "the target and pattern that fit at the lowest cost"],
-    ["O3", "Deploy", "to five targets with scoped credentials"],
-    ["O4", "Protect", "against any unapproved or policy-violating change"],
-    ["O5", "Operate", "keep it running, inspectable and affordable"],
-    ["O6", "Agent", "conversational changes and incident loop, with measured guardrails", true],
-    ["O7", "Compare", "language models on extraction, selection and explanation", true],
-    ["O8", "Validate", "requirements and usability with target users"],
-  ];
   return (
     <SlideFrame theme="light">
-      <Layout eyebrow="Objectives" title="Eight objectives." sub="Two of them are research." gap={48}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", columnGap: 72 }}>
-          {objs.map(([n, v, d, research], i) => (
-            <Reveal key={n} delay={0.06 + i * 0.04} style={{ display: "grid", gridTemplateColumns: "56px 1fr", alignItems: "baseline", padding: "20px 0", borderTop: "1px solid #eceef1" }}>
-              <span style={{ fontSize: 16, fontWeight: 800, color: research ? "#8B5CF6" : "#10B981" }}>{n}</span>
-              <div style={{ fontSize: 23, lineHeight: 1.4, color: "#6B7280" }}>
-                <span style={{ fontFamily: "var(--font-display)", fontSize: 30, fontWeight: 500, color: "#000", marginRight: 10 }}>{v}</span>
-                {d}
-                {research && <Pill color="#8B5CF6" style={{ marginLeft: 12, fontSize: 11, padding: "3px 9px", verticalAlign: "middle" }}>Research</Pill>}
-              </div>
+      <Layout title="Three objectives." sub="What a user can do with Depot." gap={48} middle
+        cite="Research sits inside all three: comparing language models on extraction, and measured guardrails for the agent loop.">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}>
+          {OBJECTIVES.map((o, i) => (
+            <Reveal key={o.n} delay={0.08 + i * 0.08} style={{ display: "flex", flexDirection: "column", height: "100%", padding: "40px 36px", borderRadius: 26, border: "1px solid #eceef1", background: "#fafafa" }}>
+              <span style={{ display: "inline-flex", alignSelf: "flex-start", alignItems: "center", justifyContent: "center", minWidth: 62, height: 38, padding: "0 14px", borderRadius: 12, background: `${o.color}16`, color: o.color, fontSize: 18, fontWeight: 800 }}>{o.n}</span>
+              <h3 style={{ fontFamily: "var(--font-display)", fontSize: 40, fontWeight: 500, letterSpacing: "-1.2px", lineHeight: 1.08, margin: "24px 0 0" }}>{o.head}</h3>
+              <p style={{ fontSize: 19, lineHeight: 1.5, color: "#6B7280", margin: "18px 0 0" }}>{o.body}</p>
             </Reveal>
           ))}
         </div>
@@ -38,23 +49,23 @@ export function ObjectivesSlide() {
   );
 }
 
-/* ─── 07 · Users of the system ─── */
+/* ─── 06 · Users of the system ─── */
 export function UsersSlide() {
   const users = [
-    { color: "oklch(0.7 0.15 160)", icon: <Sparkles size={30} />, title: "AI-assisted builders", who: "A working product, but little experience of running one." },
-    { color: "oklch(0.65 0.25 280)", icon: <CodeXml size={30} />, title: "Solo full-stack developers", who: "Outgrowing a managed platform: stay, or move to a cloud?" },
-    { color: "oklch(0.65 0.15 240)", icon: <Users size={30} />, title: "Small teams and agencies", who: "Two to ten people, with no DevOps staff." },
+    { color: "oklch(0.7 0.15 160)", icon: <Sparkles size={40} />, title: "AI-assisted builders", who: "A working product, but little experience of running one." },
+    { color: "oklch(0.65 0.25 280)", icon: <CodeXml size={40} />, title: "Solo full-stack developers", who: "Outgrowing a managed platform: stay, or move to a cloud?" },
+    { color: "oklch(0.65 0.15 240)", icon: <Users size={40} />, title: "Small teams and agencies", who: "Two to ten people, with no DevOps staff." },
   ];
   return (
     <SlideFrame theme="dark">
-      <Layout dark eyebrow="Users of the system" eyebrowColor="#60A5FA" title="Built for builders without" sub="an infrastructure engineer." gap={40} middle>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}>
+      <Layout dark title="Built for builders without" sub="an infrastructure engineer." gap={44} middle>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
           {users.map((u, i) => (
             <Reveal key={u.title} delay={0.12 + i * 0.1} y={30}>
-              <div className="glass-prism" style={{ "--color-1": u.color, height: "100%", padding: 40 }}>
-                <div className="glass-prism-icon">{u.icon}</div>
-                <h3>{u.title}</h3>
-                <p style={{ color: "rgba(255,255,255,0.62)", lineHeight: 1.5, fontSize: 22 }}>{u.who}</p>
+              <div className="glass-prism" style={{ "--color-1": u.color, height: "100%", padding: "56px 48px" }}>
+                <div className="glass-prism-icon" style={{ width: 84, height: 84, borderRadius: 20, marginBottom: 34 }}>{u.icon}</div>
+                <h3 style={{ fontSize: 40, letterSpacing: "-1.4px", lineHeight: 1.1, minHeight: 88, marginBottom: 18 }}>{u.title}</h3>
+                <p style={{ color: "rgba(255,255,255,0.62)", lineHeight: 1.5, fontSize: 27 }}>{u.who}</p>
               </div>
             </Reveal>
           ))}
@@ -64,52 +75,7 @@ export function UsersSlide() {
   );
 }
 
-/* ─── 08 · How Depot works ─── */
-export function HowItWorksSlide() {
-  const steps = ["Code", "Application Model", "Proposal and cost", "Plan and policy check", "Signed approval", "Live"];
-  const levels = [["Read logs or metrics", "runs at once"], ["Restart or scale within limits", "one confirmation"], ["Change infrastructure", "signed approval", true]];
-  return (
-    <SlideFrame theme="light">
-      <Layout eyebrow="How Depot works" title="From code to live," sub="through one gate." gap={64}
-        cite={<>The model selects; reviewed templates execute. The checks, not the generation, do the work.<Ref n={9} /></>}>
-        <div style={{ display: "flex", alignItems: "stretch", gap: 10 }}>
-          {steps.map((s, i) => {
-            const gate = i === 4;
-            return (
-              <div key={s} style={{ display: "flex", alignItems: "center", gap: 10, flex: 1 }}>
-                <Reveal delay={0.08 + i * 0.07} y={16} style={{ flex: 1, height: "100%" }}>
-                  <div style={{ height: "100%", borderRadius: 22, padding: "22px 20px", background: gate ? "#050505" : "#fafafa", color: gate ? "#fff" : "#000", border: gate ? "1px solid #050505" : "1px solid #eceef1" }}>
-                    <div style={{ fontSize: 15, fontWeight: 800, color: gate ? "#34D399" : "#10B981" }}>0{i + 1}</div>
-                    <div style={{ fontSize: 23, fontWeight: 600, marginTop: 10, lineHeight: 1.2 }}>{s}</div>
-                  </div>
-                </Reveal>
-                {i < steps.length - 1 && <ArrowRight size={20} color="#9CA3AF" style={{ flex: "none" }} />}
-              </div>
-            );
-          })}
-        </div>
-        <Reveal delay={0.5} style={{ marginTop: 22, display: "flex", alignItems: "center", gap: 14, color: "#10B981", fontSize: 19, fontWeight: 600 }}>
-          <CornerDownLeft size={22} />
-          <div style={{ flex: 1, height: 2, background: "linear-gradient(to right, #10B981, rgba(16,185,129,0.08))" }} />
-          <span style={{ color: "#374151" }}>Every later change returns through the same gate</span>
-        </Reveal>
-        <Reveal delay={0.6} style={{ marginTop: "auto" }}>
-          <div style={{ ...label, color: "#9CA3AF", marginBottom: 16 }}>Confirmation matches the risk</div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
-            {levels.map(([a, c, strong]) => (
-              <div key={a} style={{ borderTop: `2px solid ${strong ? "#000" : "#e5e7eb"}`, paddingTop: 16 }}>
-                <div style={{ fontSize: 21, color: "#374151" }}>{a}</div>
-                <div style={{ fontSize: 24, fontWeight: 700, marginTop: 6, color: strong ? "#000" : "#6B7280" }}>{c}</div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </Layout>
-    </SlideFrame>
-  );
-}
-
-/* ─── 09 · Key features ─── */
+/* ─── 07 · Key features ─── */
 export function FeaturesSlide() {
   const feats = [
     { icon: <Layers size={24} />, color: "#10B981", title: "Application Model", desc: "Every fact marked detected, inferred or user-supplied." },
@@ -121,7 +87,7 @@ export function FeaturesSlide() {
   ];
   return (
     <SlideFrame theme="light">
-      <Layout eyebrow="Key features" title="What Depot" sub="actually does." gap={40} middle>
+      <Layout title="What Depot" sub="actually does." gap={40} middle>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", columnGap: 56, rowGap: 48 }}>
           {feats.map((f, i) => (
             <Reveal key={f.title} delay={0.08 + i * 0.06}>
@@ -136,7 +102,7 @@ export function FeaturesSlide() {
   );
 }
 
-/* ─── 10 · Depot in action ─── */
+/* ─── 08 · Depot in action ─── */
 export function InActionSlide() {
   const steps = [
     ["#A78BFA", "Connect", "GitHub, GitLab or an archive"],
@@ -147,7 +113,7 @@ export function InActionSlide() {
   ];
   return (
     <SlideFrame theme="dark">
-      <Layout dark eyebrow="Depot in action" eyebrowColor="#34D399" title="One session," sub="from working code to live." gap={40} middle>
+      <Layout dark title="One session," sub="from working code to live." gap={40} middle>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 20 }}>
           {steps.map(([color, title, desc], i) => (
             <Reveal key={title} delay={0.1 + i * 0.08} y={40}>
@@ -160,84 +126,6 @@ export function InActionSlide() {
             </Reveal>
           ))}
         </div>
-      </Layout>
-    </SlideFrame>
-  );
-}
-
-/* ─── 11 · System architecture ─── */
-function Box({ t, d, dashed, dark, style }) {
-  return (
-    <div style={{ borderRadius: 18, padding: "16px 16px", textAlign: "center", background: dark ? "#050505" : "#fff", color: dark ? "#fff" : "#111", border: dashed ? "1.5px dashed #10B981" : dark ? "1px solid #050505" : "1px solid #e5e7eb", display: "flex", flexDirection: "column", justifyContent: "center", ...style }}>
-      <div style={{ fontSize: 20, fontWeight: 700, lineHeight: 1.2 }}>{t}</div>
-      {d && <div style={{ fontSize: 15, color: dark ? "rgba(255,255,255,0.6)" : "#6B7280", marginTop: 5, lineHeight: 1.3 }}>{d}</div>}
-    </div>
-  );
-}
-
-const Arrow = () => <ArrowRight size={20} color="#9CA3AF" style={{ flex: "none", alignSelf: "center" }} />;
-
-function Tier({ name, children }) {
-  return (
-    <div style={{ display: "grid", gridTemplateColumns: "150px 1fr", alignItems: "center", gap: 20 }}>
-      <div style={{ ...label, fontSize: 13, color: "#9CA3AF" }}>{name}</div>
-      {children}
-    </div>
-  );
-}
-
-export function ArchitectureSlide() {
-  const stack = ["Next.js", "Python + FastAPI", "PostgreSQL", "Terraform", "OpenID Connect", "Docker Compose"];
-  return (
-    <SlideFrame theme="light">
-      <Layout eyebrow="System architecture" eyebrowColor="#8B5CF6" title="One API, one gate," sub="two saved documents." gap={44}>
-        <Reveal delay={0.1} style={{ display: "flex", flexDirection: "column", gap: 22 }}>
-          <Tier name="Clients">
-            <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-              <Box t="Dashboard" style={{ width: 260 }} />
-              <Box t="Assistant" d="agent mode" style={{ width: 260 }} />
-              <span style={{ fontSize: 19, color: "#6B7280", marginLeft: 8 }}><Glyph c="→" /> same API, same gate</span>
-            </div>
-          </Tier>
-          <Tier name="Control plane">
-            <div style={{ display: "flex", gap: 10, alignItems: "stretch" }}>
-              <Box t="Analyser + intake" style={{ flex: 1 }} />
-              <Arrow />
-              <Box t="Application Model" dashed style={{ flex: 1 }} />
-              <Arrow />
-              <Box t="Architect" d="model selects, rules filter" style={{ flex: 1 }} />
-              <Arrow />
-              <Box t="Architecture Spec" dashed style={{ flex: 1 }} />
-              <Arrow />
-              <Box t="Safety gate" dark style={{ flex: 1 }} />
-              <Arrow />
-              <Box t="Runner" d="short-lived credentials" style={{ flex: 1 }} />
-            </div>
-          </Tier>
-          <Tier name="Targets">
-            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-              {["AWS", "GCP", "Azure", "Vercel", "Railway"].map((t) => (
-                <span key={t} style={{ padding: "12px 26px", borderRadius: 9999, border: "1px solid #d1d5db", fontSize: 19, fontWeight: 600 }}>{t}</span>
-              ))}
-              <span style={{ fontSize: 17, color: "#9CA3AF", marginLeft: 10 }}>owned by the user</span>
-            </div>
-          </Tier>
-          <Tier name="Data">
-            <div style={{ display: "flex", gap: 14 }}>
-              <Box t="PostgreSQL" d="state, job queue, events, audit" style={{ width: 360 }} />
-              <Box t="Model providers" d="selection, explanation, diagnosis" style={{ width: 360 }} />
-            </div>
-          </Tier>
-        </Reveal>
-        <Reveal delay={0.3} style={{ marginTop: "auto", display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{ ...label, fontSize: 13, color: "#9CA3AF", width: 170 }}>Stack</span>
-          {stack.map((s) => (
-            <span key={s} style={{ padding: "8px 18px", borderRadius: 9999, background: "#fafafa", border: "1px solid #eceef1", fontSize: 17, fontWeight: 600, color: "#374151" }}>{s}</span>
-          ))}
-          <span style={{ fontSize: 15, color: "#9CA3AF", marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 8 }}>
-            <span style={{ width: 24, height: 13, border: "1.5px dashed #10B981", borderRadius: 4 }} /> saved document
-          </span>
-        </Reveal>
       </Layout>
     </SlideFrame>
   );

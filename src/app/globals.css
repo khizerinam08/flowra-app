@@ -51,11 +51,6 @@ a:focus-visible {
   border: 0;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
-}
-
 /* Aurora gradient text */
 .text-aurora {
   background: linear-gradient(to right, #00c2ff, #33ff8c, #ffc640, #e54cff, #00c2ff);
