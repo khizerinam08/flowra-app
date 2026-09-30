@@ -2,7 +2,8 @@
 
 import { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Ref } from "@/components/deck/ui";
+import { SlideFrame, Layout, Ref, BLUE } from "@/components/deck/ui";
+import { Words } from "@/components/fx";
 
 /* ─── 13 · UN Sustainable Development Goals ─── */
 export function SdgSlide() {
@@ -66,25 +67,32 @@ export function ReferencesSlide() {
   );
 }
 
-/* ─── 15 · Thank you ─── */
+/* ─── 15 · Thank you, on the Amplio glass plate ─── */
 export function ThanksSlide() {
   return (
-    <SlideFrame theme="dark" metaball="#1f1f1f">
-      <div style={{ position: "absolute", inset: 0, padding: "56px 104px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
-        <Reveal>
-        </Reveal>
-        <Reveal delay={0.08}>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: 140, fontWeight: 500, letterSpacing: "-6px", lineHeight: 0.92, marginTop: 8 }}>
-            Thank you.<br /><span style={{ color: "#10B981" }}>Any questions?</span>
-          </h2>
-        </Reveal>
-        <Reveal delay={0.2} style={{ marginTop: 64, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-          {team.slice(0, 3).map((m) => (
-            <span key={m.name} style={{ padding: "12px 28px", borderRadius: 9999, border: "1px solid rgba(255,255,255,0.16)", fontSize: 20, color: "rgba(255,255,255,0.85)" }}>{m.name}</span>
-          ))}
-        </Reveal>
-        <Reveal delay={0.28} style={{ marginTop: 22, fontSize: 19, color: "rgba(255,255,255,0.5)" }}>
-          Advisor Hira Anwar · Co-advisor Ayesha Hakim · NUST SEECS
+    <SlideFrame theme="light" plate>
+      <div style={{ position: "absolute", inset: 0, padding: "56px 104px 60px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <h2 style={{ fontFamily: "var(--font-display)", fontSize: 140, fontWeight: 500, letterSpacing: "-6px", lineHeight: 0.92, color: "#0b1020" }}>
+          <Words text="Thank you." />
+          <br />
+          <span style={{ color: BLUE }}><Words text="Any questions?" delay={260} /></span>
+        </h2>
+        <Reveal delay={0.35} style={{ marginTop: 64, display: "flex", gap: 20, alignItems: "stretch" }}>
+          <div className="fx-glass" style={{ borderRadius: 28, padding: "24px 30px", minWidth: 560 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", color: "#475569" }}>
+              <span className="fx-ping" style={{ width: 9, height: 9, borderRadius: "50%", background: BLUE }} /> TEAM
+            </div>
+            <div style={{ marginTop: 12, fontSize: 24, lineHeight: 1.55, color: "#0b1020" }}>
+              {team.slice(0, 3).map((m) => <div key={m.name}>{m.name}</div>)}
+            </div>
+          </div>
+          <div className="fx-glass" style={{ borderRadius: 28, padding: "24px 30px", minWidth: 380 }}>
+            <div style={{ fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", color: "#475569" }}>ADVISORS</div>
+            <div style={{ marginTop: 12, fontSize: 24, lineHeight: 1.55, color: "#0b1020" }}>
+              {team.slice(3).map((m) => <div key={m.name}>{m.name}</div>)}
+            </div>
+            <div style={{ marginTop: 10, fontSize: 16, color: "#64748b" }}>NUST SEECS · BS Computer Science</div>
+          </div>
         </Reveal>
       </div>
     </SlideFrame>

@@ -76,14 +76,14 @@ export function TimelineSlide() {
               {months.map(([m, d]) => <div key={m} style={{ position: "absolute", top: 0, bottom: 0, left: `${pos(d)}%`, width: 1, background: "#f0f1f3" }} />)}
               <div style={{ position: "absolute", top: -8, bottom: 0, left: `${demo}%`, borderLeft: "2px dashed #111" }} />
             </div>
-            {rows.map(([m, text, owner, s, e]) => (
+            {rows.map(([m, text, owner, s, e], k) => (
               <div key={m} style={{ display: "flex", alignItems: "center", height: 50, borderTop: "1px solid #f3f4f6" }}>
                 <div style={{ width: labelW, flex: "none", display: "flex", alignItems: "center", gap: 14, fontSize: 20 }}>
                   <span style={{ width: 36, fontSize: 15, fontWeight: 800, color: "#9CA3AF" }}>{m}</span>
                   <span>{text}</span>
                 </div>
                 <div style={{ position: "relative", flex: 1, height: "100%" }}>
-                  <div style={{ position: "absolute", top: 15, bottom: 15, left: `${pos(s)}%`, width: `${pos(e) - pos(s)}%`, borderRadius: 6, background: OWNER[owner] }} />
+                  <div className="fx-grow" style={{ "--d": `${400 + k * 110}ms`, position: "absolute", top: 15, bottom: 15, left: `${pos(s)}%`, width: `${pos(e) - pos(s)}%`, borderRadius: 6, background: OWNER[owner] }} />
                 </div>
               </div>
             ))}

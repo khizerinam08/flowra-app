@@ -2,7 +2,8 @@
 
 import TeamGallery, { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Ref, Grad } from "@/components/deck/ui";
+import { SlideFrame, Layout, Ref } from "@/components/deck/ui";
+import { Words, Roll } from "@/components/fx";
 
 const label = { fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" };
 
@@ -11,13 +12,13 @@ export function TitleSlide() {
   const members = team.slice(0, 3);
   const advisors = team.slice(3);
   return (
-    <SlideFrame theme="light" metaball="#F5F6F8">
+    <SlideFrame theme="light">
       <div style={{ position: "absolute", inset: 0, padding: "60px 104px 48px", display: "grid", gridTemplateColumns: "1fr 620px", gap: 60, alignItems: "center" }}>
         <div>
           <Reveal>
           </Reveal>
           <Reveal delay={0.08}>
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: 196, fontWeight: 500, letterSpacing: "-9px", lineHeight: 0.85, color: "#000" }}>Depot</h1>
+            <h1 style={{ fontFamily: "var(--font-display)", fontSize: 196, fontWeight: 500, letterSpacing: "-9px", lineHeight: 0.85, color: "#000" }}><Words text="Depot" /></h1>
           </Reveal>
           <Reveal delay={0.16}>
             <p style={{ marginTop: 26, fontFamily: "var(--font-display)", fontSize: 36, fontWeight: 400, letterSpacing: "-0.8px", lineHeight: 1.2, color: "#6B7280", maxWidth: 640 }}>
@@ -46,20 +47,20 @@ export function ChallengeSlide() {
     { n: "150%", t: "average yearly growth in infrastructure-as-code questions on Stack Overflow, 2011–2022", r: 2 },
   ];
   return (
-    <SlideFrame theme="dark">
+    <SlideFrame theme="dark" band>
       <div style={{ position: "absolute", inset: 0, padding: "64px 104px 56px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-        <Reveal>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: 118, fontWeight: 600, lineHeight: 0.98, letterSpacing: "-4.5px" }}>
-            Building is fast now.<br />
-            The <Grad>shipping</Grad><br />
-            is still expert work.
-          </h2>
-        </Reveal>
+        <h2 style={{ fontFamily: "var(--font-display)", fontSize: 118, fontWeight: 600, lineHeight: 0.98, letterSpacing: "-4.5px" }}>
+          <Words text="Building is fast now." />
+          <br />
+          <Words text="The" delay={280} /> <span style={{ color: "#a7e3c4" }}><Words text="shipping" delay={350} /></span>
+          <br />
+          <Words text="is still expert work." delay={420} />
+        </h2>
         <div style={{ marginTop: 96, display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 96 }}>
           {stats.map((s, i) => (
-            <Reveal key={s.n} delay={0.2 + i * 0.1} style={{ borderTop: "1px solid rgba(255,255,255,0.18)", paddingTop: 34 }}>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: 116, fontWeight: 500, letterSpacing: "-4px", lineHeight: 1 }}>{s.n}</div>
-              <p style={{ marginTop: 20, fontSize: 25, lineHeight: 1.5, color: "rgba(255,255,255,0.6)" }}>{s.t}<Ref n={s.r} dark /></p>
+            <Reveal key={s.n} delay={0.2 + i * 0.1} style={{ borderTop: "1px solid rgba(255,255,255,0.28)", paddingTop: 34 }}>
+              <div style={{ fontFamily: "var(--font-display)", fontSize: 116, fontWeight: 500, letterSpacing: "-4px", lineHeight: 1 }}><Roll value={s.n} delay={600 + i * 150} /></div>
+              <p style={{ marginTop: 20, fontSize: 25, lineHeight: 1.5, color: "rgba(255,255,255,0.72)" }}>{s.t}<Ref n={s.r} dark /></p>
             </Reveal>
           ))}
         </div>

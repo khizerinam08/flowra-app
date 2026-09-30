@@ -1,0 +1,88 @@
+/* Motion borrowed from the Amplio landing (github.com/m-faizananwar/amplio):
+   the drifting trail, words rising out of their line box, rolling digits,
+   the stamp and the grow-in bars. Transform, opacity and offset-distance only.
+
+   Every slide's <section class="fx-slide"> gets [data-on] once the loader has
+   opened, so nothing plays behind the loader. Print and ?instant add
+   .fx-static: no motion, every part at its final frame. */
+
+.fx-slide:not([data-on]) *,
+.fx-slide:not([data-on]) *::before { animation-play-state: paused !important; }
+
+/* ─── the trail: lines, nodes and dots travelling along them ─── */
+.fx-trail { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.fx-trail .line { fill: none; stroke-width: 1.5; }
+.fx-trail .dot { offset-rotate: 0deg; animation: fx-travel var(--t, 12s) linear var(--d, 0s) infinite; }
+@keyframes fx-travel {
+  from { offset-distance: 0%; opacity: 0; }
+  10%, 90% { opacity: 1; }
+  to { offset-distance: 100%; opacity: 0; }
+}
+.fx-trail[data-tone="ink"] .line { stroke: #ffffff; stroke-opacity: .09; }
+.fx-trail[data-tone="ink"] .node { fill: #34D399; fill-opacity: .45; }
+.fx-trail[data-tone="ink"] .dot { fill: #a7f3d0; }
+.fx-trail[data-tone="blue"] .line { stroke: #5fc493; stroke-opacity: .35; }
+.fx-trail[data-tone="blue"] .node { fill: #a7e3c4; fill-opacity: .7; }
+.fx-trail[data-tone="blue"] .dot { fill: #d9f5e6; }
+
+/* ─── words that land one by one ─── */
+.fx-word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.fx-word > span { display: inline-block; transform: translateY(105%); transition: transform 1s cubic-bezier(.16, 1, .3, 1); }
+.fx-slide[data-on] .fx-word > span { transform: none; }
+
+/* ─── rolling digits: each digit is a 0–9 column moved with transform ─── */
+.fx-roll { position: relative; display: inline-block; width: 1ch; height: 1em; overflow: hidden; vertical-align: top; }
+.fx-roll::before {
+  content: "0\A 1\A 2\A 3\A 4\A 5\A 6\A 7\A 8\A 9";
+  position: absolute; inset-inline: 0; top: 0; white-space: pre; line-height: 1em; text-align: center;
+  transform: translateY(0);
+  transition: transform 1.4s cubic-bezier(.2, .8, .2, 1) var(--delay, 0ms);
+}
+.fx-slide[data-on] .fx-roll::before { transform: translateY(calc(var(--n, 0) * -1em)); }
+
+/* ─── stamp: lands rotated, like a signature ─── */
+.fx-stamp { opacity: 0; transform: scale(1.8) rotate(-8deg); }
+.fx-slide[data-on] .fx-stamp { animation: fx-stamp 360ms cubic-bezier(.2, .8, .2, 1) var(--d, 0ms) forwards; }
+@keyframes fx-stamp {
+  0% { transform: scale(1.8) rotate(-8deg); opacity: 0; }
+  60% { transform: scale(.95) rotate(-8deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-8deg); opacity: 1; }
+}
+
+/* ─── bars that grow from the left ─── */
+.fx-grow { transform-origin: left center; transform: scaleX(0); }
+.fx-slide[data-on] .fx-grow { transition: transform .7s cubic-bezier(.2, .8, .2, 1) var(--d, 0ms); transform: scaleX(1); }
+
+/* ─── a dot running back along a line (the return path) ─── */
+.fx-run { position: absolute; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; animation: fx-run 3.2s cubic-bezier(.45, 0, .55, 1) infinite; }
+@keyframes fx-run { 0% { left: 100%; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: 0; opacity: 0; } }
+
+/* ─── a ring pulsing out of a live dot ─── */
+.fx-ping { position: relative; }
+.fx-ping::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: inherit; animation: fx-ping 2.4s cubic-bezier(.22, .7, .25, 1) infinite; }
+@keyframes fx-ping { 0% { opacity: .45; transform: scale(1); } 70%, 100% { opacity: 0; transform: scale(2.6); } }
+
+/* ─── glass (the Amplio hero's frosted panels) ─── */
+.fx-glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, .5), rgba(255, 255, 255, .18));
+  border: 1px solid rgba(255, 255, 255, .65);
+  -webkit-backdrop-filter: blur(28px) saturate(112%);
+  backdrop-filter: blur(28px) saturate(112%);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .55), inset -1px -1px 0 rgba(255, 255, 255, .18), 0 18px 40px rgba(28, 52, 92, .08);
+}
+.fx-plate { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; filter: brightness(1.006) saturate(.965); }
+.fx-plate-video { opacity: 0; transition: opacity .6s linear; }
+.fx-plate-video[data-on] { opacity: 1; }
+
+/* ─── static: print and ?instant show the final frame ─── */
+.fx-static *, .fx-static *::before, .fx-static *::after { animation: none !important; transition: none !important; }
+.fx-static .fx-word > span { transform: none; }
+.fx-static .fx-roll::before { transform: translateY(calc(var(--n, 0) * -1em)); }
+.fx-static .fx-stamp { opacity: 1; transform: rotate(-8deg); }
+.fx-static .fx-grow { transform: none; }
+.fx-static .fx-trail .dot, .fx-static .fx-run { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-trail .dot, .fx-run, .fx-ping::after { animation: none !important; display: none; }
+  .fx-word > span, .fx-roll::before, .fx-grow { transition: none !important; }
+}

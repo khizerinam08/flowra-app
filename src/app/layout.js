@@ -1,5 +1,6 @@
 import { Inter, Outfit, Jura } from "next/font/google";
 import "./globals.css";
+import "@/components/fx/fx.css";
 
 /* next/font self-hosts these at build time: the deck makes no external requests at runtime. */
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });

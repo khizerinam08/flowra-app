@@ -112,16 +112,16 @@ export function InActionSlide() {
     ["#F472B6", "Run", "Deploy on push, roll back, watch cost"],
   ];
   return (
-    <SlideFrame theme="dark">
+    <SlideFrame theme="dark" band>
       <Layout dark title="One session," sub="from working code to live." gap={40} middle>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 20 }}>
           {steps.map(([color, title, desc], i) => (
             <Reveal key={title} delay={0.1 + i * 0.08} y={40}>
-              <div style={{ position: "relative", height: "100%", borderRadius: 28, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.025)", padding: "30px 26px 34px", overflow: "hidden" }}>
-                <div style={{ position: "absolute", right: -6, top: -30, fontFamily: "var(--font-display)", fontSize: 150, fontWeight: 900, color: "rgba(255,255,255,0.035)", lineHeight: 1 }}>0{i + 1}</div>
+              <div style={{ position: "relative", height: "100%", borderRadius: 28, border: "1px solid rgba(255,255,255,0.18)", background: "rgba(255,255,255,0.07)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", padding: "30px 26px 34px", overflow: "hidden" }}>
+                <div style={{ position: "absolute", right: -6, top: -30, fontFamily: "var(--font-display)", fontSize: 150, fontWeight: 900, color: "rgba(255,255,255,0.06)", lineHeight: 1 }}>0{i + 1}</div>
                 <Pill color={color}>Step {i + 1}</Pill>
                 <h3 style={{ fontFamily: "var(--font-display)", fontSize: 38, fontWeight: 600, margin: "26px 0 10px", letterSpacing: "-1px" }}>{title}</h3>
-                <p style={{ color: "#9CA3AF", fontSize: 21, lineHeight: 1.45 }}>{desc}</p>
+                <p style={{ color: "rgba(255,255,255,0.72)", fontSize: 21, lineHeight: 1.45 }}>{desc}</p>
               </div>
             </Reveal>
           ))}
