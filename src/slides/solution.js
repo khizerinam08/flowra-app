@@ -2,7 +2,7 @@
 
 import { Sparkles, CodeXml, Users, ShieldCheck, Layers, Route, KeyRound, Activity, Bot } from "lucide-react";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Ref, Pill } from "@/components/deck/ui";
+import { SlideFrame, Layout, Ref, Pill, AmplioCard } from "@/components/deck/ui";
 
 const label = { fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" };
 
@@ -52,23 +52,25 @@ export function ObjectivesSlide() {
 /* ─── 06 · Users of the system ─── */
 export function UsersSlide() {
   const users = [
-    { color: "oklch(0.7 0.15 160)", icon: <Sparkles size={40} />, title: "AI-assisted builders", who: "A working product, but little experience of running one." },
-    { color: "oklch(0.65 0.25 280)", icon: <CodeXml size={40} />, title: "Solo full-stack developers", who: "Outgrowing a managed platform: stay, or move to a cloud?" },
-    { color: "oklch(0.65 0.15 240)", icon: <Users size={40} />, title: "Small teams and agencies", who: "Two to ten people, with no DevOps staff." },
+    { Icon: Sparkles, title: "AI-assisted builders", who: "A working product, but little experience of running one." },
+    { Icon: CodeXml, title: "Solo full-stack developers", who: "Outgrowing a managed platform: stay, or move to a cloud?" },
+    { Icon: Users, title: "Small teams and agencies", who: "Two to ten people, with no DevOps staff." },
   ];
   return (
     <SlideFrame theme="dark">
       <Layout dark title="Built for builders without" sub="an infrastructure engineer." gap={44} middle>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
-          {users.map((u, i) => (
-            <Reveal key={u.title} delay={0.12 + i * 0.1} y={30}>
-              <div className="glass-prism" style={{ "--color-1": u.color, height: "100%", padding: "56px 48px" }}>
-                <div className="glass-prism-icon" style={{ width: 84, height: 84, borderRadius: 20, marginBottom: 34 }}>{u.icon}</div>
-                <h3 style={{ fontSize: 40, letterSpacing: "-1.4px", lineHeight: 1.1, minHeight: 88, marginBottom: 18 }}>{u.title}</h3>
-                <p style={{ color: "rgba(255,255,255,0.62)", lineHeight: 1.5, fontSize: 27 }}>{u.who}</p>
-              </div>
-            </Reveal>
-          ))}
+          {users.map((u, i) => {
+            const tone = i % 2 === 0 ? "white" : "ink";
+            return (
+              <Reveal key={u.title} delay={0.12 + i * 0.1} y={30}>
+                <AmplioCard tone={tone} tag={`User 0${i + 1}`} Icon={u.Icon} style={{ minHeight: 380 }}>
+                  <h3 style={{ marginTop: "auto", minHeight: 88, display: "flex", alignItems: "flex-end", fontFamily: "var(--font-display)", fontSize: 40, fontWeight: 500, letterSpacing: "-1.2px", lineHeight: 1.1 }}>{u.title}</h3>
+                  <p style={{ marginTop: 14, fontSize: 24, lineHeight: 1.45, color: tone === "white" ? "#475569" : "rgba(255,255,255,0.68)" }}>{u.who}</p>
+                </AmplioCard>
+              </Reveal>
+            );
+          })}
         </div>
       </Layout>
     </SlideFrame>

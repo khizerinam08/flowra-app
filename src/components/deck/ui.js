@@ -68,6 +68,45 @@ export function Cite({ children, dark, style }) {
   );
 }
 
+/* ─── Amplio card: white or ink glass, a solid pill tag with a live dot, a solid round
+   badge for the icon. Tag and badge invert with the card; `accent` makes them green. ─── */
+const CARD_SURFACE = {
+  white: {
+    background: "linear-gradient(135deg, #ffffff, #f4f6fa)",
+    color: "#0b1020",
+    border: "1px solid #e6e9ef",
+    boxShadow: "inset 1px 1px 0 rgba(255,255,255,0.9), 0 24px 50px rgba(8,20,64,0.18)",
+  },
+  ink: {
+    background: "linear-gradient(160deg, #15171c, #050505 65%)",
+    color: "#fff",
+    border: "1px solid rgba(255,255,255,0.12)",
+    boxShadow: "inset 1px 1px 0 rgba(255,255,255,0.08), 0 24px 50px rgba(0,0,0,0.3)",
+  },
+};
+
+export function AmplioCard({ tone = "white", accent, tag, Icon, children, style }) {
+  const solid = accent ? { background: "#10B981", color: "#04120C" } : tone === "white" ? { background: "#050505", color: "#fff" } : { background: "#fff", color: "#050505" };
+  return (
+    <div style={{ height: "100%", display: "flex", flexDirection: "column", borderRadius: 28, padding: "26px 28px 30px", ...CARD_SURFACE[tone], ...(accent ? { boxShadow: "0 0 0 3px #10B981, 0 24px 60px rgba(16,185,129,0.3)" } : null), ...style }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        {tag ? (
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "7px 14px 7px 12px", borderRadius: 9999, fontSize: 15, fontWeight: 600, ...solid }}>
+            <span className="fx-ping" style={{ width: 8, height: 8, borderRadius: "50%", background: accent ? "#04120C" : "#10B981" }} />
+            {tag}
+          </span>
+        ) : <span />}
+        {Icon && (
+          <span style={{ flex: "none", width: 68, height: 68, borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", ...solid }}>
+            <Icon size={28} strokeWidth={2.2} />
+          </span>
+        )}
+      </div>
+      {children}
+    </div>
+  );
+}
+
 /* A source that opens the original page in a new tab, so the deck stays where it is.
    Links are not requests: nothing loads until clicked, so the deck still runs offline. */
 export function SourceLink({ href, children }) {

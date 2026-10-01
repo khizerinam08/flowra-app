@@ -2,7 +2,7 @@
 
 import TeamGallery, { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { Boxes, Cloud, Wallet, ShieldCheck, Server, Layers, Check, Minus, X } from "lucide-react";
+import { Boxes, Cloud, Wallet, ShieldCheck, Server, Layers, Check, Minus, X, CodeXml, Bot } from "lucide-react";
 import { SlideFrame, Layout, Ref, BLUE, SourceLink } from "@/components/deck/ui";
 import { Words, Roll } from "@/components/fx";
 
@@ -164,15 +164,15 @@ export function ProblemSlide() {
 }
 
 /* ─── 04 · What exists today ───
-   One Amplio-style card per product (proposal Table 1): a pill tag for the category,
-   a solid round badge, and a solid status mark per criterion. Cards alternate white
-   glass and ink glass; Depot carries the green. */
+   The four groups of existing tools against Depot (proposal Table A.1), as Amplio-style
+   column cards: a pill tag, a solid round badge, the group and its examples, then a solid
+   status mark per criterion. Columns alternate white and ink glass; Depot carries the green. */
 const STRONG = "strong", PARTIAL = "partial", WEAK = "weak";
 
 const MARK = {
-  [STRONG]: { Icon: Check, bg: "#10B981", label: "meets it" },
-  [PARTIAL]: { Icon: Minus, bg: "#F59E0B", label: "partly" },
-  [WEAK]: { Icon: X, bg: "#94A3B8", label: "no" },
+  [STRONG]: { Icon: Check, bg: "#10B981", label: "Yes" },
+  [PARTIAL]: { Icon: Minus, bg: "#F59E0B", label: "Partly" },
+  [WEAK]: { Icon: X, bg: "#94A3B8", label: "No" },
 };
 
 function StatusMark({ level, size = 30 }) {
@@ -185,13 +185,15 @@ function StatusMark({ level, size = 30 }) {
 }
 
 export function LandscapeSlide() {
-  const criteria = ["Starts from the code", "Picks where it runs", "Asks before it acts"];
-  const tools = [
-    { name: "Vercel", cat: "Managed platform", Icon: Server, light: true, c: [[PARTIAL, "Plus platform config"], [WEAK, "The platform only"], [PARTIAL, "No approval gate"]] },
-    { name: "Flightcontrol", cat: "Bring-your-own-cloud", Icon: Cloud, c: [[PARTIAL, "Repo plus config file"], [PARTIAL, "AWS only"], [PARTIAL, "Deploy only"]] },
-    { name: "Depot", cat: "Proposed", Icon: Layers, light: true, depot: true, c: [[STRONG, "Ordinary repository"], [STRONG, "Compares every option"], [STRONG, "Signed, risk-tiered"]] },
+  const criteria = ["Starts from code as it is", "Runs in the user's account", "Chooses cloud or platform", "Approval before change"];
+  const groups = [
+    { name: "Managed platforms", ex: "Vercel, Railway, Render", Icon: Server, v: [STRONG, WEAK, WEAK, PARTIAL] },
+    { name: "Bring-your-own-cloud", ex: "Porter, Qovery, Northflank, Ravion", Icon: Cloud, v: [PARTIAL, STRONG, WEAK, PARTIAL] },
+    { name: "Infrastructure-from-code", ex: "Encore, Nitric, SST, Defang", Icon: CodeXml, v: [WEAK, STRONG, WEAK, WEAK] },
+    { name: "AI for one provider or codebase", ex: "Pulumi Neo, StackGen, Gemini Cloud Assist, azd init", Icon: Bot, v: [PARTIAL, PARTIAL, PARTIAL, PARTIAL] },
+    { name: "Depot", ex: "AWS, GCP, Azure, Vercel, Railway; one gate for all", Icon: Layers, depot: true, v: [STRONG, STRONG, STRONG, STRONG] },
   ];
-  const HEAD = 150, ROW = 92;
+  const HEAD = 196, ROW = 74;
   const whiteGlass = {
     background: "linear-gradient(135deg, #ffffff, #f4f6fa)",
     color: "#0b1020",
@@ -208,35 +210,37 @@ export function LandscapeSlide() {
   };
   return (
     <SlideFrame theme="dark">
-      <Layout dark title="Each tool solves part of it." sub="Someone still decides where it runs." gap={36} middle
-        cite={<>One representative product per category, from vendor documentation, 30 Sep 2026<Ref n={5} dark />. Depot is proposed.</>}>
-        <Reveal delay={0.1} style={{ display: "grid", gridTemplateColumns: "0.85fr repeat(3, 1fr)", gap: 18 }}>
+      <Layout dark title="Each tool solves part of it." sub="Someone still decides where it runs." gap={30} middle
+        cite={<>Fifteen products, from their own documentation, 30 Sep 2026<Ref n={5} dark />. Partly = partly, or only some products; No = no, or not stated. Depot is planned.</>}>
+        <Reveal delay={0.1} style={{ display: "grid", gridTemplateColumns: "0.9fr repeat(5, 1fr)", gap: 14 }}>
           {/* criteria down the left, aligned to the rows */}
           <div style={{ paddingTop: HEAD }}>
             {criteria.map((c) => (
-              <div key={c} style={{ height: ROW, display: "flex", alignItems: "center", borderTop: "1px solid rgba(255,255,255,0.14)", fontSize: 21, fontWeight: 600, color: "rgba(255,255,255,0.92)", lineHeight: 1.25, paddingRight: 12 }}>{c}</div>
+              <div key={c} style={{ height: ROW, display: "flex", alignItems: "center", borderTop: "1px solid rgba(255,255,255,0.14)", fontSize: 19, fontWeight: 600, color: "rgba(255,255,255,0.92)", lineHeight: 1.25, paddingRight: 10 }}>{c}</div>
             ))}
           </div>
-          {tools.map((t) => {
-            const solid = t.depot ? { background: "#10B981", color: "#04120C" } : t.light ? { background: "#050505", color: "#fff" } : { background: "#fff", color: "#050505" };
+          {groups.map((g, k) => {
+            const light = g.depot || k % 2 === 0;
+            const solid = g.depot ? { background: "#10B981", color: "#04120C" } : light ? { background: "#050505", color: "#fff" } : { background: "#fff", color: "#050505" };
             return (
-              <div key={t.name} style={{ borderRadius: 28, padding: "0 24px", ...(t.light ? whiteGlass : inkGlass), ...(t.depot ? { boxShadow: "0 0 0 3px #10B981, 0 24px 60px rgba(16,185,129,0.35)" } : null) }}>
-                <div style={{ height: HEAD, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <div key={g.name} style={{ borderRadius: 24, padding: "0 18px", ...(light ? whiteGlass : inkGlass), ...(g.depot ? { boxShadow: "0 0 0 3px #10B981, 0 24px 60px rgba(16,185,129,0.35)" } : null) }}>
+                <div style={{ height: HEAD, display: "flex", flexDirection: "column", paddingTop: 18 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <span style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "7px 14px 7px 12px", borderRadius: 9999, fontSize: 14, fontWeight: 600, ...solid }}>
-                      <span className="fx-ping" style={{ width: 8, height: 8, borderRadius: "50%", background: t.depot ? "#04120C" : "#10B981" }} />
-                      {t.cat}
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 12px 6px 10px", borderRadius: 9999, fontSize: 13, fontWeight: 600, ...solid }}>
+                      <span className="fx-ping" style={{ width: 7, height: 7, borderRadius: "50%", background: g.depot ? "#04120C" : "#10B981" }} />
+                      {g.depot ? "Proposed" : "Today"}
                     </span>
-                    <span style={{ width: 54, height: 54, borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", ...solid }}>
-                      <t.Icon size={24} strokeWidth={2.2} />
+                    <span style={{ width: 46, height: 46, borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", ...solid }}>
+                      <g.Icon size={21} strokeWidth={2.2} />
                     </span>
                   </div>
-                  <div style={{ marginTop: 12, fontFamily: "var(--font-display)", fontSize: 40, fontWeight: 500, letterSpacing: "-1.2px", lineHeight: 1 }}>{t.name}</div>
+                  <div style={{ marginTop: 14, fontFamily: "var(--font-display)", fontSize: g.depot ? 34 : 23, fontWeight: 500, letterSpacing: "-0.5px", lineHeight: 1.1 }}>{g.name}</div>
+                  <div style={{ marginTop: 6, fontSize: 13.5, lineHeight: 1.35, color: light ? "#64748b" : "rgba(255,255,255,0.5)" }}>{g.ex}</div>
                 </div>
-                {t.c.map(([level, text], i) => (
-                  <div key={criteria[i]} style={{ height: ROW, display: "flex", alignItems: "center", gap: 14, borderTop: t.light ? "1px solid #e8ebf0" : "1px solid rgba(255,255,255,0.12)", fontSize: 20, fontWeight: 600 }}>
+                {g.v.map((level, i) => (
+                  <div key={criteria[i]} style={{ height: ROW, display: "flex", alignItems: "center", gap: 12, borderTop: light ? "1px solid #e8ebf0" : "1px solid rgba(255,255,255,0.12)", fontSize: 18, fontWeight: 600 }}>
                     <StatusMark level={level} />
-                    {text}
+                    {MARK[level].label}
                   </div>
                 ))}
               </div>
