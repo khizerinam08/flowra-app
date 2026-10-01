@@ -1,8 +1,9 @@
 "use client";
 
-import { ArrowRight, ArrowDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/deck/DeckContext";
 import { SlideFrame, Layout, Panel, BLUE, INK, BODY, MUTED } from "@/components/deck/ui";
+import Mermaid from "@/components/deck/Mermaid";
 
 /* One look for every slide in this file: white slides, white cards, one accent (blue).
    No icons, tags or alternating card colours, and body text no smaller than 20px. */
@@ -130,54 +131,49 @@ export function InActionSlide() {
   );
 }
 
-/* ─── 09 · Architecture: the target design in four layers, for a non-technical audience ─── */
+/* ─── 09 · Architecture: the target design, as a flow diagram (Mermaid) ───
+   Follows the proposal: code in, an Application Model, AI-written Terraform from proven
+   blueprints, self-verification with auto-repair, one signed approval gate, the user's own
+   cloud, then operations, with incidents routed back through the same gate. */
+const ARCH_DESIGN = `flowchart TB
+  SRC["Code: GitHub, GitLab or archive"] --> ANA["Analyser and guided intake"]
+  ANA --> MODEL["Application Model: every fact and its source"]
+  MODEL --> ARCHI["AI architect: picks the cloud, writes the Terraform"]
+  LIB[("Proven, security-reviewed blueprints")] -.-> ARCHI
+  ARCHI --> CHK["Validate, plan, scan, cost"]
+  CHK -- "fails" --> ARCHI
+`;
+
+const ARCH_RUN = `flowchart TB
+  GATE["Safety gate: signed, role-checked approval"] --> CLOUD["Your cloud: AWS, GCP or Azure"]
+  CLOUD --> OPS["Deploy, roll back, monitor, track cost"]
+  OPS -- "alarm" --> INC["Incident loop: AI proposes a fix"]
+  INC --> GATE
+  GATE -.-> REC[("Decision record: plans, approvals, costs")]
+`;
+
 export function ArchitectureSlide() {
-  const layers = [
-    { name: "You", parts: ["Web dashboard", "Chat assistant"], note: "Same rules for both: a chat can't do more than a button." },
-    { name: "Depot's brain", parts: ["Reads the code", "Designs and writes the setup", "Checks and repairs it"], note: "Drafts from proven blueprints, then tests its own work." },
-    { name: "Safety gate", parts: ["Shows cost and risks", "Waits for a signed approval"], note: "Nothing reaches the cloud without a person saying yes." },
-    { name: "Your cloud", parts: ["Amazon Web Services", "Google Cloud", "Microsoft Azure"], note: "Runs in the user's own account, with short-lived access." },
-  ];
+  const head = { fontFamily: "var(--font-display)", fontSize: 30, fontWeight: 600, color: BLUE, marginBottom: 6 };
   return (
     <SlideFrame theme="light">
-      <Layout title="How Depot is built:" sub="four simple layers." gap={22} middle>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 270px", gap: 22 }}>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            {layers.map((l, i) => (
-              <div key={l.name}>
-                <Reveal delay={0.1 + i * 0.12} y={16}>
-                  <Panel style={{ flexDirection: "row", alignItems: "center", gap: 22, padding: "12px 24px", ...(l.name === "Safety gate" ? { border: `2px solid ${BLUE}` } : null) }}>
-                    <div style={{ flex: "none", width: 200 }}>
-                      <div style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 600, color: BLUE }}>Layer {i + 1}</div>
-                      <div style={{ fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 600, letterSpacing: "-0.7px" }}>{l.name}</div>
-                    </div>
-                    <div style={{ flex: 1, display: "flex", gap: 8, flexWrap: "wrap" }}>
-                      {l.parts.map((p, k) => (
-                        <div key={p} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                          <span style={{ padding: "8px 14px", borderRadius: 12, background: "#F1F5F9", border: "1px solid #E2E8F0", fontSize: 21, fontWeight: 600, color: INK }}>{p}</span>
-                          {l.name === "Depot's brain" && k < l.parts.length - 1 && <ArrowRight size={20} color={BLUE} strokeWidth={2.6} />}
-                        </div>
-                      ))}
-                    </div>
-                    <div style={{ flex: "none", width: 270, fontSize: 19, lineHeight: 1.3, color: BODY }}>{l.note}</div>
-                  </Panel>
-                </Reveal>
-                {i < layers.length - 1 && (
-                  <div aria-hidden="true" style={{ height: 20, display: "flex", alignItems: "center", justifyContent: "center", color: BLUE }}>
-                    <ArrowDown size={22} strokeWidth={2.6} />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-          <Reveal delay={0.6} style={{ display: "flex" }}>
-            <Panel style={{ justifyContent: "center", padding: "26px 26px" }}>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 600, color: BLUE }}>Alongside every layer</div>
-              <div style={{ marginTop: 6, fontFamily: "var(--font-display)", fontSize: 34, fontWeight: 600 }}>Memory</div>
-              <p style={{ marginTop: 14, fontSize: 21, lineHeight: 1.45, color: BODY }}>Every decision, change, cost and approval is recorded, so anyone can see why the setup is what it is.</p>
+      <Layout title="How Depot is built:" sub="from code to a running cloud." gap={30} middle
+        cite="One approval gate for every change, from the dashboard, the chat assistant or an incident fix.">
+        <Reveal delay={0.15}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 120px 1fr", alignItems: "center", gap: 0 }}>
+            <Panel style={{ padding: "18px 22px" }}>
+              <div style={head}>1 · Understand, design and verify</div>
+              <Mermaid chart={ARCH_DESIGN} label="Code is analysed into an Application Model; an AI architect writes Terraform from proven blueprints; the result is validated, scanned and costed, with automatic repair on failure." />
             </Panel>
-          </Reveal>
-        </div>
+            <div aria-hidden="true" style={{ textAlign: "center", color: BLUE }}>
+              <ArrowRight size={44} strokeWidth={2.6} />
+              <div style={{ marginTop: 6, fontSize: 21, fontWeight: 600 }}>passes</div>
+            </div>
+            <Panel style={{ padding: "18px 22px" }}>
+              <div style={head}>2 · Approve and run</div>
+              <Mermaid chart={ARCH_RUN} label="A signed, role-checked approval gate releases changes to the user's own cloud; operations alarms return as an AI-proposed fix through the same gate; every decision is recorded." />
+            </Panel>
+          </div>
+        </Reveal>
       </Layout>
     </SlideFrame>
   );

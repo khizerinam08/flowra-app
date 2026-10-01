@@ -388,3 +388,9 @@ button {
   background: #fff;
   border: 1px solid var(--gallery-indicator-color, rgb(0, 132, 209));
 }
+
+/* Mermaid diagram on the architecture slide: fill the card, keep the text legible */
+.mermaid-host { width: 100%; }
+.mermaid-host svg { width: 100%; height: auto; max-height: 500px; display: block; }
+.mermaid-host .nodeLabel, .mermaid-host .edgeLabel { font-weight: 500; }
+.mermaid-host .cluster-label .nodeLabel { font-weight: 700; color: #1e40af; }

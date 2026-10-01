@@ -12,18 +12,14 @@ export function ScopeSlide() {
     ["Any web app, API, static site or worker", "Written in JavaScript/TypeScript, Python or Go"],
     ["From GitHub, GitLab or an upload", "One code source per app"],
     ["On AWS, Google Cloud or Azure", "In the user's own cloud account"],
-    ["AI-designed infrastructure", "Written from proven blueprints, then checked and repaired"],
-    ["Deploys, rollback and monitoring", "With cost tracking and savings"],
-    ["A chat assistant for incidents", "Diagnoses problems and proposes fixes"],
   ];
   return (
     <SlideFrame theme="light">
-      <Layout title="What Depot" sub="covers." gap={40} middle
-        cite="Extended scope only if M8 is met early: guided mode, more clouds (e.g. DigitalOcean, Oracle), voice, preview environments.">
+      <Layout title="What Depot" sub="covers." gap={40} middle>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
           {inScope.map(([t, d], i) => (
             <Reveal key={t} delay={0.08 + i * 0.06} y={20}>
-              <Panel style={{ minHeight: 250 }}>
+              <Panel style={{ minHeight: 320 }}>
                 <div style={{ fontFamily: "var(--font-display)", fontSize: 34, fontWeight: 600, letterSpacing: "-0.7px", lineHeight: 1.12 }}>{t}</div>
                 <p style={{ marginTop: "auto", paddingTop: 14, fontSize: 23, lineHeight: 1.4, color: BODY }}>{d}</p>
               </Panel>
@@ -44,7 +40,7 @@ export function EvaluationSlide() {
     ["Estimates the cost", "Within 25% of the cloud's own calculator", "Before anything is switched on"],
     ["Cuts the cost", "20% or more saved each month", "On apps that sit idle"],
     ["Blocks risky changes", "Zero unapproved changes", "Every seeded unsafe plan blocked"],
-    ["Easy to use", <>80% deploy unaided; usability 68 or more<Ref n={7} /></>, "68 is the published average"],
+    ["Easy to use", <>80% deploy unaided; usability 68 or more<Ref n={8} /></>, "68 is the published average"],
   ];
   const grid = "0.95fr 1.45fr 1fr";
   return (

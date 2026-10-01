@@ -54,36 +54,36 @@ const FlowLoader = ({ onComplete, onReveal, word1 = "DE", word2 = "POT" }) => {
       /* 2. Brand Reveal (Snappier Letters Reveal) */
       tl.from(loadingLetters, {
         yPercent: 100,
-        stagger: 0.05,
-        duration: 0.8,
+        stagger: 0.02,
+        duration: 0.3,
       });
 
       /* 3. HIGH-SPEED DARK GREEN PORTAL Reveal */
       // Duration reduced from 2.5s to 1.2s for snappier feel
-      tl.addLabel("portal", "+=0.1");
+      tl.addLabel("portal", "+=0");
       tl.to(loader, {
         "--portal-radius": "150%",
-        duration: 1.2,
+        duration: 0.6,
         ease: "power4.in" // Use 'in' ease for initial velocity
       }, "portal");
 
       if (rim) {
         tl.to(rim, {
           opacity: 1,
-          duration: 0.3,
+          duration: 0.15,
         }, "<");
         
         tl.to(rim, {
           opacity: 0,
-          duration: 0.3,
-        }, ">-0.4");
+          duration: 0.15,
+        }, ">-0.2");
       }
 
       if (mainContent) {
         tl.to(mainContent, {
           scale: 1,
           opacity: 1,
-          duration: 1.2,
+          duration: 0.6,
           ease: "power4.inOut"
         }, "<"); // Perfect sync with portal growth
       }
@@ -92,19 +92,19 @@ const FlowLoader = ({ onComplete, onReveal, word1 = "DE", word2 = "POT" }) => {
       tl.to(headingStart, {
         xPercent: -200,
         opacity: 0,
-        duration: 1,
+        duration: 0.5,
         ease: "power3.inOut"
       }, "<0.05");
 
       tl.to(headingEnd, {
         xPercent: 200,
         opacity: 0,
-        duration: 1,
+        duration: 0.5,
         ease: "power3.inOut"
       }, "<");
 
       // Slide content starts its entrance as the portal opens, not after it closes.
-      tl.call(() => onReveal && onReveal(), null, "portal+=0.45");
+      tl.call(() => onReveal && onReveal(), null, "portal+=0.2");
     }, container);
 
     return () => {
