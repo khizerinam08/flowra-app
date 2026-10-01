@@ -42,8 +42,7 @@ export function TitleSlide() {
 }
 
 /* ─── 02 · The challenge ───
-   One claim, four numbers: building is fast; deploys break, costs run away and
-   few can ship it. Cards alternate white and blue glass; tags are solid Amplio live-dot pills. */
+   One claim, two numbers: building is fast; deploys break. Cards alternate white and blue glass; tags are solid Amplio live-dot pills. */
 function Tag({ light, children }) {
   return (
     <span style={{
@@ -75,8 +74,6 @@ export function ChallengeSlide() {
   const stats = [
     { light: true, tag: "Building is fast", n: "~95%", what: "of the code written by AI, at a quarter of YC's Winter 2025 start-ups", source: "TechCrunch, 2025", url: "https://techcrunch.com/2025/03/06/a-quarter-of-startups-in-ycs-current-cohort-have-codebases-that-are-almost-entirely-ai-generated/", r: 1 },
     { tag: "Deploys break", n: "~70%", what: "of AI-written infrastructure failed to deploy on the first try, even from the best of six AI models", source: "Zhang et al., FSE 2026", url: "https://arxiv.org/abs/2506.05623", r: 2 },
-    { light: true, tag: "Costs run away", n: "29%", what: "of their cloud spend is wasted, say 753 cloud decision-makers", source: "Flexera State of the Cloud, 2026", url: "https://info.flexera.com/cm-report-state-of-the-cloud", r: 3 },
-    { tag: "Few can ship it", n: "17.8%", what: "of developers work extensively with Terraform, against 43.3% on AWS", source: "Stack Overflow Developer Survey, 2025", url: "https://survey.stackoverflow.co/2025/technology", r: 4 },
   ];
   return (
     <SlideFrame theme="dark" band>
@@ -86,16 +83,16 @@ export function ChallengeSlide() {
           <br />
           <span style={{ color: "#a7e3c4" }}><Words text="Shipping them is the bottleneck." delay={320} /></span>
         </h2>
-        <div style={{ marginTop: "auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20 }}>
+        <div style={{ marginTop: "auto", display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 28 }}>
           {stats.map((s, i) => (
             <Reveal key={s.n} delay={0.25 + i * 0.12} y={30}>
-              <div style={{ height: "100%", display: "flex", flexDirection: "column", alignItems: "flex-start", borderRadius: 28, padding: "26px 26px 24px", backdropFilter: "blur(24px) saturate(112%)", WebkitBackdropFilter: "blur(24px) saturate(112%)", ...(s.light ? whiteGlass : blueGlass) }}>
+              <div style={{ height: "100%", display: "flex", flexDirection: "column", alignItems: "flex-start", borderRadius: 32, padding: "32px 36px 30px", backdropFilter: "blur(24px) saturate(112%)", WebkitBackdropFilter: "blur(24px) saturate(112%)", ...(s.light ? whiteGlass : blueGlass) }}>
                 <Tag light={s.light}>{s.tag}</Tag>
-                <div style={{ marginTop: 22, fontFamily: "var(--font-display)", fontSize: 80, fontWeight: 500, letterSpacing: "-3px", lineHeight: 1 }}>
+                <div style={{ marginTop: 26, fontFamily: "var(--font-display)", fontSize: 112, fontWeight: 500, letterSpacing: "-4px", lineHeight: 1 }}>
                   <Roll value={s.n} delay={700 + i * 150} />
                 </div>
-                <p style={{ marginTop: 16, fontSize: 19, lineHeight: 1.45, color: s.light ? "#334155" : "rgba(255,255,255,0.82)" }}>{s.what}</p>
-                <p style={{ marginTop: "auto", paddingTop: 18, fontSize: 15, color: s.light ? "#64748b" : "rgba(255,255,255,0.6)" }}>
+                <p style={{ marginTop: 18, fontSize: 25, lineHeight: 1.45, color: s.light ? "#334155" : "rgba(255,255,255,0.82)", maxWidth: 560 }}>{s.what}</p>
+                <p style={{ marginTop: "auto", paddingTop: 22, fontSize: 17, color: s.light ? "#64748b" : "rgba(255,255,255,0.6)" }}>
                   <SourceLink href={s.url}>{s.source}</SourceLink><Ref n={s.r} dark={!s.light} />
                 </p>
               </div>
@@ -211,7 +208,7 @@ export function LandscapeSlide() {
   return (
     <SlideFrame theme="dark">
       <Layout dark title="Each tool solves part of it." sub="Someone still decides where it runs." gap={30} middle
-        cite={<>Fifteen products, from their own documentation<Ref n={5} dark />. Partly = partly, or only some products; No = no, or not stated. Depot is planned.</>}>
+        cite={<>Fifteen products, from their own documentation<Ref n={3} dark />. Partly = partly, or only some products; No = no, or not stated. Depot is planned.</>}>
         <Reveal delay={0.1} style={{ display: "grid", gridTemplateColumns: "0.9fr repeat(5, 1fr)", gap: 14 }}>
           {/* criteria down the left, aligned to the rows */}
           <div style={{ paddingTop: HEAD }}>
