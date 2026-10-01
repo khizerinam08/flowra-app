@@ -1,6 +1,7 @@
 "use client";
 
-import { Sparkles, CodeXml, Users, ShieldCheck, Layers, Route, KeyRound, Activity, Bot } from "lucide-react";
+import { Sparkles, CodeXml, Users, ShieldCheck, Layers, Route, KeyRound, Activity, Bot, Rocket, ArrowRightLeft, GitBranch, MessageSquare, Eye } from "lucide-react";
+import { MiniTrack, Sparkline, Transfer, FlowLine } from "@/components/fx";
 import { Reveal } from "@/components/deck/DeckContext";
 import { SlideFrame, Layout, Ref, Pill, AmplioCard } from "@/components/deck/ui";
 
@@ -31,18 +32,29 @@ const OBJECTIVES = [
 ];
 
 export function ObjectivesSlide() {
+  const icons = [Rocket, Activity, ArrowRightLeft];
   return (
     <SlideFrame theme="light">
       <Layout title="Three objectives." sub="What a user can do with Depot." gap={48} middle
         cite="Research sits inside all three: comparing language models on extraction, and measured guardrails for the agent loop.">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}>
-          {OBJECTIVES.map((o, i) => (
-            <Reveal key={o.n} delay={0.08 + i * 0.08} style={{ display: "flex", flexDirection: "column", height: "100%", padding: "40px 36px", borderRadius: 26, border: "1px solid #eceef1", background: "#fafafa" }}>
-              <span style={{ display: "inline-flex", alignSelf: "flex-start", alignItems: "center", justifyContent: "center", minWidth: 62, height: 38, padding: "0 14px", borderRadius: 12, background: `${o.color}16`, color: o.color, fontSize: 18, fontWeight: 800 }}>{o.n}</span>
-              <h3 style={{ fontFamily: "var(--font-display)", fontSize: 40, fontWeight: 500, letterSpacing: "-1.2px", lineHeight: 1.08, margin: "24px 0 0" }}>{o.head}</h3>
-              <p style={{ fontSize: 19, lineHeight: 1.5, color: "#6B7280", margin: "18px 0 0" }}>{o.body}</p>
-            </Reveal>
-          ))}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+          {OBJECTIVES.map((o, i) => {
+            const tone = i % 2 === 0 ? "ink" : "white";
+            const dark = tone === "ink";
+            return (
+              <Reveal key={o.n} delay={0.08 + i * 0.08}>
+                <AmplioCard tone={tone} tag={o.n} Icon={icons[i]} delay={i * 120} style={{ minHeight: 420 }}>
+                  <div style={{ marginTop: 34 }}>
+                    {i === 0 && <MiniTrack color={o.color} tone={dark ? "rgba(255,255,255,0.14)" : "#e5e7eb"} />}
+                    {i === 1 && <Sparkline color={o.color} />}
+                    {i === 2 && <Transfer color={o.color} base={dark ? "rgba(255,255,255,0.25)" : "#d1d5db"} />}
+                  </div>
+                  <h3 style={{ marginTop: "auto", fontFamily: "var(--font-display)", fontSize: 38, fontWeight: 500, letterSpacing: "-1.1px", lineHeight: 1.08 }}>{o.head}</h3>
+                  <p style={{ marginTop: 14, fontSize: 19, lineHeight: 1.5, color: dark ? "rgba(255,255,255,0.66)" : "#64748b" }}>{o.body}</p>
+                </AmplioCard>
+              </Reveal>
+            );
+          })}
         </div>
       </Layout>
     </SlideFrame>
@@ -80,24 +92,28 @@ export function UsersSlide() {
 /* ─── 07 · Key features ─── */
 export function FeaturesSlide() {
   const feats = [
-    { icon: <Layers size={24} />, color: "#10B981", title: "Application Model", desc: "Every fact marked detected, inferred or user-supplied." },
-    { icon: <Route size={24} />, color: "#60A5FA", title: "Architect", desc: "Picks among reviewed patterns, ranked by cost and effort." },
-    { icon: <ShieldCheck size={24} />, color: "#8B5CF6", title: "Safety gate", desc: "Validate, saved plan, policy, cost and role check." },
-    { icon: <KeyRound size={24} />, color: "#F59E0B", title: "No stored keys", desc: "Bounded roles, federation, or one scoped token per target." },
-    { icon: <Activity size={24} />, color: "#10B981", title: "Delivery and operations", desc: "Deploy on push, rollback, logs, cost, alerts, savings." },
-    { icon: <Bot size={24} />, color: "#EF4444", title: "Agent and incident loop", desc: "Changes by conversation; alarms end in a fix a person approves." },
+    { Icon: Layers, title: "Application Model", desc: "Every fact marked detected, inferred or user-supplied." },
+    { Icon: Route, title: "Architect", desc: "Picks among reviewed patterns, ranked by cost and effort." },
+    { Icon: ShieldCheck, title: "Safety gate", desc: "Validate, saved plan, policy, cost and role check." },
+    { Icon: KeyRound, title: "No stored keys", desc: "Bounded roles, federation, or one scoped token per target." },
+    { Icon: Activity, title: "Delivery and operations", desc: "Deploy on push, rollback, logs, cost, alerts, savings." },
+    { Icon: Bot, title: "Agent and incident loop", desc: "Changes by conversation; alarms end in a fix a person approves." },
   ];
   return (
     <SlideFrame theme="light">
-      <Layout title="What Depot" sub="actually does." gap={40} middle>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", columnGap: 56, rowGap: 48 }}>
-          {feats.map((f, i) => (
-            <Reveal key={f.title} delay={0.08 + i * 0.06}>
-              <div style={{ width: 52, height: 52, borderRadius: 15, background: `${f.color}14`, color: f.color, border: `1px solid ${f.color}33`, display: "flex", alignItems: "center", justifyContent: "center" }}>{f.icon}</div>
-              <h3 style={{ fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 500, letterSpacing: "-0.6px", margin: "20px 0 8px" }}>{f.title}</h3>
-              <p style={{ color: "#6B7280", fontSize: 21, lineHeight: 1.45 }}>{f.desc}</p>
-            </Reveal>
-          ))}
+      <Layout title="What Depot" sub="actually does." gap={36} middle>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
+          {feats.map((f, i) => {
+            const tone = (Math.floor(i / 3) + i) % 2 === 0 ? "ink" : "white";
+            return (
+              <Reveal key={f.title} delay={0.06 + i * 0.06}>
+                <AmplioCard compact tone={tone} tag={`Feature 0${i + 1}`} Icon={f.Icon} delay={i * 110} style={{ minHeight: 236 }}>
+                  <h3 style={{ marginTop: "auto", fontFamily: "var(--font-display)", fontSize: 30, fontWeight: 500, letterSpacing: "-0.6px", lineHeight: 1.1 }}>{f.title}</h3>
+                  <p style={{ marginTop: 8, fontSize: 19, lineHeight: 1.42, color: tone === "ink" ? "rgba(255,255,255,0.66)" : "#64748b" }}>{f.desc}</p>
+                </AmplioCard>
+              </Reveal>
+            );
+          })}
         </div>
       </Layout>
     </SlideFrame>
@@ -107,26 +123,30 @@ export function FeaturesSlide() {
 /* ─── 08 · Depot in action ─── */
 export function InActionSlide() {
   const steps = [
-    ["#A78BFA", "Connect", "GitHub, GitLab or an archive"],
-    ["#60A5FA", "Answer", "Up to eight questions"],
-    ["#34D399", "Review", "Target, architecture, monthly cost"],
-    ["#FBBF24", "Approve", "Signed and role-checked"],
-    ["#F472B6", "Run", "Deploy on push, roll back, watch cost"],
+    [GitBranch, "Connect", "GitHub, GitLab or an archive"],
+    [MessageSquare, "Answer", "Up to eight questions"],
+    [Eye, "Review", "Target, architecture, monthly cost"],
+    [ShieldCheck, "Approve", "Signed and role-checked"],
+    [Rocket, "Run", "Deploy on push, roll back, watch cost"],
   ];
   return (
     <SlideFrame theme="dark" band>
       <Layout dark title="One session," sub="from working code to live." gap={40} middle>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 20 }}>
-          {steps.map(([color, title, desc], i) => (
-            <Reveal key={title} delay={0.1 + i * 0.08} y={40}>
-              <div style={{ position: "relative", height: "100%", borderRadius: 28, border: "1px solid rgba(255,255,255,0.18)", background: "rgba(255,255,255,0.07)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", padding: "30px 26px 34px", overflow: "hidden" }}>
-                <div style={{ position: "absolute", right: -6, top: -30, fontFamily: "var(--font-display)", fontSize: 150, fontWeight: 900, color: "rgba(255,255,255,0.06)", lineHeight: 1 }}>0{i + 1}</div>
-                <Pill color={color}>Step {i + 1}</Pill>
-                <h3 style={{ fontFamily: "var(--font-display)", fontSize: 38, fontWeight: 600, margin: "26px 0 10px", letterSpacing: "-1px" }}>{title}</h3>
-                <p style={{ color: "rgba(255,255,255,0.72)", fontSize: 21, lineHeight: 1.45 }}>{desc}</p>
-              </div>
-            </Reveal>
-          ))}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16 }}>
+          {steps.map(([Icon, title, desc], i) => {
+            const tone = i % 2 === 0 ? "white" : "ink";
+            return (
+              <Reveal key={title} delay={0.1 + i * 0.08} y={30}>
+                <AmplioCard compact tone={tone} tag={`Step ${i + 1}`} Icon={Icon} delay={i * 140} style={{ minHeight: 300 }}>
+                  <h3 style={{ marginTop: "auto", fontFamily: "var(--font-display)", fontSize: 34, fontWeight: 600, letterSpacing: "-1px" }}>{title}</h3>
+                  <p style={{ marginTop: 8, fontSize: 19, lineHeight: 1.42, color: tone === "ink" ? "rgba(255,255,255,0.7)" : "#475569" }}>{desc}</p>
+                </AmplioCard>
+              </Reveal>
+            );
+          })}
+        </div>
+        <div style={{ marginTop: 22 }}>
+          <FlowLine steps={steps.length} />
         </div>
       </Layout>
     </SlideFrame>

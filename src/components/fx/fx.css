@@ -74,15 +74,31 @@
 .fx-plate-video { opacity: 0; transition: opacity .6s linear; }
 .fx-plate-video[data-on] { opacity: 1; }
 
+/* ─── pop: a mark lands with a little overshoot ─── */
+.fx-pop { transform: scale(0); opacity: 0; }
+.fx-slide[data-on] .fx-pop { animation: fx-pop 380ms cubic-bezier(.2, .8, .2, 1) var(--d, 0ms) forwards; }
+@keyframes fx-pop { 0% { transform: scale(0); opacity: 0; } 70% { transform: scale(1.15); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+
+/* ─── draw: an SVG stroke draws itself (paths need pathLength="1") ─── */
+.fx-draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.fx-slide[data-on] .fx-draw { transition: stroke-dashoffset 1.3s cubic-bezier(.2, .8, .2, 1) var(--d, 0ms); stroke-dashoffset: 0; }
+
+/* ─── travel: a dot loops along its offset-path ─── */
+.fx-travel { offset-rotate: 0deg; animation: fx-travel var(--t, 3s) cubic-bezier(.45, 0, .55, 1) var(--d, 0s) infinite; }
+
 /* ─── static: print and ?instant show the final frame ─── */
 .fx-static *, .fx-static *::before, .fx-static *::after { animation: none !important; transition: none !important; }
 .fx-static .fx-word > span { transform: none; }
 .fx-static .fx-roll::before { transform: translateY(calc(var(--n, 0) * -1em)); }
 .fx-static .fx-stamp { opacity: 1; transform: rotate(-8deg); }
 .fx-static .fx-grow { transform: none; }
-.fx-static .fx-trail .dot, .fx-static .fx-run { display: none; }
+.fx-static .fx-trail .dot, .fx-static .fx-run, .fx-static .fx-travel { display: none; }
+.fx-static .fx-pop { opacity: 1; transform: none; }
+.fx-static .fx-draw { stroke-dashoffset: 0; }
 
 @media (prefers-reduced-motion: reduce) {
-  .fx-trail .dot, .fx-run, .fx-ping::after { animation: none !important; display: none; }
+  .fx-trail .dot, .fx-run, .fx-travel, .fx-ping::after { animation: none !important; display: none; }
+  .fx-pop { animation: none !important; opacity: 1; transform: none; }
+  .fx-draw { transition: none !important; stroke-dashoffset: 0; }
   .fx-word > span, .fx-roll::before, .fx-grow { transition: none !important; }
 }

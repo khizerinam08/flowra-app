@@ -2,7 +2,7 @@
 
 import { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Ref, BLUE, SourceLink } from "@/components/deck/ui";
+import { SlideFrame, Layout, Ref, BLUE, SourceLink, AmplioCard, CARD_SURFACE } from "@/components/deck/ui";
 import { Words } from "@/components/fx";
 
 /* ─── 13 · UN Sustainable Development Goals ─── */
@@ -15,18 +15,22 @@ export function SdgSlide() {
     <SlideFrame theme="light">
       <Layout title="Two goals" sub="we contribute to." gap={40} middle
         cite={<>Icons are the official UN SDG icons, used under the UN SDG guidelines<Ref n={7} />. The content of this publication has not been approved by the United Nations and does not reflect the views of the United Nations or its officials or Member States.</>}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72 }}>
-          {goals.map((g, i) => (
-            <Reveal key={g.goal} delay={0.12 + i * 0.12} style={{ display: "flex", gap: 36, alignItems: "flex-start" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={g.img} alt={`UN ${g.goal}: ${g.name}`} width={220} height={220} style={{ width: 220, height: 220, borderRadius: 16, flex: "none" }} />
-              <div>
-                <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: "0.14em", color: "#9CA3AF" }}>{g.goal.toUpperCase()}</div>
-                <h3 style={{ fontFamily: "var(--font-display)", fontSize: 36, fontWeight: 500, letterSpacing: "-1px", lineHeight: 1.1, margin: "12px 0 16px" }}>{g.name}</h3>
-                <p style={{ fontSize: 22, lineHeight: 1.5, color: "#4B5563" }}>{g.line}</p>
-              </div>
-            </Reveal>
-          ))}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          {goals.map((g, i) => {
+            const tone = i === 0 ? "white" : "ink";
+            return (
+              <Reveal key={g.goal} delay={0.12 + i * 0.12} y={24}>
+                <AmplioCard tone={tone} tag={g.goal} delay={i * 150}
+                  badge={(
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img className="fx-pop" src={g.img} alt={`UN ${g.goal}: ${g.name}`} width={150} height={150} style={{ "--d": `${400 + i * 150}ms`, width: 150, height: 150, borderRadius: 18, flex: "none", boxShadow: "0 12px 30px rgba(0,0,0,0.2)" }} />
+                  )}>
+                  <h3 style={{ marginTop: 26, fontFamily: "var(--font-display)", fontSize: 38, fontWeight: 500, letterSpacing: "-1px", lineHeight: 1.1 }}>{g.name}</h3>
+                  <p style={{ marginTop: 14, fontSize: 22, lineHeight: 1.5, color: tone === "ink" ? "rgba(255,255,255,0.68)" : "#4B5563" }}>{g.line}</p>
+                </AmplioCard>
+              </Reveal>
+            );
+          })}
         </div>
       </Layout>
     </SlideFrame>
@@ -51,12 +55,12 @@ export function ReferencesSlide() {
     <SlideFrame theme="light">
       <Layout title="Sources." gap={48}
         cite="Click a source to open it. Full IEEE entries, with access dates, are in the proposal.">
-        <Reveal delay={0.1} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64 }}>
+        <Reveal delay={0.1} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, borderRadius: 28, padding: "26px 32px", ...CARD_SURFACE.white }}>
           {cols.map((col, c) => (
             <ol key={c} start={c * half + 1} style={{ listStyle: "none" }}>
               {col.map((r, i) => (
-                <li key={i} style={{ display: "grid", gridTemplateColumns: "44px 1fr", padding: "12px 0", borderTop: "1px solid #f0f1f3", fontSize: 17, lineHeight: 1.45, color: "#374151" }}>
-                  <span style={{ fontWeight: 800, color: "#10B981" }}>{c * half + i + 1}</span>
+                <li key={i} style={{ display: "grid", gridTemplateColumns: "48px 1fr", alignItems: "start", padding: "14px 0", borderTop: i ? "1px solid #eef0f3" : "none", fontSize: 17, lineHeight: 1.45, color: "#374151" }}>
+                  <span className="fx-pop" style={{ "--d": `${300 + (c * half + i) * 90}ms`, width: 30, height: 30, borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", background: "#050505", color: "#fff", fontSize: 14, fontWeight: 700 }}>{c * half + i + 1}</span>
                   <span><SourceLink href={r.url}>{r.text}</SourceLink></span>
                 </li>
               ))}

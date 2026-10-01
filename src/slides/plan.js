@@ -1,42 +1,48 @@
 "use client";
 
-import { Check } from "lucide-react";
+import { Check, GitBranch, Boxes, Cloud, KeyRound, ShieldCheck } from "lucide-react";
 import { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout } from "@/components/deck/ui";
+import { SlideFrame, Layout, AmplioCard, CARD_SURFACE } from "@/components/deck/ui";
 
 const label = { fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" };
 
 /* ─── 09 · Scope ─── */
-function ScopeList({ items }) {
-  return (
-    <div>
-      {items.map((t) => (
-        <div key={t} style={{ display: "flex", gap: 16, alignItems: "baseline", padding: "15px 0", borderTop: "1px solid #eceef1", fontSize: 23, color: "#111" }}>
-          <span style={{ color: "#10B981", flex: "none", position: "relative", top: 3 }}><Check size={22} strokeWidth={3} /></span>
-          {t}
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export function ScopeSlide() {
   const inScope = [
-    "GitHub, GitLab or an archive",
-    "Apps, APIs, static sites, workers",
-    "AWS, GCP, Azure",
-    "Short-lived credentials",
-    "Approval before every change",
+    [GitBranch, "GitHub, GitLab or an archive"],
+    [Boxes, "Apps, APIs, static sites, workers"],
+    [Cloud, "AWS, GCP, Azure"],
+    [KeyRound, "Short-lived credentials"],
+    [ShieldCheck, "Approval before every change"],
   ];
   return (
     <SlideFrame theme="light">
-      <Layout title="What Depot" sub="covers." gap={48}
+      <Layout title="What Depot" sub="covers." gap={40} middle
         cite="Extended scope only if M8 is met early: guided mode, Oracle and Yandex Cloud, voice, preview environments.">
-        <Reveal delay={0.1}>
-          <div style={{ ...label, color: "#10B981", marginBottom: 12 }}>In scope</div>
-          <ScopeList items={inScope} />
+        <Reveal delay={0.05}>
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "8px 16px 8px 14px", borderRadius: 9999, fontSize: 16, fontWeight: 600, background: "#050505", color: "#fff" }}>
+            <span className="fx-ping" style={{ width: 8, height: 8, borderRadius: "50%", background: "#10B981" }} />
+            In scope
+          </span>
         </Reveal>
+        <div style={{ marginTop: 24, display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16 }}>
+          {inScope.map(([Icon, t], i) => {
+            const tone = i % 2 === 0 ? "ink" : "white";
+            return (
+              <Reveal key={t} delay={0.1 + i * 0.07} y={24}>
+                <AmplioCard compact tone={tone} Icon={Icon} delay={i * 120} style={{ minHeight: 280 }}>
+                  <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: 14 }}>
+                    <span className="fx-pop" style={{ "--d": `${900 + i * 160}ms`, width: 34, height: 34, borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", background: "#10B981", color: "#fff" }}>
+                      <Check size={19} strokeWidth={3.2} />
+                    </span>
+                    <div style={{ fontFamily: "var(--font-display)", fontSize: 27, fontWeight: 500, letterSpacing: "-0.5px", lineHeight: 1.18 }}>{t}</div>
+                  </div>
+                </AmplioCard>
+              </Reveal>
+            );
+          })}
+        </div>
       </Layout>
     </SlideFrame>
   );
@@ -61,13 +67,14 @@ export function TimelineSlide() {
     ["M8", "Evaluation", "Ahsan", "2027-03-09", "2027-04-25"],
     ["M9", "Final report and defence", "All", "2027-04-21", "2027-05-30"],
   ];
-  const labelW = 420;
+  const labelW = 400;
   const demo = pos("2027-01-30");
+  const today = pos("2026-10-01");
   return (
     <SlideFrame theme="light">
       <Layout title="Three clouds first," sub="then everything else." gap={40}
         cite="Team planning targets; dates will follow the official defence schedule.">
-        <Reveal delay={0.1} style={{ position: "relative" }}>
+        <Reveal delay={0.1} style={{ position: "relative", borderRadius: 28, padding: "54px 30px 22px", ...CARD_SURFACE.white }}>
           <div style={{ display: "flex", marginLeft: labelW, position: "relative", height: 30, fontSize: 15, fontWeight: 700, color: "#9CA3AF" }}>
             {months.map(([m, d]) => <span key={m} style={{ position: "absolute", left: `${pos(d)}%` }}>{m}</span>)}
           </div>
@@ -75,22 +82,27 @@ export function TimelineSlide() {
             <div style={{ position: "absolute", top: 0, bottom: 0, left: labelW, right: 0, pointerEvents: "none" }}>
               {months.map(([m, d]) => <div key={m} style={{ position: "absolute", top: 0, bottom: 0, left: `${pos(d)}%`, width: 1, background: "#f0f1f3" }} />)}
               <div style={{ position: "absolute", top: -8, bottom: 0, left: `${demo}%`, borderLeft: "2px dashed #111" }} />
+              <div style={{ position: "absolute", top: -42, bottom: 0, left: `${today}%`, width: 2, marginLeft: -1, background: "#10B981" }} />
+              <span style={{ position: "absolute", top: -68, left: `${today}%`, transform: "translateX(-50%)", display: "inline-flex", alignItems: "center", gap: 7, padding: "4px 10px 4px 8px", borderRadius: 9999, background: "#10B981", color: "#04120C", fontSize: 12.5, fontWeight: 700, whiteSpace: "nowrap" }}>
+                <span className="fx-ping" style={{ width: 7, height: 7, borderRadius: "50%", background: "#04120C" }} />
+                Today
+              </span>
             </div>
             {rows.map(([m, text, owner, s, e], k) => (
-              <div key={m} style={{ display: "flex", alignItems: "center", height: 50, borderTop: "1px solid #f3f4f6" }}>
+              <div key={m} style={{ display: "flex", alignItems: "center", height: 43, borderTop: "1px solid #f3f4f6" }}>
                 <div style={{ width: labelW, flex: "none", display: "flex", alignItems: "center", gap: 14, fontSize: 20 }}>
-                  <span style={{ width: 36, fontSize: 15, fontWeight: 800, color: "#9CA3AF" }}>{m}</span>
+                  <span style={{ flex: "none", width: 44, textAlign: "center", padding: "3px 0", borderRadius: 9999, fontSize: 13.5, fontWeight: 700, background: "#050505", color: "#fff" }}>{m}</span>
                   <span>{text}</span>
                 </div>
                 <div style={{ position: "relative", flex: 1, height: "100%" }}>
-                  <div className="fx-grow" style={{ "--d": `${400 + k * 110}ms`, position: "absolute", top: 15, bottom: 15, left: `${pos(s)}%`, width: `${pos(e) - pos(s)}%`, borderRadius: 6, background: OWNER[owner] }} />
+                  <div className="fx-grow" style={{ "--d": `${400 + k * 110}ms`, position: "absolute", top: 12, bottom: 12, left: `${pos(s)}%`, width: `${pos(e) - pos(s)}%`, borderRadius: 6, background: OWNER[owner] }} />
                 </div>
               </div>
             ))}
           </div>
           <div style={{ display: "flex", gap: 24, marginTop: 18, marginLeft: labelW, fontSize: 16, color: "#6B7280", fontWeight: 600, alignItems: "center" }}>
             {Object.entries(OWNER).map(([k, c]) => (
-              <span key={k} style={{ display: "inline-flex", alignItems: "center", gap: 8 }}><span style={{ width: 14, height: 14, borderRadius: 4, background: c }} />{k === "All" ? "Whole team" : k}</span>
+              <span key={k} style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "5px 12px 5px 10px", borderRadius: 9999, background: c, color: "#fff", fontSize: 14 }}><span style={{ width: 7, height: 7, borderRadius: "50%", background: "#fff" }} />{k === "All" ? "Whole team" : k}</span>
             ))}
             <span style={{ display: "inline-flex", alignItems: "center", gap: 8, marginLeft: "auto" }}><span style={{ width: 0, height: 16, borderLeft: "2px dashed #111" }} />FYDP-I demo</span>
           </div>
@@ -116,22 +128,27 @@ export function WorkSlide() {
           </h2>
           <p style={{ color: "#666", fontSize: 22, fontWeight: 500, marginTop: 16 }}>Three owners. No member reviews only their own work.</p>
         </Reveal>
-        <div style={{ marginTop: 56, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 56, width: "100%" }}>
-          {team.slice(0, 3).map((m, i) => (
-            <Reveal key={m.name} delay={0.12 + i * 0.1} y={24} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-              <div className="team-tile" style={{ width: 200, height: 200 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={m.avatar} alt={m.name} />
-              </div>
-              <h3 style={{ fontFamily: "var(--font-label)", fontSize: 30, fontWeight: 700, letterSpacing: "-0.5px", marginTop: 26 }}>{m.name}</h3>
-              <p style={{ fontSize: 20, color: "#4B5563", lineHeight: 1.45, marginTop: 10, maxWidth: 380 }}>{leads[i].leads}</p>
-              <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
-                {leads[i].tags.map((t) => <span key={t} style={{ padding: "5px 12px", borderRadius: 9999, background: `${leads[i].color}16`, color: leads[i].color, fontSize: 15, fontWeight: 700 }}>{t}</span>)}
-              </div>
-            </Reveal>
-          ))}
+        <div style={{ marginTop: 48, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, width: "100%" }}>
+          {team.slice(0, 3).map((m, i) => {
+            const tone = i % 2 === 0 ? "white" : "ink";
+            const dark = tone === "ink";
+            return (
+              <Reveal key={m.name} delay={0.12 + i * 0.1} y={24}>
+                <AmplioCard tone={tone} tag={leads[i].tags.join(" · ")} delay={i * 120} style={{ minHeight: 360 }}
+                  badge={(
+                    <span className="fx-pop team-tile" style={{ "--d": `${400 + i * 120}ms`, width: 104, height: 104, padding: 8, flex: "none" }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={m.avatar} alt={m.name} />
+                    </span>
+                  )}>
+                  <h3 style={{ marginTop: "auto", fontFamily: "var(--font-label)", fontSize: 30, fontWeight: 700, letterSpacing: "-0.5px" }}>{m.name}</h3>
+                  <p style={{ fontSize: 20, lineHeight: 1.45, marginTop: 10, color: dark ? "rgba(255,255,255,0.68)" : "#4B5563" }}>{leads[i].leads}</p>
+                </AmplioCard>
+              </Reveal>
+            );
+          })}
         </div>
-        <Reveal delay={0.5} style={{ marginTop: 72, fontSize: 19, color: "#6B7280" }}>
+        <Reveal delay={0.5} style={{ marginTop: 48, fontSize: 19, color: "#6B7280" }}>
           Advisor <b style={{ color: "#111" }}>Hira Anwar</b> · Co-advisor <b style={{ color: "#111" }}>Ayesha Hakim</b>
         </Reveal>
       </div>
