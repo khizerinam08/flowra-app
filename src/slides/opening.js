@@ -2,7 +2,7 @@
 
 import TeamGallery, { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { Boxes, Cloud, Wallet, ShieldCheck } from "lucide-react";
+import { Boxes, Cloud, Wallet, ShieldCheck, Server, Layers, Check, Minus, X } from "lucide-react";
 import { SlideFrame, Layout, Ref, BLUE, SourceLink } from "@/components/deck/ui";
 import { Words, Roll } from "@/components/fx";
 
@@ -163,61 +163,84 @@ export function ProblemSlide() {
   );
 }
 
-/* ─── 04 · What exists today ─── */
-/* Transposed: the four criteria are rows, the products are columns, and Depot carries
-   its own highlighted band. Cells state the insight in words, tinted by how well the
-   product meets the row: strong, partial or missing. Products follow proposal Table 1. */
+/* ─── 04 · What exists today ───
+   One Amplio-style card per product (proposal Table 1): a pill tag for the category,
+   a solid round badge, and a solid status mark per criterion. Cards alternate white
+   glass and ink glass; Depot carries the green. */
 const STRONG = "strong", PARTIAL = "partial", WEAK = "weak";
 
-const TINT = {
-  [STRONG]: { background: "rgba(16,185,129,0.18)", color: "#6EE7B7" },
-  [PARTIAL]: { background: "rgba(251,191,36,0.15)", color: "#FCD34D" },
-  [WEAK]: { background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.36)" },
+const MARK = {
+  [STRONG]: { Icon: Check, bg: "#10B981", label: "meets it" },
+  [PARTIAL]: { Icon: Minus, bg: "#F59E0B", label: "partly" },
+  [WEAK]: { Icon: X, bg: "#94A3B8", label: "no" },
 };
 
-function Cell({ level, depot, children }) {
+function StatusMark({ level, size = 30 }) {
+  const { Icon, bg, label } = MARK[level];
   return (
-    <div style={{ display: "flex", justifyContent: "center", padding: "3px 4px" }}>
-      <div style={{ ...TINT[level], width: "100%", padding: "12px 12px", borderRadius: 12, fontSize: 18, fontWeight: 600, lineHeight: 1.26, textAlign: "center", ...(depot ? { background: "rgba(16,185,129,0.92)", color: "#04120C" } : null) }}>
-        {children}
-      </div>
-    </div>
+    <span aria-label={label} style={{ flex: "none", width: size, height: size, borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", background: bg, color: "#fff" }}>
+      <Icon size={size * 0.56} strokeWidth={3} />
+    </span>
   );
 }
 
 export function LandscapeSlide() {
   const criteria = ["Starts from the code", "Picks where it runs", "Asks before it acts"];
   const tools = [
-    { name: "Vercel", cat: "managed platform", c: [[PARTIAL, "Plus platform config"], [WEAK, "The platform only"], [PARTIAL, "No approval gate"]] },
-    { name: "Flightcontrol", cat: "bring-your-own-cloud", c: [[PARTIAL, "Repo plus config file"], [PARTIAL, "AWS only"], [PARTIAL, "Deploy only"]] },
-    { name: "Depot", cat: "proposed", depot: true, c: [[STRONG, "Ordinary repository"], [STRONG, "Compares every option"], [STRONG, "Signed, risk-tiered"]] },
+    { name: "Vercel", cat: "Managed platform", Icon: Server, light: true, c: [[PARTIAL, "Plus platform config"], [WEAK, "The platform only"], [PARTIAL, "No approval gate"]] },
+    { name: "Flightcontrol", cat: "Bring-your-own-cloud", Icon: Cloud, c: [[PARTIAL, "Repo plus config file"], [PARTIAL, "AWS only"], [PARTIAL, "Deploy only"]] },
+    { name: "Depot", cat: "Proposed", Icon: Layers, light: true, depot: true, c: [[STRONG, "Ordinary repository"], [STRONG, "Compares every option"], [STRONG, "Signed, risk-tiered"]] },
   ];
-  const grid = "1.1fr repeat(3, 1fr)";
+  const whiteGlass = {
+    background: "linear-gradient(135deg, #ffffff, #f4f6fa)",
+    color: "#0b1020",
+    border: "1px solid rgba(255,255,255,0.9)",
+    boxShadow: "inset 1px 1px 0 rgba(255,255,255,0.9), 0 24px 50px rgba(0,0,0,0.35)",
+  };
+  const inkGlass = {
+    background: "linear-gradient(160deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03))",
+    color: "#fff",
+    border: "1px solid rgba(255,255,255,0.14)",
+    boxShadow: "inset 1px 1px 0 rgba(255,255,255,0.1)",
+    backdropFilter: "blur(20px)",
+    WebkitBackdropFilter: "blur(20px)",
+  };
   return (
     <SlideFrame theme="dark">
-      <Layout dark title="Each tool solves part of it." sub="Someone still decides where it runs." gap={40}
+      <Layout dark title="Each tool solves part of it." sub="Someone still decides where it runs." gap={40} middle
         cite={<>One representative product per category, from vendor documentation, 30 Sep 2026<Ref n={5} dark />. Depot is proposed.</>}>
-        <Reveal delay={0.1}>
-          <div style={{ display: "grid", gridTemplateColumns: grid, alignItems: "stretch", paddingBottom: 14, borderBottom: "1px solid rgba(255,255,255,0.14)" }}>
-            <div />
-            {tools.map((t) => (
-              <div key={t.name} style={{ textAlign: "center", padding: "0 4px 8px", borderRadius: 14, ...(t.depot ? { background: "rgba(16,185,129,0.1)", boxShadow: "inset 0 0 0 1px rgba(16,185,129,0.3)" } : null) }}>
-                <div style={{ fontSize: 23, fontWeight: 700, color: t.depot ? "#6EE7B7" : "#fff" }}>{t.name}</div>
-                <div style={{ fontSize: 14, color: t.depot ? "rgba(110,231,183,0.75)" : "rgba(255,255,255,0.4)", marginTop: 3, letterSpacing: "0.04em" }}>{t.cat}</div>
-              </div>
-            ))}
-          </div>
-          {criteria.map((c, i) => (
-            <div key={c} style={{ display: "grid", gridTemplateColumns: grid, alignItems: "center", padding: "22px 0", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-              <div style={{ paddingRight: 22, fontSize: 19, fontWeight: 600, lineHeight: 1.25, color: "rgba(255,255,255,0.9)" }}>{c}</div>
-              {tools.map((t) => (
-                <div key={t.name} style={{ borderRadius: 14, ...(t.depot ? { background: "rgba(16,185,129,0.08)", boxShadow: "inset 0 0 0 1px rgba(16,185,129,0.22)" } : null) }}>
-                  <Cell level={t.c[i][0]} depot={t.depot}>{t.c[i][1]}</Cell>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+          {tools.map((t, k) => {
+            const solid = t.depot ? { background: "#10B981", color: "#04120C" } : t.light ? { background: "#050505", color: "#fff" } : { background: "#fff", color: "#050505" };
+            return (
+              <Reveal key={t.name} delay={0.1 + k * 0.12} y={30}>
+                <div style={{ height: "100%", borderRadius: 28, padding: "26px 28px 24px", ...(t.light ? whiteGlass : inkGlass), ...(t.depot ? { boxShadow: "0 0 0 3px #10B981, 0 24px 60px rgba(16,185,129,0.35)" } : null) }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "7px 14px 7px 12px", borderRadius: 9999, fontSize: 15, fontWeight: 600, ...solid }}>
+                      <span className="fx-ping" style={{ width: 8, height: 8, borderRadius: "50%", background: t.depot ? "#04120C" : "#10B981" }} />
+                      {t.cat}
+                    </span>
+                    <span style={{ width: 64, height: 64, borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", ...solid }}>
+                      <t.Icon size={28} strokeWidth={2.2} />
+                    </span>
+                  </div>
+                  <div style={{ marginTop: 6, fontFamily: "var(--font-display)", fontSize: 44, fontWeight: 500, letterSpacing: "-1.2px", lineHeight: 1 }}>{t.name}</div>
+                  <div style={{ marginTop: 22 }}>
+                    {criteria.map((c, i) => (
+                      <div key={c} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 0", borderTop: t.light ? "1px solid #e8ebf0" : "1px solid rgba(255,255,255,0.12)" }}>
+                        <StatusMark level={t.c[i][0]} />
+                        <div>
+                          <div style={{ fontSize: 14, fontWeight: 600, color: t.light ? "#64748b" : "rgba(255,255,255,0.55)" }}>{c}</div>
+                          <div style={{ fontSize: 20, fontWeight: 600, marginTop: 2 }}>{t.c[i][1]}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ))}
-            </div>
-          ))}
-        </Reveal>
+              </Reveal>
+            );
+          })}
+        </div>
       </Layout>
     </SlideFrame>
   );
