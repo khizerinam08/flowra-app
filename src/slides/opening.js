@@ -191,6 +191,7 @@ export function LandscapeSlide() {
     { name: "Flightcontrol", cat: "Bring-your-own-cloud", Icon: Cloud, c: [[PARTIAL, "Repo plus config file"], [PARTIAL, "AWS only"], [PARTIAL, "Deploy only"]] },
     { name: "Depot", cat: "Proposed", Icon: Layers, light: true, depot: true, c: [[STRONG, "Ordinary repository"], [STRONG, "Compares every option"], [STRONG, "Signed, risk-tiered"]] },
   ];
+  const HEAD = 150, ROW = 92;
   const whiteGlass = {
     background: "linear-gradient(135deg, #ffffff, #f4f6fa)",
     color: "#0b1020",
@@ -207,40 +208,41 @@ export function LandscapeSlide() {
   };
   return (
     <SlideFrame theme="dark">
-      <Layout dark title="Each tool solves part of it." sub="Someone still decides where it runs." gap={40} middle
+      <Layout dark title="Each tool solves part of it." sub="Someone still decides where it runs." gap={36} middle
         cite={<>One representative product per category, from vendor documentation, 30 Sep 2026<Ref n={5} dark />. Depot is proposed.</>}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
-          {tools.map((t, k) => {
+        <Reveal delay={0.1} style={{ display: "grid", gridTemplateColumns: "0.85fr repeat(3, 1fr)", gap: 18 }}>
+          {/* criteria down the left, aligned to the rows */}
+          <div style={{ paddingTop: HEAD }}>
+            {criteria.map((c) => (
+              <div key={c} style={{ height: ROW, display: "flex", alignItems: "center", borderTop: "1px solid rgba(255,255,255,0.14)", fontSize: 21, fontWeight: 600, color: "rgba(255,255,255,0.92)", lineHeight: 1.25, paddingRight: 12 }}>{c}</div>
+            ))}
+          </div>
+          {tools.map((t) => {
             const solid = t.depot ? { background: "#10B981", color: "#04120C" } : t.light ? { background: "#050505", color: "#fff" } : { background: "#fff", color: "#050505" };
             return (
-              <Reveal key={t.name} delay={0.1 + k * 0.12} y={30}>
-                <div style={{ height: "100%", borderRadius: 28, padding: "26px 28px 24px", ...(t.light ? whiteGlass : inkGlass), ...(t.depot ? { boxShadow: "0 0 0 3px #10B981, 0 24px 60px rgba(16,185,129,0.35)" } : null) }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                    <span style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "7px 14px 7px 12px", borderRadius: 9999, fontSize: 15, fontWeight: 600, ...solid }}>
+              <div key={t.name} style={{ borderRadius: 28, padding: "0 24px", ...(t.light ? whiteGlass : inkGlass), ...(t.depot ? { boxShadow: "0 0 0 3px #10B981, 0 24px 60px rgba(16,185,129,0.35)" } : null) }}>
+                <div style={{ height: HEAD, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "7px 14px 7px 12px", borderRadius: 9999, fontSize: 14, fontWeight: 600, ...solid }}>
                       <span className="fx-ping" style={{ width: 8, height: 8, borderRadius: "50%", background: t.depot ? "#04120C" : "#10B981" }} />
                       {t.cat}
                     </span>
-                    <span style={{ width: 64, height: 64, borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", ...solid }}>
-                      <t.Icon size={28} strokeWidth={2.2} />
+                    <span style={{ width: 54, height: 54, borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", ...solid }}>
+                      <t.Icon size={24} strokeWidth={2.2} />
                     </span>
                   </div>
-                  <div style={{ marginTop: 6, fontFamily: "var(--font-display)", fontSize: 44, fontWeight: 500, letterSpacing: "-1.2px", lineHeight: 1 }}>{t.name}</div>
-                  <div style={{ marginTop: 22 }}>
-                    {criteria.map((c, i) => (
-                      <div key={c} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 0", borderTop: t.light ? "1px solid #e8ebf0" : "1px solid rgba(255,255,255,0.12)" }}>
-                        <StatusMark level={t.c[i][0]} />
-                        <div>
-                          <div style={{ fontSize: 14, fontWeight: 600, color: t.light ? "#64748b" : "rgba(255,255,255,0.55)" }}>{c}</div>
-                          <div style={{ fontSize: 20, fontWeight: 600, marginTop: 2 }}>{t.c[i][1]}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  <div style={{ marginTop: 12, fontFamily: "var(--font-display)", fontSize: 40, fontWeight: 500, letterSpacing: "-1.2px", lineHeight: 1 }}>{t.name}</div>
                 </div>
-              </Reveal>
+                {t.c.map(([level, text], i) => (
+                  <div key={criteria[i]} style={{ height: ROW, display: "flex", alignItems: "center", gap: 14, borderTop: t.light ? "1px solid #e8ebf0" : "1px solid rgba(255,255,255,0.12)", fontSize: 20, fontWeight: 600 }}>
+                    <StatusMark level={level} />
+                    {text}
+                  </div>
+                ))}
+              </div>
             );
           })}
-        </div>
+        </Reveal>
       </Layout>
     </SlideFrame>
   );
