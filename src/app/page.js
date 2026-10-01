@@ -85,6 +85,16 @@ function Navbar({ index, go, print, style }) {
   );
 }
 
+/* The slide number, large in the bottom-right corner so the audience can follow along. */
+function SlideNumber({ index }) {
+  return (
+    <div aria-hidden="true" style={{ position: "absolute", right: 36, bottom: 16, zIndex: 20, display: "flex", alignItems: "baseline", gap: 6, padding: "6px 18px", borderRadius: 9999, background: "#fff", border: "1px solid #E2E8F0", boxShadow: "0 6px 18px rgba(15,23,42,0.08)", fontFamily: "var(--font-display)", fontVariantNumeric: "tabular-nums" }}>
+      <span style={{ fontSize: 30, fontWeight: 600, color: "#0B1020", lineHeight: 1 }}>{pad(index + 1)}</span>
+      <span style={{ fontSize: 18, fontWeight: 500, color: "#64748B" }}>/ {pad(slides.length)}</span>
+    </div>
+  );
+}
+
 /* One slide inside its rounded card, on the contrasting page colour */
 function SlideCard({ index, style, children }) {
   const s = slides[index];
@@ -96,6 +106,7 @@ function SlideCard({ index, style, children }) {
       style={{ position: "absolute", inset: 16, zIndex: 1, borderRadius: "3.5rem", overflow: "hidden", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.35)", ...style }}
     >
       {children}
+      <SlideNumber index={index} />
     </div>
   );
 }

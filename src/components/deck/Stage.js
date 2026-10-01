@@ -28,7 +28,7 @@ function PrintStage({ children, padTop, padBottom, padX }) {
   );
 }
 
-export default function Stage({ children, padTop = 84, padBottom = 20, padX = 32 }) {
+export default function Stage({ children, padTop = 84, padBottom = 62, padX = 32 }) {
   const { print } = useDeck();
   const Impl = print ? PrintStage : LiveStage;
   return <Impl padTop={padTop} padBottom={padBottom} padX={padX}>{children}</Impl>;

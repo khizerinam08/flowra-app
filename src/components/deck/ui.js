@@ -31,6 +31,19 @@ export function SlideFrame({ theme = "light", metaball, decor, band, plate, chil
   );
 }
 
+/* ─── One card style for the whole deck: white, a fine border, a soft shadow ─── */
+export const INK = "#0B1020";
+export const BODY = "#334155";
+export const MUTED = "#64748B";
+
+export function Panel({ children, style }) {
+  return (
+    <div style={{ height: "100%", display: "flex", flexDirection: "column", borderRadius: 24, padding: "30px 32px", background: "#fff", border: "1px solid #E2E8F0", boxShadow: "0 10px 30px rgba(15,23,42,0.07)", color: INK, ...style }}>
+      {children}
+    </div>
+  );
+}
+
 /* ─── Slide layout on the 1600×900 canvas ─── */
 export function Layout({ dark, title, sub, titleSize = 76, align = "left", cite, children, gap = 56, middle }) {
   const center = align === "center";
@@ -52,7 +65,7 @@ export function Heading({ children, sub, dark, size = 64 }) {
       {sub && (
         <>
           <br />
-          <span style={{ color: dark ? "rgba(255,255,255,0.42)" : "#9CA3AF" }}><Words text={sub} delay={220} /></span>
+          <span style={{ color: dark ? "rgba(255,255,255,0.55)" : "#64748B" }}><Words text={sub} delay={220} /></span>
         </>
       )}
     </h2>
@@ -62,7 +75,7 @@ export function Heading({ children, sub, dark, size = 64 }) {
 /* Source caption under a chart or table; numbers match the References slide. */
 export function Cite({ children, dark, style }) {
   return (
-    <div style={{ fontSize: 15, lineHeight: 1.4, color: dark ? "rgba(255,255,255,0.45)" : "#9CA3AF", fontWeight: 500, ...style }}>
+    <div style={{ fontSize: 20, lineHeight: 1.45, color: dark ? "rgba(255,255,255,0.6)" : "#64748B", fontWeight: 500, ...style }}>
       {children}
     </div>
   );

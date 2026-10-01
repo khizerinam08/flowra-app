@@ -1,152 +1,182 @@
 "use client";
 
-import { Hammer, History, CodeXml, Users, ShieldCheck, Layers, Route, KeyRound, Activity, Bot, Rocket, GitBranch, MessageSquare, Eye } from "lucide-react";
-import { MiniTrack, Sparkline, DecisionLog, FlowLine } from "@/components/fx";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Ref, Pill, AmplioCard } from "@/components/deck/ui";
+import { SlideFrame, Layout, Panel, BLUE, INK, BODY, MUTED } from "@/components/deck/ui";
 
-const label = { fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" };
+/* One look for every slide in this file: white slides, white cards, one accent (blue).
+   No icons, tags or alternating card colours, and body text no smaller than 20px. */
 
-/* ─── 05 · Objectives ─── */
-/* Stated as what a user can do once Depot exists. The O-numbers are referenced by the
-   evaluation and work-division slides, so they stay stable. */
+const Num = ({ children }) => (
+  <div style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 600, color: BLUE }}>{children}</div>
+);
+
+/* ─── 05 · Users of the system ─── */
+export function UsersSlide() {
+  const users = [
+    { title: "AI-assisted builders", who: "A working product, but little experience of running one." },
+    { title: "Solo full-stack developers", who: "Outgrowing a managed platform: stay, or move to a cloud?" },
+    { title: "Small teams and agencies", who: "Two to ten people, with no DevOps staff." },
+  ];
+  return (
+    <SlideFrame theme="light">
+      <Layout title="Built for builders without" sub="an infrastructure engineer." gap={48} middle>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+          {users.map((u, i) => (
+            <Reveal key={u.title} delay={0.12 + i * 0.1} y={24}>
+              <Panel style={{ minHeight: 400, padding: "40px 38px" }}>
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: 46, fontWeight: 600, letterSpacing: "-1.3px", lineHeight: 1.1, minHeight: 100 }}>{u.title}</h3>
+                <p style={{ marginTop: "auto", paddingTop: 20, fontSize: 28, lineHeight: 1.45, color: BODY }}>{u.who}</p>
+              </Panel>
+            </Reveal>
+          ))}
+        </div>
+      </Layout>
+    </SlideFrame>
+  );
+}
+
+/* ─── 06 · Key features: the flagship ones, as what Depot does ─── */
+export function FeaturesSlide() {
+  const feats = [
+    { title: "Reads your code", desc: "Works out what the app needs from its code and a few questions." },
+    { title: "Picks the cloud", desc: "Compares AWS, Google Cloud and Azure, and chooses the best fit at the lowest cost." },
+    { title: "Writes the infrastructure", desc: "Designs the architecture and writes the Terraform from proven, security-reviewed blueprints." },
+    { title: "Checks and repairs its work", desc: "Validates, scans and prices every change, and fixes failures before you see them." },
+    { title: "Ships and keeps it running", desc: "Deploys on every push, rolls back bad releases and tracks cost." },
+    { title: "Fixes problems by chat", desc: "Diagnoses incidents and proposes fixes and savings for a person to approve." },
+  ];
+  return (
+    <SlideFrame theme="light">
+      <Layout title="What Depot" sub="does for you." gap={36} middle>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+          {feats.map((f, i) => (
+            <Reveal key={f.title} delay={0.06 + i * 0.06}>
+              <Panel style={{ minHeight: 270 }}>
+                <Num>0{i + 1}</Num>
+                <h3 style={{ marginTop: 12, fontFamily: "var(--font-display)", fontSize: 35, fontWeight: 600, letterSpacing: "-0.7px", lineHeight: 1.1 }}>{f.title}</h3>
+                <p style={{ marginTop: 12, fontSize: 23, lineHeight: 1.42, color: BODY }}>{f.desc}</p>
+              </Panel>
+            </Reveal>
+          ))}
+        </div>
+      </Layout>
+    </SlideFrame>
+  );
+}
+
+/* ─── 07 · Objectives ─── */
+/* What a user can do once Depot exists; the O-numbers stay stable for the plan slides. */
 const OBJECTIVES = [
-  {
-    n: "O1",
-    color: "#10B981",
-    head: "Deploy any supported repository",
-    body: "Point Depot at a repo. It reads the app, picks the cloud, writes the infrastructure, prices it, provisions it.",
-  },
-  {
-    n: "O2",
-    color: "#60A5FA",
-    head: "Check health, metrics and cost",
-    body: "History, health, logs, spend and rollback in one place.",
-  },
-  {
-    n: "O3",
-    color: "#8B5CF6",
-    head: "Remembers every decision",
-    body: "Why the architecture is what it is, what changed and when.",
-  },
+  { n: "01", head: "Deploy any supported repository", body: "Code in, live app out, on AWS, GCP or Azure." },
+  { n: "02", head: "Check health, metrics and cost", body: "Logs, spend and rollback in one place." },
+  { n: "03", head: "Remembers every decision", body: "What changed, when, and why." },
 ];
 
 export function ObjectivesSlide() {
-  const icons = [Rocket, Activity, History];
   return (
     <SlideFrame theme="light">
       <Layout title="Three objectives." sub="What a user can do with Depot." gap={48} middle
         cite="Research sits inside all three: comparing ten current AI models on architecture and IaC writing, and measured guardrails for the agent loop.">
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
-          {OBJECTIVES.map((o, i) => {
-            const tone = i % 2 === 0 ? "ink" : "white";
-            const dark = tone === "ink";
-            return (
-              <Reveal key={o.n} delay={0.08 + i * 0.08}>
-                <AmplioCard tone={tone} tag={o.n} Icon={icons[i]} delay={i * 120} style={{ minHeight: 420 }}>
-                  <div style={{ marginTop: 34 }}>
-                    {i === 0 && <MiniTrack color={o.color} tone={dark ? "rgba(255,255,255,0.14)" : "#e5e7eb"} />}
-                    {i === 1 && <Sparkline color={o.color} />}
-                    {i === 2 && <DecisionLog color={o.color} base={dark ? "rgba(255,255,255,0.14)" : "#e5e7eb"} />}
-                  </div>
-                  <h3 style={{ marginTop: "auto", fontFamily: "var(--font-display)", fontSize: 38, fontWeight: 500, letterSpacing: "-1.1px", lineHeight: 1.08 }}>{o.head}</h3>
-                  <p style={{ marginTop: 14, fontSize: 19, lineHeight: 1.5, color: dark ? "rgba(255,255,255,0.66)" : "#64748b" }}>{o.body}</p>
-                </AmplioCard>
-              </Reveal>
-            );
-          })}
+          {OBJECTIVES.map((o, i) => (
+            <Reveal key={o.n} delay={0.08 + i * 0.08}>
+              <Panel style={{ minHeight: 420, padding: "40px 38px" }}>
+                <Num>{o.n}</Num>
+                <h3 style={{ marginTop: 16, fontFamily: "var(--font-display)", fontSize: 48, fontWeight: 600, letterSpacing: "-1.4px", lineHeight: 1.08 }}>{o.head}</h3>
+                <p style={{ marginTop: "auto", paddingTop: 20, fontSize: 28, lineHeight: 1.45, color: BODY }}>{o.body}</p>
+              </Panel>
+            </Reveal>
+          ))}
         </div>
       </Layout>
     </SlideFrame>
   );
 }
 
-/* ─── 06 · Users of the system ─── */
-export function UsersSlide() {
-  const users = [
-    { Icon: Hammer, title: "AI-assisted builders", who: "A working product, but little experience of running one." },
-    { Icon: CodeXml, title: "Solo full-stack developers", who: "Outgrowing a managed platform: stay, or move to a cloud?" },
-    { Icon: Users, title: "Small teams and agencies", who: "Two to ten people, with no DevOps staff." },
-  ];
-  return (
-    <SlideFrame theme="dark">
-      <Layout dark title="Built for builders without" sub="an infrastructure engineer." gap={44} middle>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
-          {users.map((u, i) => {
-            const tone = i % 2 === 0 ? "white" : "ink";
-            return (
-              <Reveal key={u.title} delay={0.12 + i * 0.1} y={30}>
-                <AmplioCard tone={tone} tag={`User 0${i + 1}`} Icon={u.Icon} style={{ minHeight: 380 }}>
-                  <h3 style={{ marginTop: "auto", minHeight: 88, display: "flex", alignItems: "flex-end", fontFamily: "var(--font-display)", fontSize: 40, fontWeight: 500, letterSpacing: "-1.2px", lineHeight: 1.1 }}>{u.title}</h3>
-                  <p style={{ marginTop: 14, fontSize: 24, lineHeight: 1.45, color: tone === "white" ? "#475569" : "rgba(255,255,255,0.68)" }}>{u.who}</p>
-                </AmplioCard>
-              </Reveal>
-            );
-          })}
-        </div>
-      </Layout>
-    </SlideFrame>
-  );
-}
-
-/* ─── 07 · Key features ─── */
-export function FeaturesSlide() {
-  const feats = [
-    { Icon: Layers, title: "Application Model", desc: "Every fact marked detected, inferred or user-supplied." },
-    { Icon: Route, title: "Architect", desc: "Designs the architecture and writes the Terraform from proven blueprints; self-verifies and auto-repairs." },
-    { Icon: ShieldCheck, title: "Safety gate", desc: "Validate, saved plan, policy, cost and role check." },
-    { Icon: KeyRound, title: "No stored keys", desc: "Bounded roles and federation; short-lived credentials." },
-    { Icon: Activity, title: "Delivery and operations", desc: "Deploy on push, rollback, logs, cost, alerts, savings." },
-    { Icon: Bot, title: "Agent and incident loop", desc: "Changes by conversation; alarms end in a fix a person approves." },
+/* ─── 08 · Depot in action: a connected workflow, explained for non-technical listeners ─── */
+export function InActionSlide() {
+  const steps = [
+    ["Connect", "GitHub, GitLab or an archive", "Point Depot at the app's code, or upload it."],
+    ["Answer", "Up to eight questions", "Answer simple questions the code can't, like expected traffic and budget."],
+    ["Review", "AI-written architecture and Terraform, with monthly cost", "See the proposed setup and what it will cost each month."],
+    ["Approve", "Signed and role-checked", "Nothing goes live until an authorised person signs it off."],
+    ["Run", "Deploy on push, roll back, watch cost", "The app goes live, updates itself, and can be undone."],
   ];
   return (
     <SlideFrame theme="light">
-      <Layout title="What Depot" sub="actually does." gap={36} middle>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
-          {feats.map((f, i) => {
-            const tone = (Math.floor(i / 3) + i) % 2 === 0 ? "ink" : "white";
-            return (
-              <Reveal key={f.title} delay={0.06 + i * 0.06}>
-                <AmplioCard compact tone={tone} tag={`Feature 0${i + 1}`} Icon={f.Icon} delay={i * 110} style={{ minHeight: 236 }}>
-                  <h3 style={{ marginTop: "auto", fontFamily: "var(--font-display)", fontSize: 30, fontWeight: 500, letterSpacing: "-0.6px", lineHeight: 1.1 }}>{f.title}</h3>
-                  <p style={{ marginTop: 8, fontSize: 19, lineHeight: 1.42, color: tone === "ink" ? "rgba(255,255,255,0.66)" : "#64748b" }}>{f.desc}</p>
-                </AmplioCard>
+      <Layout title="One session," sub="from working code to live." gap={40} middle>
+        <div style={{ display: "flex", alignItems: "stretch" }}>
+          {steps.map(([title, what, plain], i) => (
+            <div key={title} style={{ display: "flex", alignItems: "flex-start", flex: 1 }}>
+              <Reveal delay={0.1 + i * 0.12} y={20} style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                <Panel style={{ height: 236, padding: "26px 22px" }}>
+                  <Num>Step {i + 1}</Num>
+                  <h3 style={{ marginTop: 8, fontFamily: "var(--font-display)", fontSize: 38, fontWeight: 600, letterSpacing: "-0.9px" }}>{title}</h3>
+                  <p style={{ marginTop: "auto", fontSize: 20, lineHeight: 1.3, color: MUTED }}>{what}</p>
+                </Panel>
+                <p style={{ marginTop: 20, padding: "0 6px", fontSize: 24, lineHeight: 1.4, color: INK }}>{plain}</p>
               </Reveal>
-            );
-          })}
+              {i < steps.length - 1 && (
+                <div aria-hidden="true" style={{ flex: "none", width: 40, height: 236, display: "flex", alignItems: "center", justifyContent: "center", color: BLUE }}>
+                  <ArrowRight size={30} strokeWidth={2.6} />
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </Layout>
     </SlideFrame>
   );
 }
 
-/* ─── 08 · Depot in action ─── */
-export function InActionSlide() {
-  const steps = [
-    [GitBranch, "Connect", "GitHub, GitLab or an archive"],
-    [MessageSquare, "Answer", "Up to eight questions"],
-    [Eye, "Review", "AI-written architecture and Terraform, with monthly cost"],
-    [ShieldCheck, "Approve", "Signed and role-checked"],
-    [Rocket, "Run", "Deploy on push, roll back, watch cost"],
+/* ─── 09 · Architecture: the target design in four layers, for a non-technical audience ─── */
+export function ArchitectureSlide() {
+  const layers = [
+    { name: "You", parts: ["Web dashboard", "Chat assistant"], note: "Same rules for both: a chat can't do more than a button." },
+    { name: "Depot's brain", parts: ["Reads the code", "Designs and writes the setup", "Checks and repairs it"], note: "Drafts from proven blueprints, then tests its own work." },
+    { name: "Safety gate", parts: ["Shows cost and risks", "Waits for a signed approval"], note: "Nothing reaches the cloud without a person saying yes." },
+    { name: "Your cloud", parts: ["Amazon Web Services", "Google Cloud", "Microsoft Azure"], note: "Runs in the user's own account, with short-lived access." },
   ];
   return (
-    <SlideFrame theme="dark" band>
-      <Layout dark title="One session," sub="from working code to live." gap={40} middle>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16 }}>
-          {steps.map(([Icon, title, desc], i) => {
-            const tone = i % 2 === 0 ? "white" : "ink";
-            return (
-              <Reveal key={title} delay={0.1 + i * 0.08} y={30}>
-                <AmplioCard compact tone={tone} tag={`Step ${i + 1}`} Icon={Icon} delay={i * 140} style={{ minHeight: 300 }}>
-                  <h3 style={{ marginTop: "auto", fontFamily: "var(--font-display)", fontSize: 34, fontWeight: 600, letterSpacing: "-1px" }}>{title}</h3>
-                  <p style={{ marginTop: 8, fontSize: 19, lineHeight: 1.42, color: tone === "ink" ? "rgba(255,255,255,0.7)" : "#475569" }}>{desc}</p>
-                </AmplioCard>
-              </Reveal>
-            );
-          })}
-        </div>
-        <div style={{ marginTop: 22 }}>
-          <FlowLine steps={steps.length} />
+    <SlideFrame theme="light">
+      <Layout title="How Depot is built:" sub="four simple layers." gap={22} middle>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 270px", gap: 22 }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {layers.map((l, i) => (
+              <div key={l.name}>
+                <Reveal delay={0.1 + i * 0.12} y={16}>
+                  <Panel style={{ flexDirection: "row", alignItems: "center", gap: 22, padding: "12px 24px", ...(l.name === "Safety gate" ? { border: `2px solid ${BLUE}` } : null) }}>
+                    <div style={{ flex: "none", width: 200 }}>
+                      <div style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 600, color: BLUE }}>Layer {i + 1}</div>
+                      <div style={{ fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 600, letterSpacing: "-0.7px" }}>{l.name}</div>
+                    </div>
+                    <div style={{ flex: 1, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                      {l.parts.map((p, k) => (
+                        <div key={p} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                          <span style={{ padding: "8px 14px", borderRadius: 12, background: "#F1F5F9", border: "1px solid #E2E8F0", fontSize: 21, fontWeight: 600, color: INK }}>{p}</span>
+                          {l.name === "Depot's brain" && k < l.parts.length - 1 && <ArrowRight size={20} color={BLUE} strokeWidth={2.6} />}
+                        </div>
+                      ))}
+                    </div>
+                    <div style={{ flex: "none", width: 270, fontSize: 19, lineHeight: 1.3, color: BODY }}>{l.note}</div>
+                  </Panel>
+                </Reveal>
+                {i < layers.length - 1 && (
+                  <div aria-hidden="true" style={{ height: 20, display: "flex", alignItems: "center", justifyContent: "center", color: BLUE }}>
+                    <ArrowDown size={22} strokeWidth={2.6} />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <Reveal delay={0.6} style={{ display: "flex" }}>
+            <Panel style={{ justifyContent: "center", padding: "26px 26px" }}>
+              <div style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 600, color: BLUE }}>Alongside every layer</div>
+              <div style={{ marginTop: 6, fontFamily: "var(--font-display)", fontSize: 34, fontWeight: 600 }}>Memory</div>
+              <p style={{ marginTop: 14, fontSize: 21, lineHeight: 1.45, color: BODY }}>Every decision, change, cost and approval is recorded, so anyone can see why the setup is what it is.</p>
+            </Panel>
+          </Reveal>
         </div>
       </Layout>
     </SlideFrame>

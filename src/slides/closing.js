@@ -2,35 +2,29 @@
 
 import { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Ref, BLUE, SourceLink, AmplioCard, CARD_SURFACE } from "@/components/deck/ui";
+import { SlideFrame, Layout, Ref, BLUE, SourceLink, Panel, INK, BODY, MUTED } from "@/components/deck/ui";
 import { Words } from "@/components/fx";
 
-/* ─── 13 · UN Sustainable Development Goals ─── */
+/* ─── 14 · UN Sustainable Development Goals ─── */
 export function SdgSlide() {
   const goals = [
-    { img: "/images/sdg/sdg-08.png", goal: "SDG 8.3", name: "Small-enterprise growth", line: "Small teams run products on cloud accounts they own, at a known monthly cost, without hiring." },
-    { img: "/images/sdg/sdg-09.png", goal: "SDG 9.5", name: "Research and technological capability", line: "An open benchmark, and views that explain why each architecture was chosen." },
+    { goal: "SDG 8.3", name: "Small-enterprise growth", line: "Small teams run products on cloud accounts they own, at a known monthly cost, without hiring." },
+    { goal: "SDG 9.5", name: "Research and technological capability", line: "An open benchmark, and views that explain why each architecture was chosen." },
   ];
   return (
     <SlideFrame theme="light">
-      <Layout title="Two goals" sub="we contribute to." gap={40} middle
-        cite={<>Icons are the official UN SDG icons, used under the UN SDG guidelines<Ref n={4} />. The content of this publication has not been approved by the United Nations and does not reflect the views of the United Nations or its officials or Member States.</>}>
+      <Layout title="Two goals" sub="we contribute to." gap={44} middle
+        cite={<>Goals and targets from the UN Sustainable Development Goals<Ref n={6} />. This publication has not been approved by the United Nations and does not reflect the views of the United Nations or its officials or Member States.</>}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
-          {goals.map((g, i) => {
-            const tone = i === 0 ? "white" : "ink";
-            return (
-              <Reveal key={g.goal} delay={0.12 + i * 0.12} y={24}>
-                <AmplioCard tone={tone} tag={g.goal} delay={i * 150}
-                  badge={(
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img className="fx-pop" src={g.img} alt={`UN ${g.goal}: ${g.name}`} width={150} height={150} style={{ "--d": `${400 + i * 150}ms`, width: 150, height: 150, borderRadius: 18, flex: "none", boxShadow: "0 12px 30px rgba(0,0,0,0.2)" }} />
-                  )}>
-                  <h3 style={{ marginTop: 26, fontFamily: "var(--font-display)", fontSize: 38, fontWeight: 500, letterSpacing: "-1px", lineHeight: 1.1 }}>{g.name}</h3>
-                  <p style={{ marginTop: 14, fontSize: 22, lineHeight: 1.5, color: tone === "ink" ? "rgba(255,255,255,0.68)" : "#4B5563" }}>{g.line}</p>
-                </AmplioCard>
-              </Reveal>
-            );
-          })}
+          {goals.map((g, i) => (
+            <Reveal key={g.goal} delay={0.12 + i * 0.12} y={24}>
+              <Panel style={{ minHeight: 400, padding: "40px 42px" }}>
+                <div style={{ fontFamily: "var(--font-display)", fontSize: 26, fontWeight: 600, color: BLUE }}>{g.goal}</div>
+                <h3 style={{ marginTop: 14, fontFamily: "var(--font-display)", fontSize: 50, fontWeight: 600, letterSpacing: "-1.4px", lineHeight: 1.08 }}>{g.name}</h3>
+                <p style={{ marginTop: "auto", paddingTop: 22, fontSize: 28, lineHeight: 1.45, color: BODY }}>{g.line}</p>
+              </Panel>
+            </Reveal>
+          ))}
         </div>
       </Layout>
     </SlideFrame>
@@ -39,30 +33,29 @@ export function SdgSlide() {
 
 /* ─── 14 · References (numbers match the [n] markers on the slides) ─── */
 export const REFERENCES = [
-  { text: `I. Mehta, "A quarter of startups in YC's current cohort have codebases that are almost entirely AI-generated," TechCrunch, Mar. 2025.`, url: "https://techcrunch.com/2025/03/06/a-quarter-of-startups-in-ycs-current-cohort-have-codebases-that-are-almost-entirely-ai-generated/" },
   { text: `T. Zhang, S. Pan, Z. Zhang, Z. Xing and X. Sun, "Deployability-centric infrastructure-as-code generation: Fail, learn, refine, and succeed through LLM-empowered DevOps simulation," ACM FSE, 2026 (arXiv:2506.05623).`, url: "https://arxiv.org/abs/2506.05623" },
-  { text: `Vendor documentation of the fifteen products compared.`, url: null },
+  { text: `F. L. S. Vargas, R. B. Mansilha and D. Kreutz, "Security-first evaluation of text-to-Terraform: Benchmarking LLMs and SLMs for secure IaC generation," arXiv:2608.02672, 2026.`, url: "https://arxiv.org/abs/2608.02672" },
+  { text: `Flexera, 2026 State of the Cloud Report, 2026.`, url: "https://info.flexera.com/cm-report-state-of-the-cloud" },
+  { text: `Stack Overflow, "Technology," 2025 Stack Overflow Developer Survey, 2025.`, url: "https://survey.stackoverflow.co/2025/technology" },
+  { text: `Vendor documentation of the products compared.`, url: null },
   { text: `United Nations, "Goal 8" and "Goal 9," Sustainable Development Goals.`, url: "https://sdgs.un.org/goals" },
+  { text: `J. Sauro, "Measuring usability with the System Usability Scale (SUS)," MeasuringU, 2011.`, url: "https://measuringu.com/sus/" },
 ];
 
 export function ReferencesSlide() {
-  const half = Math.ceil(REFERENCES.length / 2);
-  const cols = [REFERENCES.slice(0, half), REFERENCES.slice(half)];
   return (
     <SlideFrame theme="light">
-      <Layout title="Sources." gap={48}
+      <Layout title="Sources." gap={40} middle
         cite="Click a source to open it. Full references are in the proposal.">
-        <Reveal delay={0.1} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, borderRadius: 28, padding: "26px 32px", ...CARD_SURFACE.white }}>
-          {cols.map((col, c) => (
-            <ol key={c} start={c * half + 1} style={{ listStyle: "none" }}>
-              {col.map((r, i) => (
-                <li key={i} style={{ display: "grid", gridTemplateColumns: "48px 1fr", alignItems: "start", padding: "14px 0", borderTop: i ? "1px solid #eef0f3" : "none", fontSize: 17, lineHeight: 1.45, color: "#374151" }}>
-                  <span className="fx-pop" style={{ "--d": `${300 + (c * half + i) * 90}ms`, width: 30, height: 30, borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", background: "#050505", color: "#fff", fontSize: 14, fontWeight: 700 }}>{c * half + i + 1}</span>
-                  <span><SourceLink href={r.url}>{r.text}</SourceLink></span>
-                </li>
-              ))}
-            </ol>
-          ))}
+        <Reveal delay={0.1}>
+          <Panel style={{ padding: "10px 34px" }}>
+            {REFERENCES.map((r, i) => (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "52px 1fr", alignItems: "start", padding: "13px 0", borderTop: i ? "1px solid #EEF2F6" : "none", fontSize: 23, lineHeight: 1.4, color: BODY }}>
+                <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: BLUE }}>{i + 1}</span>
+                <span><SourceLink href={r.url}>{r.text}</SourceLink></span>
+              </div>
+            ))}
+          </Panel>
         </Reveal>
       </Layout>
     </SlideFrame>
@@ -81,19 +74,17 @@ export function ThanksSlide() {
         </h2>
         <Reveal delay={0.35} style={{ marginTop: 64, display: "flex", gap: 20, alignItems: "stretch" }}>
           <div className="fx-glass" style={{ borderRadius: 28, padding: "24px 30px", minWidth: 560 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", color: "#475569" }}>
-              <span className="fx-ping" style={{ width: 9, height: 9, borderRadius: "50%", background: BLUE }} /> TEAM
-            </div>
-            <div style={{ marginTop: 12, fontSize: 24, lineHeight: 1.55, color: "#0b1020" }}>
+            <div style={{ fontSize: 18, fontWeight: 700, letterSpacing: "0.1em", color: "#475569" }}>TEAM</div>
+            <div style={{ marginTop: 12, fontSize: 28, lineHeight: 1.55, color: "#0b1020" }}>
               {team.slice(0, 3).map((m) => <div key={m.name}>{m.name}</div>)}
             </div>
           </div>
           <div className="fx-glass" style={{ borderRadius: 28, padding: "24px 30px", minWidth: 380 }}>
-            <div style={{ fontSize: 14, fontWeight: 800, letterSpacing: "0.14em", color: "#475569" }}>ADVISORS</div>
-            <div style={{ marginTop: 12, fontSize: 24, lineHeight: 1.55, color: "#0b1020" }}>
+            <div style={{ fontSize: 18, fontWeight: 700, letterSpacing: "0.1em", color: "#475569" }}>ADVISORS</div>
+            <div style={{ marginTop: 12, fontSize: 28, lineHeight: 1.55, color: "#0b1020" }}>
               {team.slice(3).map((m) => <div key={m.name}>{m.name}</div>)}
             </div>
-            <div style={{ marginTop: 10, fontSize: 16, color: "#64748b" }}>NUST SEECS · BS Computer Science</div>
+            <div style={{ marginTop: 10, fontSize: 19, color: "#64748b" }}>NUST SEECS · BS Computer Science</div>
           </div>
         </Reveal>
       </div>
