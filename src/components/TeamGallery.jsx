@@ -8,14 +8,14 @@ import { useDeck } from "@/components/deck/DeckContext";
    pre-rendered to public/images/team/ by scripts/make-avatars.mjs so nothing loads remotely.
    Slot order: top, top-left, top-right, bottom-left, bottom-right, bottom. */
 export const team = [
-  { name: "Ahsan Riaz", role: "Model, agent and research", avatar: "/images/team/ahsan-riaz.svg" },
-  { name: "Muhammad Waleed", role: "Product, workspaces and delivery", avatar: "/images/team/muhammad-waleed.svg" },
-  { name: "Muhammad Faizan Anwar", role: "Architect, adapters and safety gate", avatar: "/images/team/muhammad-faizan-anwar.svg" },
-  { name: "Hira Anwar", role: "Advisor", avatar: "/images/team/hira-anwar.svg" },
-  { name: "Ayesha Hakim", role: "Co-advisor", avatar: "/images/team/ayesha-hakim.svg" },
+  { name: "Zayyan Ahmed", role: "Frontend, AI & platform design", avatar: "/images/team/zayyan-ahmed.svg" },
+  { name: "Khizer Inam", role: "Backend, infrastructure & DevOps", avatar: "/images/team/khizer-inam.svg" },
+  { name: "Wajih Us Sama", role: "AI engine, interviews & assessment", avatar: "/images/team/wajih-us-sama.svg" },
+  { name: "Dr. Maajid Maqbool", role: "Advisor", avatar: "/images/team/dr-maajid-maqbool.svg" },
+  { name: "Dr. Farzana Jabeen", role: "Co-advisor", avatar: "/images/team/dr-farzana-jabeen.svg" },
 ];
 
-const TeamGallery = ({ members = team, title = "DEPOT", caption = "TEAM", size = 620 }) => {
+const TeamGallery = ({ members = team, title = "CK", caption = "TEAM", size = 620 }) => {
   const [hovered, setHovered] = useState(null);
   // Printed and ?instant slides show the centre label at rest, not mid-fade.
   const { print, still } = useDeck();

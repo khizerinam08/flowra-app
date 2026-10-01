@@ -61,10 +61,10 @@ function Navbar({ index, go, print, style }) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
           onClick={() => go(0)}
-          aria-label="Depot, go to the title slide"
-          style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", background: "none", border: "none", cursor: "pointer", fontFamily: "var(--font-display)", fontSize: 26, fontWeight: 700, color: "#fff", letterSpacing: "-1px" }}
+          aria-label="CareerKonnect, go to the title slide"
+          style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", background: "none", border: "none", cursor: "pointer", fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 700, color: "#fff", letterSpacing: "-0.5px" }}
         >
-          Depot
+          CareerKonnect
         </motion.button>
         <div style={{ display: "flex", gap: 28, alignItems: "center", marginLeft: "auto" }}>
           <div className="nav-links" style={{ gap: 28 }}>{sections.right.map((s, i) => link(s, i, 0.7))}</div>

@@ -1,27 +1,51 @@
 "use client";
 
-import { team } from "@/components/TeamGallery";
 import { Reveal } from "@/components/deck/DeckContext";
-import { SlideFrame, Layout, Panel, Ref, BLUE, INK, BODY, MUTED } from "@/components/deck/ui";
+import { SlideFrame, Layout, Panel, BLUE, INK, BODY, MUTED } from "@/components/deck/ui";
+import Mermaid from "@/components/deck/Mermaid";
 
-/* Same look as the rest of the deck: white slides, white cards, one accent, large text. */
-
-/* ─── 10 · Scope: the flagship things Depot covers ─── */
-export function ScopeSlide() {
-  const inScope = [
-    ["Any web app, API, static site or worker", "Written in JavaScript/TypeScript, Python or Go"],
-    ["From GitHub, GitLab or an upload", "One code source per app"],
-    ["On AWS, Google Cloud or Azure", "In the user's own cloud account"],
+/* ─── 09 · Tech Stack: what powers the platform ─── */
+export function TechStackSlide() {
+  const layers = [
+    {
+      area: "Frontend & Mobile",
+      items: [
+        ["Next.js 16 + React 19", "App Router, SSR, Clerk middleware"],
+        ["Expo Mobile App", "Cross-platform native experience"],
+        ["Cloudflare Edge", "DNS, proxy, WAF, bot protection"],
+      ],
+    },
+    {
+      area: "Backend & Data",
+      items: [
+        ["FastAPI (Python)", "30 modules, 18 services, 38 tables"],
+        ["Neon Postgres", "System of record, Alembic migrations"],
+        ["Pinecone", "RAG memory for resume matching"],
+      ],
+    },
+    {
+      area: "AI, Voice & Media",
+      items: [
+        ["LLM Providers", "DeepSeek, OpenAI, Gemini"],
+        ["Daily.co + Deepgram + ElevenLabs", "Live interview runtime via Pipecat"],
+        ["Cloudflare Stream + R2", "Video delivery and file storage"],
+      ],
+    },
   ];
   return (
     <SlideFrame theme="light">
-      <Layout title="What Depot" sub="covers." gap={40} middle>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-          {inScope.map(([t, d], i) => (
-            <Reveal key={t} delay={0.08 + i * 0.06} y={20}>
-              <Panel style={{ minHeight: 320 }}>
-                <div style={{ fontFamily: "var(--font-display)", fontSize: 34, fontWeight: 600, letterSpacing: "-0.7px", lineHeight: 1.12 }}>{t}</div>
-                <p style={{ marginTop: "auto", paddingTop: 14, fontSize: 23, lineHeight: 1.4, color: BODY }}>{d}</p>
+      <Layout title="Built to scale." sub="The technology behind CareerKonnect." gap={44} middle>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+          {layers.map((l, i) => (
+            <Reveal key={l.area} delay={0.12 + i * 0.1} y={24}>
+              <Panel style={{ minHeight: 460, padding: "38px 36px" }}>
+                <div style={{ fontFamily: "var(--font-display)", fontSize: 36, fontWeight: 600, color: BLUE, marginBottom: 28 }}>{l.area}</div>
+                {l.items.map(([tech, note], j) => (
+                  <div key={tech} style={{ paddingTop: j ? 18 : 0, paddingBottom: 18, borderTop: j ? "1px solid #EEF2F6" : "none" }}>
+                    <div style={{ fontSize: 27, fontWeight: 600, color: INK }}>{tech}</div>
+                    <div style={{ marginTop: 4, fontSize: 20, lineHeight: 1.3, color: BODY }}>{note}</div>
+                  </div>
+                ))}
               </Panel>
             </Reveal>
           ))}
@@ -31,44 +55,57 @@ export function ScopeSlide() {
   );
 }
 
-/* ─── 11 · Evaluation: the proposal's pass thresholds (Table 5.5), in plain words ─── */
-export function EvaluationSlide() {
-  const rows = [
-    ["Deploys successfully", "7 of 8 test apps live after repair", <>Today&apos;s AI: 20.8–30.2% on the first try<Ref n={1} /></>],
-    ["Picks the right architecture", "80% or more accepted by reviewers", "Two independent reviewers"],
-    ["Understands the app", "85% or more of facts correct", "Checked against labelled apps"],
-    ["Estimates the cost", "Within 25% of the cloud's own calculator", "Before anything is switched on"],
-    ["Cuts the cost", "20% or more saved each month", "On apps that sit idle"],
-    ["Blocks risky changes", "Zero unapproved changes", "Every seeded unsafe plan blocked"],
-    ["Easy to use", <>80% deploy unaided; usability 68 or more<Ref n={8} /></>, "68 is the published average"],
-  ];
-  const grid = "0.95fr 1.45fr 1fr";
+/* ─── 10 · Architecture ─── */
+const ARCH_PLATFORM = `flowchart TB
+  WEB["Web Browser"] --> CF["Cloudflare Edge"]
+  APP["Expo Mobile"] --> CF
+  CF --> CKWEB["ck-web: Next.js 16 + React 19"]
+  CKWEB --> API["ck-api: FastAPI, 30 modules"]
+  API --> INT["Interview Runtime: Pipecat"]
+  API --> DB["Neon Postgres"]
+  API --> R2["Cloudflare R2"]
+  API --> PINE["Pinecone RAG"]
+  API --> CLERK["Clerk Auth"]
+`;
+
+const ARCH_AI = `flowchart TB
+  INT["Interview Runtime"] --> LLM["LLM Providers: DeepSeek, OpenAI, Gemini"]
+  INT --> DAILY["Daily.co WebRTC"]
+  INT --> VOICE["Deepgram + ElevenLabs"]
+  API["ck-api"] --> LLM
+  API --> STREAM["Cloudflare Stream"]
+  GH["GitHub Actions CI"] --> DEPLOY["Dokploy Deployment"]
+  DEPLOY --> WORKERS["Worker Callbacks"]
+  DEPLOY --> SENTRY["Sentry Observability"]
+`;
+
+export function ArchitectureSlide() {
+  const head = { fontFamily: "var(--font-display)", fontSize: 28, fontWeight: 600, color: BLUE, marginBottom: 6 };
   return (
     <SlideFrame theme="light">
-      <Layout title="How we'll prove it works." sub="Pass marks set before we build." gap={30} middle
-        cite="Pass marks from the FYDP-I proposal, measured in milestone M8.">
-        <Reveal delay={0.1}>
-          <Panel style={{ padding: "6px 30px" }}>
-            <div style={{ display: "grid", gridTemplateColumns: grid, gap: 20, padding: "16px 0 12px", borderBottom: "2px solid #E2E8F0", fontSize: 21, fontWeight: 700, color: MUTED }}>
-              <div>We measure</div>
-              <div>Pass if</div>
-              <div>Context</div>
+      <Layout title="Platform architecture:" sub="self-hosted, AI-powered, observable." gap={30} middle
+        cite="Self-hosted containers on Dokploy. Region is selected from the browser hostname.">
+        <Reveal delay={0.15}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 100px 1fr", alignItems: "center", gap: 0 }}>
+            <Panel style={{ padding: "18px 22px" }}>
+              <div style={head}>1 · Application Platform</div>
+              <Mermaid chart={ARCH_PLATFORM} label="Web and mobile clients connect through Cloudflare edge to the Next.js frontend and FastAPI backend, with Neon Postgres, Pinecone RAG, and Clerk auth." />
+            </Panel>
+            <div aria-hidden="true" style={{ textAlign: "center", color: BLUE, fontSize: 21, fontWeight: 600 }}>
+              +
             </div>
-            {rows.map(([what, pass, note], i) => (
-              <div key={what} style={{ display: "grid", gridTemplateColumns: grid, gap: 20, alignItems: "center", padding: "15px 0", borderBottom: i < rows.length - 1 ? "1px solid #EEF2F6" : "none" }}>
-                <div style={{ fontSize: 27, fontWeight: 600, color: INK }}>{what}</div>
-                <div style={{ fontFamily: "var(--font-display)", fontSize: 27, fontWeight: 600, color: BLUE }}>{pass}</div>
-                <div style={{ fontSize: 21, color: BODY }}>{note}</div>
-              </div>
-            ))}
-          </Panel>
+            <Panel style={{ padding: "18px 22px" }}>
+              <div style={head}>2 · AI, Voice & Delivery</div>
+              <Mermaid chart={ARCH_AI} label="Interview runtime connects to LLM providers, Daily.co for WebRTC, and Deepgram + ElevenLabs for voice. CI/CD through GitHub Actions, Dokploy, and Sentry." />
+            </Panel>
+          </div>
         </Reveal>
       </Layout>
     </SlideFrame>
   );
 }
 
-/* ─── 12 · Timeline ─── */
+/* ─── 11 · Timeline ─── */
 const START = new Date("2026-09-01").getTime();
 const END = new Date("2027-06-01").getTime();
 const pos = (d) => ((new Date(d).getTime() - START) / (END - START)) * 100;
@@ -77,13 +114,13 @@ export function TimelineSlide() {
   const months = [["Sep", "2026-09-01"], ["Oct", "2026-10-01"], ["Nov", "2026-11-01"], ["Dec", "2026-12-01"], ["Jan", "2027-01-01"], ["Feb", "2027-02-01"], ["Mar", "2027-03-01"], ["Apr", "2027-04-01"], ["May", "2027-05-01"]];
   const rows = [
     ["M1", "Proposal and defence", "All", "2026-09-14", "2026-10-16"],
-    ["M2", "Requirements and SRS", "Waleed", "2026-10-05", "2026-11-27"],
-    ["M3", "AWS, gate and CI proven", "Faizan", "2026-10-05", "2026-11-27"],
-    ["M4", "GCP, GitLab and archive", "Waleed", "2026-11-16", "2027-01-09"],
-    ["M5", "Azure, target selection", "Faizan", "2026-12-14", "2027-01-23"],
-    ["M6", "Workspaces and delivery", "Waleed", "2027-02-02", "2027-03-13"],
-    ["M7", "Agent, savings, model comparison", "Ahsan", "2027-02-02", "2027-04-03"],
-    ["M8", "Evaluation", "Ahsan", "2027-03-09", "2027-04-25"],
+    ["M2", "Requirements, SRS and wireframes", "Zayyan", "2026-10-05", "2026-11-27"],
+    ["M3", "Backend API and auth pipeline", "Khizer", "2026-10-05", "2026-11-27"],
+    ["M4", "Company modules and LMS", "Zayyan", "2026-11-16", "2027-01-09"],
+    ["M5", "AI interview engine (Pipecat)", "Wajih", "2026-12-14", "2027-01-23"],
+    ["M6", "Employer portal and resume pool", "Khizer", "2027-02-02", "2027-03-13"],
+    ["M7", "Assessment engine and matching", "Wajih", "2027-02-02", "2027-04-03"],
+    ["M8", "Integration testing and evaluation", "All", "2027-03-09", "2027-04-25"],
     ["M9", "Final report and defence", "All", "2027-04-21", "2027-05-30"],
   ];
   const labelW = 470;
@@ -91,7 +128,7 @@ export function TimelineSlide() {
   const today = pos("2026-10-01");
   return (
     <SlideFrame theme="light">
-      <Layout title="Three clouds first," sub="then everything else." gap={34}
+      <Layout title="Nine milestones." sub="From proposal to deployment." gap={34}
         cite="Team planning targets; dates will follow the official defence schedule.">
         <Reveal delay={0.1}>
           <Panel style={{ padding: "50px 30px 20px", position: "relative" }}>
@@ -123,44 +160,6 @@ export function TimelineSlide() {
             </div>
           </Panel>
         </Reveal>
-      </Layout>
-    </SlideFrame>
-  );
-}
-
-/* ─── 13 · The team: who owns which layer ─── */
-export function WorkSlide() {
-  const areas = [
-    { area: "AI & data logic", work: ["Reads code into the Application Model", "Agent mode and incident loop", "Model research and optimisation"] },
-    { area: "Front end & delivery", work: ["Dashboard and team workspaces", "Deploys, rollback and monitoring", "User research and testing"] },
-    { area: "Cloud & backend logic", work: ["AI architect and Terraform writing", "AWS, GCP and Azure adapters", "Safety gate and cost savings"] },
-  ];
-  return (
-    <SlideFrame theme="light">
-      <Layout title="The team." sub="No one reviews only their own work." gap={44} middle
-        cite={<>Advisor <b style={{ color: INK }}>Hira Anwar</b> · Co-advisor <b style={{ color: INK }}>Ayesha Hakim</b></>}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
-          {team.slice(0, 3).map((m, i) => (
-            <Reveal key={m.name} delay={0.12 + i * 0.1} y={20}>
-              <Panel style={{ minHeight: 440, padding: "32px 34px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={m.avatar} alt="" width={84} height={84} style={{ width: 84, height: 84, borderRadius: "50%", background: "#F1F5F9", border: "1px solid #E2E8F0", flex: "none" }} />
-                  <h3 style={{ fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 600, letterSpacing: "-0.7px", lineHeight: 1.12 }}>{m.name}</h3>
-                </div>
-                <div style={{ marginTop: 26, fontFamily: "var(--font-display)", fontSize: 36, fontWeight: 600, color: BLUE }}>{areas[i].area}</div>
-                <ul style={{ marginTop: 14, listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
-                  {areas[i].work.map((w) => (
-                    <li key={w} style={{ fontSize: 24, lineHeight: 1.35, color: BODY, paddingLeft: 20, position: "relative" }}>
-                      <span style={{ position: "absolute", left: 0, top: 13, width: 8, height: 8, borderRadius: 2, background: BLUE }} />
-                      {w}
-                    </li>
-                  ))}
-                </ul>
-              </Panel>
-            </Reveal>
-          ))}
-        </div>
       </Layout>
     </SlideFrame>
   );

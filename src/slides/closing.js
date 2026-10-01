@@ -5,25 +5,65 @@ import { Reveal } from "@/components/deck/DeckContext";
 import { SlideFrame, Layout, Ref, BLUE, SourceLink, Panel, INK, BODY, MUTED } from "@/components/deck/ui";
 import { Words } from "@/components/fx";
 
-/* ─── 14 · UN Sustainable Development Goals ─── */
+/* ─── 12 · UN Sustainable Development Goals ─── */
 export function SdgSlide() {
   const goals = [
-    { img: "/images/sdg/sdg-08.png", goal: "SDG 8.3", name: "Small-enterprise growth", line: "Small teams run products on cloud accounts they own, at a known monthly cost, without hiring." },
-    { img: "/images/sdg/sdg-09.png", goal: "SDG 9.5", name: "Research and technological capability", line: "An open benchmark, and views that explain why each architecture was chosen." },
+    { img: "/images/sdg/sdg-04.png", goal: "SDG 4", name: "Quality Education", line: "Industry-backed courses ensure students learn what employers actually need, not outdated academic theory." },
+    { img: "/images/sdg/sdg-08.png", goal: "SDG 8.3", name: "Decent Work & Economic Growth", line: "Directly connects graduates to employment opportunities, reducing youth unemployment in Pakistan." },
+    { img: "/images/sdg/sdg-09.png", goal: "SDG 9.5", name: "Industry, Innovation & Infrastructure", line: "AI-powered skill assessment and interview engine built on modern cloud infrastructure." },
   ];
   return (
     <SlideFrame theme="light">
-      <Layout title="Two goals" sub="we contribute to." gap={44} middle
-        cite={<>Icons are the official UN SDG icons, used under the UN SDG guidelines<Ref n={7} />. This publication has not been approved by the United Nations and does not reflect the views of the United Nations or its officials or Member States.</>}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+      <Layout title="Three goals" sub="we contribute to." gap={40} middle
+        cite={<>Icons are the official UN SDG icons, used under the UN SDG guidelines<Ref n={7} />. This publication has not been approved by the United Nations.</>}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
           {goals.map((g, i) => (
             <Reveal key={g.goal} delay={0.12 + i * 0.12} y={24}>
-              <Panel style={{ minHeight: 400, padding: "40px 42px" }}>
+              <Panel style={{ minHeight: 400, padding: "36px 38px" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={g.img} alt={`UN ${g.goal}: ${g.name}`} width={170} height={170} style={{ width: 170, height: 170, borderRadius: 16, boxShadow: "0 12px 30px rgba(0,0,0,0.18)", marginBottom: 22 }} />
-                <div style={{ fontFamily: "var(--font-display)", fontSize: 26, fontWeight: 600, color: BLUE }}>{g.goal}</div>
-                <h3 style={{ marginTop: 14, fontFamily: "var(--font-display)", fontSize: 50, fontWeight: 600, letterSpacing: "-1.4px", lineHeight: 1.08 }}>{g.name}</h3>
-                <p style={{ marginTop: "auto", paddingTop: 22, fontSize: 28, lineHeight: 1.45, color: BODY }}>{g.line}</p>
+                <img src={g.img} alt={`UN ${g.goal}: ${g.name}`} width={140} height={140} style={{ width: 140, height: 140, borderRadius: 16, boxShadow: "0 12px 30px rgba(0,0,0,0.18)", marginBottom: 18 }} />
+                <div style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 600, color: BLUE }}>{g.goal}</div>
+                <h3 style={{ marginTop: 10, fontFamily: "var(--font-display)", fontSize: 40, fontWeight: 600, letterSpacing: "-1.2px", lineHeight: 1.08 }}>{g.name}</h3>
+                <p style={{ marginTop: "auto", paddingTop: 18, fontSize: 24, lineHeight: 1.45, color: BODY }}>{g.line}</p>
+              </Panel>
+            </Reveal>
+          ))}
+        </div>
+      </Layout>
+    </SlideFrame>
+  );
+}
+
+/* ─── 13 · Business Plan: revenue model ─── */
+export function BusinessSlide() {
+  const streams = [
+    {
+      num: "01", title: "Company Module Sales",
+      desc: "Students purchase individual company modules to access hiring guides, demo interviews, and tailored application advice.",
+      note: "Per-module pricing, accessible to students",
+    },
+    {
+      num: "02", title: "Yearly Membership",
+      desc: "~₨6,000/year gives students ongoing career counselling, community access, and platform-wide benefits.",
+      note: "10× cheaper than comparable market services",
+    },
+    {
+      num: "03", title: "Employer Portal Subscriptions",
+      desc: "Companies pay to access the verified resume pool, post requirements, and directly recruit assessed graduates.",
+      note: "Recurring revenue from hiring companies",
+    },
+  ];
+  return (
+    <SlideFrame theme="light">
+      <Layout title="Three revenue streams." sub="Sustainable from day one." gap={44} middle>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+          {streams.map((s, i) => (
+            <Reveal key={s.title} delay={0.12 + i * 0.1} y={24}>
+              <Panel style={{ minHeight: 420, padding: "40px 38px" }}>
+                <div style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 600, color: BLUE }}>{s.num}</div>
+                <h3 style={{ marginTop: 16, fontFamily: "var(--font-display)", fontSize: 44, fontWeight: 600, letterSpacing: "-1.4px", lineHeight: 1.08 }}>{s.title}</h3>
+                <p style={{ marginTop: 24, fontSize: 25, lineHeight: 1.45, color: BODY }}>{s.desc}</p>
+                <div style={{ marginTop: "auto", paddingTop: 18, borderTop: "1px solid #EEF2F6", fontSize: 20, color: MUTED, fontWeight: 500 }}>{s.note}</div>
               </Panel>
             </Reveal>
           ))}
@@ -35,14 +75,13 @@ export function SdgSlide() {
 
 /* ─── 14 · References (numbers match the [n] markers on the slides) ─── */
 export const REFERENCES = [
-  { text: `T. Zhang, S. Pan, Z. Zhang, Z. Xing and X. Sun, "Deployability-centric infrastructure-as-code generation: Fail, learn, refine, and succeed through LLM-empowered DevOps simulation," ACM FSE, 2026 (arXiv:2506.05623).`, url: "https://arxiv.org/abs/2506.05623" },
-  { text: `F. L. S. Vargas, R. B. Mansilha and D. Kreutz, "Security-first evaluation of text-to-Terraform: Benchmarking LLMs and SLMs for secure IaC generation," arXiv:2608.02672, 2026.`, url: "https://arxiv.org/abs/2608.02672" },
-  { text: `Flexera, 2026 State of the Cloud Report, 2026.`, url: "https://info.flexera.com/cm-report-state-of-the-cloud" },
-  { text: `Depot pilot survey of developers (15 respondents, mostly computer science students), NUST SEECS, September 2026.`, url: null },
-  { text: `Interview with the CEO of Lyte Studios, conducted with the same questions as the pilot survey, 2026.`, url: null },
-  { text: `Vendor documentation of the products compared.`, url: null },
-  { text: `United Nations, "Goal 8" and "Goal 9," Sustainable Development Goals.`, url: "https://sdgs.un.org/goals" },
-  { text: `J. Sauro, "Measuring usability with the System Usability Scale (SUS)," MeasuringU, 2011.`, url: "https://measuringu.com/sus/" },
+  { text: `Pakistan Bureau of Statistics, "Labour Force Survey 2024–25 Annual Report," 2025.`, url: "https://www.pbs.gov.pk/wp-content/uploads/2020/07/LFS-2024-25-Annual-Report.pdf" },
+  { text: `Higher Education Commission, "Higher Education Data Repository Annual Report," 2021.`, url: "https://www.hec.gov.pk/english/services/universities/HEDP/PublishingImages/Pages/Component-4/Annex%203%20HEDR%20Annual%20Report%20(C4).pdf" },
+  { text: `Gallup Pakistan, "Unemployment among graduates aged 20–24," analysis of Labour Force Survey microdata.`, url: "https://gallup.com.pk/post/40187" },
+  { text: `P@SHA, "The Great Divide: Industry-Academia Skills Gap Analysis 2022."`, url: "https://www.pasha.org.pk/wp-content/uploads/The-Great-Divide-Industry-Academia-Skills-Gap-Analysis-Report-2022.pdf" },
+  { text: `World Bank, "Pakistan Enterprise Survey 2022."`, url: "https://microdata.worldbank.org/catalog/6461" },
+  { text: `Vendor documentation of the products compared (Coursera, LinkedIn, Indeed, Upwork).`, url: null },
+  { text: `United Nations, "Goal 4," "Goal 8" and "Goal 9," Sustainable Development Goals.`, url: "https://sdgs.un.org/goals" },
 ];
 
 export function ReferencesSlide() {

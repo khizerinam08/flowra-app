@@ -10,11 +10,11 @@ import { micah } from "@dicebear/collection";
 
 const base = { facialHairProbability: 0, baseColor: ["fadbaf"], earringsProbability: 0, glassesProbability: 0, mouth: ["smile"], eyebrows: ["up"] };
 const people = {
-  "ahsan-riaz": { seed: "Ahsan", hair: ["fonze"], hairColor: ["000000"] },
-  "muhammad-waleed": { seed: "Waleed", hair: ["dannyPhantom"], hairColor: ["000000"] },
-  "muhammad-faizan-anwar": { seed: "Faizan123", hair: ["dannyPhantom"], hairColor: ["77311d"] },
-  "hira-anwar": { seed: "Hira", hair: ["full"], hairColor: ["000000"] },
-  "ayesha-hakim": { seed: "Ayesha", hair: ["full"], hairColor: ["77311d"] },
+  "zayyan-ahmed": { seed: "Zayyan", hair: ["fonze"], hairColor: ["000000"] },
+  "khizer-inam": { seed: "Khizer", hair: ["dannyPhantom"], hairColor: ["000000"] },
+  "wajih-us-sama": { seed: "Wajih123", hair: ["dannyPhantom"], hairColor: ["77311d"] },
+  "dr-maajid-maqbool": { seed: "Maajid", hair: ["fonze"], hairColor: ["000000"] },
+  "dr-farzana-jabeen": { seed: "Farzana", hair: ["full"], hairColor: ["000000"] },
 };
 
 mkdirSync("public/images/team", { recursive: true });

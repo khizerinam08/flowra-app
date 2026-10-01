@@ -8,8 +8,8 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit", display: 
 const jura = Jura({ subsets: ["latin"], variable: "--font-jura", display: "swap" });
 
 export const metadata = {
-  title: "Depot — FYDP-I Proposal Defence",
-  description: "Depot: an infrastructure architect powered by AI, from code to cloud. FYDP-I proposal defence, NUST SEECS, BS Computer Science.",
+  title: "CareerKonnect — FYDP-I Proposal Defence",
+  description: "CareerKonnect: bridging the gap between fresh graduates and employers in Pakistan. FYDP-I proposal defence, NUST SEECS, BS Computer Science.",
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     shortcut: "/icon.svg",
