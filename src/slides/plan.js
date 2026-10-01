@@ -19,7 +19,7 @@ export function ScopeSlide() {
   return (
     <SlideFrame theme="light">
       <Layout title="What Depot" sub="covers." gap={40} middle
-        cite="Extended scope only if M8 is met early: guided mode, Oracle and Yandex Cloud, voice, preview environments.">
+        cite="Extended scope only if M8 is met early: guided mode, more clouds (e.g. DigitalOcean, Oracle), voice, preview environments.">
         <Reveal delay={0.05}>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "8px 16px 8px 14px", borderRadius: 9999, fontSize: 16, fontWeight: 600, background: "#050505", color: "#fff" }}>
             <span className="fx-ping" style={{ width: 8, height: 8, borderRadius: "50%", background: "#10B981" }} />
@@ -62,7 +62,7 @@ export function TimelineSlide() {
     ["M3", "AWS, gate and CI proven", "Faizan", "2026-10-05", "2026-11-27"],
     ["M4", "GCP, GitLab and archive", "Waleed", "2026-11-16", "2027-01-09"],
     ["M5", "Azure, target selection", "Faizan", "2026-12-14", "2027-01-23"],
-    ["M6", "Workspaces, live migration", "Waleed", "2027-02-02", "2027-03-13"],
+    ["M6", "Workspaces and delivery", "Waleed", "2027-02-02", "2027-03-13"],
     ["M7", "Agent, savings, model comparison", "Ahsan", "2027-02-02", "2027-04-03"],
     ["M8", "Evaluation", "Ahsan", "2027-03-09", "2027-04-25"],
     ["M9", "Final report and defence", "All", "2027-04-21", "2027-05-30"],
@@ -116,7 +116,7 @@ export function TimelineSlide() {
 export function WorkSlide() {
   const leads = [
     { color: "#8B5CF6", leads: "Application Model, agent mode, incident loop, research", tags: ["O1", "O2", "O3"] },
-    { color: "#60A5FA", leads: "User-facing work, team workspaces, managed platforms", tags: ["O1", "O2"] },
+    { color: "#60A5FA", leads: "User-facing work, team workspaces, delivery and operations", tags: ["O1", "O2"] },
     { color: "#10B981", leads: "Architect, cloud adapters, safety gate, savings", tags: ["O1", "O3"] },
   ];
   return (

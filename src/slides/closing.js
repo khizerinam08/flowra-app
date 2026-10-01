@@ -43,9 +43,9 @@ export const REFERENCES = [
   { text: `T. Zhang, S. Pan, Z. Zhang, Z. Xing and X. Sun, "Deployability-centric infrastructure-as-code generation: Fail, learn, refine, and succeed through LLM-empowered DevOps simulation," ACM FSE, 2026 (arXiv:2506.05623).`, url: "https://arxiv.org/abs/2506.05623" },
   { text: `Flexera, 2026 State of the Cloud Report, 2026.`, url: "https://info.flexera.com/cm-report-state-of-the-cloud" },
   { text: `Stack Overflow, "Technology," 2025 Stack Overflow Developer Survey, 2025.`, url: "https://survey.stackoverflow.co/2025/technology" },
-  { text: `Vendor documentation of the fifteen products compared, accessed Sep. 30, 2026.`, url: null },
-  { text: `OWASP Gen AI Security Project, "LLM06:2025 Excessive agency," 2025.`, url: "https://genai.owasp.org/llmrisk/llm062025-excessive-agency/" },
-  { text: `United Nations, "Goal 8" and "Goal 9," Sustainable Development Goals, accessed Sep. 30, 2026.`, url: "https://sdgs.un.org/goals" },
+  { text: `Vendor documentation of the fifteen products compared.`, url: null },
+  { text: `OWASP GenAI Security Project, "LLM03:2026 Excessive Agency," OWASP Top 10 for LLM Applications 2026, 2026.`, url: "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/" },
+  { text: `United Nations, "Goal 8" and "Goal 9," Sustainable Development Goals.`, url: "https://sdgs.un.org/goals" },
 ];
 
 export function ReferencesSlide() {
@@ -54,7 +54,7 @@ export function ReferencesSlide() {
   return (
     <SlideFrame theme="light">
       <Layout title="Sources." gap={48}
-        cite="Click a source to open it. Full IEEE entries, with access dates, are in the proposal.">
+        cite="Click a source to open it. Full references are in the proposal.">
         <Reveal delay={0.1} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, borderRadius: 28, padding: "26px 32px", ...CARD_SURFACE.white }}>
           {cols.map((col, c) => (
             <ol key={c} start={c * half + 1} style={{ listStyle: "none" }}>

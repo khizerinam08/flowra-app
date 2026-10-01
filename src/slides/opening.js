@@ -185,13 +185,13 @@ function StatusMark({ level, size = 30 }) {
 }
 
 export function LandscapeSlide() {
-  const criteria = ["Starts from code as it is", "Runs in the user's account", "Chooses cloud or platform", "Approval before change"];
+  const criteria = ["Starts from code as it is", "Chooses the cloud", "Cuts cloud cost", "Risk-assessed changes"];
   const groups = [
     { name: "Managed platforms", ex: "Vercel, Railway, Render", Icon: Server, v: [STRONG, WEAK, WEAK, PARTIAL] },
-    { name: "Bring-your-own-cloud", ex: "Porter, Qovery, Northflank, Ravion", Icon: Cloud, v: [PARTIAL, STRONG, WEAK, PARTIAL] },
-    { name: "Infrastructure-from-code", ex: "Encore, Nitric, SST, Defang", Icon: CodeXml, v: [WEAK, STRONG, WEAK, WEAK] },
+    { name: "Bring-your-own-cloud", ex: "Porter, Qovery, Northflank, Ravion", Icon: Cloud, v: [PARTIAL, WEAK, WEAK, PARTIAL] },
+    { name: "Infrastructure-from-code", ex: "Encore, Nitric, SST, Defang", Icon: CodeXml, v: [WEAK, WEAK, WEAK, WEAK] },
     { name: "AI for one provider or codebase", ex: "Pulumi Neo, StackGen, Gemini Cloud Assist, azd init", Icon: Bot, v: [PARTIAL, PARTIAL, PARTIAL, PARTIAL] },
-    { name: "Depot", ex: "AWS, GCP, Azure, Vercel, Railway; one gate for all", Icon: Layers, depot: true, v: [STRONG, STRONG, STRONG, STRONG] },
+    { name: "Depot", ex: "AWS, GCP, Azure; one gate for all", Icon: Layers, depot: true, v: [STRONG, STRONG, STRONG, STRONG] },
   ];
   const HEAD = 196, ROW = 74;
   const whiteGlass = {
@@ -211,7 +211,7 @@ export function LandscapeSlide() {
   return (
     <SlideFrame theme="dark">
       <Layout dark title="Each tool solves part of it." sub="Someone still decides where it runs." gap={30} middle
-        cite={<>Fifteen products, from their own documentation, 30 Sep 2026<Ref n={5} dark />. Partly = partly, or only some products; No = no, or not stated. Depot is planned.</>}>
+        cite={<>Fifteen products, from their own documentation<Ref n={5} dark />. Partly = partly, or only some products; No = no, or not stated. Depot is planned.</>}>
         <Reveal delay={0.1} style={{ display: "grid", gridTemplateColumns: "0.9fr repeat(5, 1fr)", gap: 14 }}>
           {/* criteria down the left, aligned to the rows */}
           <div style={{ paddingTop: HEAD }}>

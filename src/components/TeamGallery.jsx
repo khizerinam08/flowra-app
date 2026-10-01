@@ -9,7 +9,7 @@ import { useDeck } from "@/components/deck/DeckContext";
    Slot order: top, top-left, top-right, bottom-left, bottom-right, bottom. */
 export const team = [
   { name: "Ahsan Riaz", role: "Model, agent and research", avatar: "/images/team/ahsan-riaz.svg" },
-  { name: "Muhammad Waleed", role: "Product, workspaces and platforms", avatar: "/images/team/muhammad-waleed.svg" },
+  { name: "Muhammad Waleed", role: "Product, workspaces and delivery", avatar: "/images/team/muhammad-waleed.svg" },
   { name: "Muhammad Faizan Anwar", role: "Architect, adapters and safety gate", avatar: "/images/team/muhammad-faizan-anwar.svg" },
   { name: "Hira Anwar", role: "Advisor", avatar: "/images/team/hira-anwar.svg" },
   { name: "Ayesha Hakim", role: "Co-advisor", avatar: "/images/team/ayesha-hakim.svg" },

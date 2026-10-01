@@ -115,19 +115,6 @@ export function Sparkline({ color = "#60A5FA", delay = 500 }) {
   );
 }
 
-/* Two services and a dot crossing between them: moving a live service. */
-export function Transfer({ color = "#A78BFA", base = "rgba(255,255,255,0.18)" }) {
-  const path = "M24 24 C 90 -4, 190 52, 256 24";
-  return (
-    <svg aria-hidden="true" viewBox="0 0 280 48" style={{ width: "100%", height: 48, overflow: "visible" }}>
-      <path d={path} pathLength="1" className="fx-draw" fill="none" stroke={base} strokeWidth="2.5" strokeDasharray="1" />
-      <circle cx="24" cy="24" r="12" fill="none" stroke={color} strokeWidth="3" />
-      <circle cx="256" cy="24" r="12" fill={color} />
-      <circle r="6" fill={color} className="fx-travel" style={{ offsetPath: `path("${path}")`, "--t": "2.6s" }} />
-    </svg>
-  );
-}
-
 /* A horizontal trail under a row of steps: one node per step, dots travelling along it. */
 export function FlowLine({ steps = 5, color = "#a7e3c4" }) {
   const w = 1392, y = 22;
@@ -139,5 +126,22 @@ export function FlowLine({ steps = 5, color = "#a7e3c4" }) {
       {xs.map((x, i) => <circle key={x} cx={x} cy={y} r="8" fill={color} className="fx-pop" style={{ "--d": `${700 + i * 180}ms`, transformBox: "fill-box", transformOrigin: "center" }} />)}
       {[0, 1].map((k) => <circle key={k} r="5" fill="#fff" className="fx-travel" style={{ offsetPath: `path("${path}")`, "--t": "3.6s", "--d": `${-k * 1.8}s` }} />)}
     </svg>
+  );
+}
+
+/* A decision log filling in: three entries landing one after another, each with its marker. */
+export function DecisionLog({ color = "#A78BFA", base = "#e5e7eb", delay = 500 }) {
+  const rows = [78, 56, 66];
+  return (
+    <div aria-hidden="true" style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+      {rows.map((w, i) => (
+        <div key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <span className="fx-pop" style={{ "--d": `${delay + i * 220}ms`, flex: "none", width: 12, height: 12, borderRadius: "50%", background: color }} />
+          <div style={{ position: "relative", flex: 1, height: 8, borderRadius: 8, background: base }}>
+            <div className="fx-grow" style={{ "--d": `${delay + 80 + i * 220}ms`, position: "absolute", left: 0, top: 0, bottom: 0, width: `${w}%`, borderRadius: 8, background: color, opacity: 0.85 }} />
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }

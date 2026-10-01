@@ -1,7 +1,7 @@
 "use client";
 
-import { Sparkles, CodeXml, Users, ShieldCheck, Layers, Route, KeyRound, Activity, Bot, Rocket, ArrowRightLeft, GitBranch, MessageSquare, Eye } from "lucide-react";
-import { MiniTrack, Sparkline, Transfer, FlowLine } from "@/components/fx";
+import { Hammer, History, CodeXml, Users, ShieldCheck, Layers, Route, KeyRound, Activity, Bot, Rocket, GitBranch, MessageSquare, Eye } from "lucide-react";
+import { MiniTrack, Sparkline, DecisionLog, FlowLine } from "@/components/fx";
 import { Reveal } from "@/components/deck/DeckContext";
 import { SlideFrame, Layout, Ref, Pill, AmplioCard } from "@/components/deck/ui";
 
@@ -15,7 +15,7 @@ const OBJECTIVES = [
     n: "O1",
     color: "#10B981",
     head: "Deploy any supported repository",
-    body: "Point Depot at a repo. It reads the app, picks the target, prices it, provisions it.",
+    body: "Point Depot at a repo. It reads the app, picks the cloud, writes the infrastructure, prices it, provisions it.",
   },
   {
     n: "O2",
@@ -26,17 +26,17 @@ const OBJECTIVES = [
   {
     n: "O3",
     color: "#8B5CF6",
-    head: "Move a live service, not just its code",
-    body: "Cutover planned, priced and rehearsed before the switch.",
+    head: "Remembers every decision",
+    body: "Why the architecture is what it is, what changed and when.",
   },
 ];
 
 export function ObjectivesSlide() {
-  const icons = [Rocket, Activity, ArrowRightLeft];
+  const icons = [Rocket, Activity, History];
   return (
     <SlideFrame theme="light">
       <Layout title="Three objectives." sub="What a user can do with Depot." gap={48} middle
-        cite="Research sits inside all three: comparing language models on extraction, and measured guardrails for the agent loop.">
+        cite="Research sits inside all three: comparing ten current AI models on architecture and IaC writing, and measured guardrails for the agent loop.">
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
           {OBJECTIVES.map((o, i) => {
             const tone = i % 2 === 0 ? "ink" : "white";
@@ -47,7 +47,7 @@ export function ObjectivesSlide() {
                   <div style={{ marginTop: 34 }}>
                     {i === 0 && <MiniTrack color={o.color} tone={dark ? "rgba(255,255,255,0.14)" : "#e5e7eb"} />}
                     {i === 1 && <Sparkline color={o.color} />}
-                    {i === 2 && <Transfer color={o.color} base={dark ? "rgba(255,255,255,0.25)" : "#d1d5db"} />}
+                    {i === 2 && <DecisionLog color={o.color} base={dark ? "rgba(255,255,255,0.14)" : "#e5e7eb"} />}
                   </div>
                   <h3 style={{ marginTop: "auto", fontFamily: "var(--font-display)", fontSize: 38, fontWeight: 500, letterSpacing: "-1.1px", lineHeight: 1.08 }}>{o.head}</h3>
                   <p style={{ marginTop: 14, fontSize: 19, lineHeight: 1.5, color: dark ? "rgba(255,255,255,0.66)" : "#64748b" }}>{o.body}</p>
@@ -64,7 +64,7 @@ export function ObjectivesSlide() {
 /* ─── 06 · Users of the system ─── */
 export function UsersSlide() {
   const users = [
-    { Icon: Sparkles, title: "AI-assisted builders", who: "A working product, but little experience of running one." },
+    { Icon: Hammer, title: "AI-assisted builders", who: "A working product, but little experience of running one." },
     { Icon: CodeXml, title: "Solo full-stack developers", who: "Outgrowing a managed platform: stay, or move to a cloud?" },
     { Icon: Users, title: "Small teams and agencies", who: "Two to ten people, with no DevOps staff." },
   ];
@@ -93,9 +93,9 @@ export function UsersSlide() {
 export function FeaturesSlide() {
   const feats = [
     { Icon: Layers, title: "Application Model", desc: "Every fact marked detected, inferred or user-supplied." },
-    { Icon: Route, title: "Architect", desc: "Picks among reviewed patterns, ranked by cost and effort." },
+    { Icon: Route, title: "Architect", desc: "Designs the architecture and writes the Terraform from proven blueprints; self-verifies and auto-repairs." },
     { Icon: ShieldCheck, title: "Safety gate", desc: "Validate, saved plan, policy, cost and role check." },
-    { Icon: KeyRound, title: "No stored keys", desc: "Bounded roles, federation, or one scoped token per target." },
+    { Icon: KeyRound, title: "No stored keys", desc: "Bounded roles and federation; short-lived credentials." },
     { Icon: Activity, title: "Delivery and operations", desc: "Deploy on push, rollback, logs, cost, alerts, savings." },
     { Icon: Bot, title: "Agent and incident loop", desc: "Changes by conversation; alarms end in a fix a person approves." },
   ];
@@ -125,7 +125,7 @@ export function InActionSlide() {
   const steps = [
     [GitBranch, "Connect", "GitHub, GitLab or an archive"],
     [MessageSquare, "Answer", "Up to eight questions"],
-    [Eye, "Review", "Target, architecture, monthly cost"],
+    [Eye, "Review", "AI-written architecture and Terraform, with monthly cost"],
     [ShieldCheck, "Approve", "Signed and role-checked"],
     [Rocket, "Run", "Deploy on push, roll back, watch cost"],
   ];
