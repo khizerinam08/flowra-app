@@ -14,7 +14,7 @@ export function SdgSlide() {
   return (
     <SlideFrame theme="light">
       <Layout title="Two goals" sub="we contribute to." gap={40} middle
-        cite={<>Icons are the official UN SDG icons, used under the UN SDG guidelines<Ref n={5} />. The content of this publication has not been approved by the United Nations and does not reflect the views of the United Nations or its officials or Member States.</>}>
+        cite={<>Icons are the official UN SDG icons, used under the UN SDG guidelines<Ref n={4} />. The content of this publication has not been approved by the United Nations and does not reflect the views of the United Nations or its officials or Member States.</>}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
           {goals.map((g, i) => {
             const tone = i === 0 ? "white" : "ink";
@@ -42,7 +42,6 @@ export const REFERENCES = [
   { text: `I. Mehta, "A quarter of startups in YC's current cohort have codebases that are almost entirely AI-generated," TechCrunch, Mar. 2025.`, url: "https://techcrunch.com/2025/03/06/a-quarter-of-startups-in-ycs-current-cohort-have-codebases-that-are-almost-entirely-ai-generated/" },
   { text: `T. Zhang, S. Pan, Z. Zhang, Z. Xing and X. Sun, "Deployability-centric infrastructure-as-code generation: Fail, learn, refine, and succeed through LLM-empowered DevOps simulation," ACM FSE, 2026 (arXiv:2506.05623).`, url: "https://arxiv.org/abs/2506.05623" },
   { text: `Vendor documentation of the fifteen products compared.`, url: null },
-  { text: `OWASP GenAI Security Project, "LLM03:2026 Excessive Agency," OWASP Top 10 for LLM Applications 2026, 2026.`, url: "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/" },
   { text: `United Nations, "Goal 8" and "Goal 9," Sustainable Development Goals.`, url: "https://sdgs.un.org/goals" },
 ];
 
